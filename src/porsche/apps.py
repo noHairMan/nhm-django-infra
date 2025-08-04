@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.apps import AppConfig
 
 
@@ -6,6 +7,4 @@ class PorscheConfig(AppConfig):
     name = "porsche"
 
     def ready(self):
-        import dynaconf  # noqa
-        settings = dynaconf.DjangoDynaconf(__name__)  # noqa
         super().ready()

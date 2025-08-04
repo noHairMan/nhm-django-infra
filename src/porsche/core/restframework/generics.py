@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from typing import override
 
 from rest_framework.generics import GenericAPIView
@@ -25,5 +26,3 @@ class PorscheGenericAPIView(GenericAPIView):
                 return self.update_serializer_class
             case _:
                 return super().get_serializer_class()
-
-
