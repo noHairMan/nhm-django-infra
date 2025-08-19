@@ -16,6 +16,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+APP = "porsche"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -24,19 +25,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-vq(!affi377e+3)-dm5$h1mek#z12v&h+4lcr+3+0^2@!z2k4)"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
 INSTALLED_APPS = [
+    "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    "porsche",
+    APP,
 ]
 
 MIDDLEWARE = [
@@ -52,7 +54,6 @@ ROOT_URLCONF = "porsche.urls"
 
 WSGI_APPLICATION = "porsche.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
@@ -62,7 +63,6 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     },
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -82,7 +82,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
@@ -93,7 +92,6 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

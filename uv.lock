@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.13"
 
 [[package]]
@@ -112,7 +112,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "django", specifier = ">=5.1.5" },
+    { name = "django", specifier = ">=5.2.0" },
     { name = "django-filter", specifier = ">=24.3" },
     { name = "djangorestframework", specifier = ">=3.15.2" },
     { name = "dynaconf", specifier = ">=3.2.7" },
