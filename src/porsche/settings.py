@@ -58,20 +58,26 @@ WSGI_APPLICATION = "porsche.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "postgres": {
+    "default": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": APP,
-        "USER": "mydatabaseuser",
-        "PASSWORD": "mypassword",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
+        "DB": None,
+        "USER": None,
+        "PASSWORD": None,
+        "HOST": None,
+        "PORT": None,
         "CONN_HEALTH_CHECKS": True,
         "OPTIONS": {
-            "pool": True,  # todo: replace to dict to use connection pooling, and need install package `psycopg`
+            "pool": {
+                "min_size": 4,
+                "max_size": 20,
+                "timeout": 30,
+                "max_idle": 600,
+                "num_workers": 2,
+            },
         },
     },
 }
-DATABASES["default"] = DATABASES["postgres"]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -156,3 +162,13 @@ LOGGING = {
         },
     },
 }
+
+# HERE STARTS DYNACONF EXTENSION LOAD
+import dynaconf
+
+settings = dynaconf.DjangoDynaconf(
+    __name__,
+    envvar_prefix=APP,
+    load_dotenv=True,
+)
+# HERE ENDS DYNACONF EXTENSION LOAD (No more code below this line)

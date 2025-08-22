@@ -7,7 +7,7 @@ services:
     volumes:
       - "$PWD/postgres/data:/var/lib/postgresql/data"
       - "$PWD/postgres/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d"
-      - "$PWD/postgres.conf:/etc/postgresql/postgresql.conf"
+      - "$PWD/postgres/postgres.conf:/etc/postgresql/postgresql.conf"
     ports:
       - "5432:5432"
     environment:
@@ -15,4 +15,10 @@ services:
       POSTGRES_USER: $POSTGRES_USER
       POSTGRES_PASSWORD: $POSTGRES_PASSWORD
       POSTGRES_INITDB_ARGS: $POSTGRES_INITDB_ARGS
-      POSTGRES_INITDB_WALDIR: $POSTGRES_INITDB_WALDIR
+    networks:
+      - default
+
+networks:
+  default:
+    name: nhm-django-infra-network
+    driver: bridge
