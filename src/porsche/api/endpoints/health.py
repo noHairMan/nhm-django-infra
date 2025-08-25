@@ -1,7 +1,8 @@
-from rest_framework.response import Response
-from rest_framework.views import APIView
+from porsche.core.restframework.request import PorscheRequest
+from porsche.core.restframework.response import PorscheResponse
+from porsche.core.restframework.views import PorscheAPIView
 
 
-class HealthCheckView(APIView):
-    def get(self, request):
-        return Response({"status": "ok"})
+class HealthCheckView(PorscheAPIView):
+    def get(self, request: PorscheRequest):
+        return PorscheResponse({"status": "ok"})
