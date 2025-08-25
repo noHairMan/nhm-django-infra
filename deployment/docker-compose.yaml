@@ -18,6 +18,27 @@ services:
     networks:
       - default
 
+  nhm-django-infra:
+    build:
+      context: ../
+      dockerfile: deployment/Dockerfile
+    image: nhm-django-infra:${PORSCHE_VERSION:-latest}
+    container_name: nhm-django-infra
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      PORSCHE_VERSION: $PORSCHE_VERSION
+      PORSCHE_DATABASES__default__DB: $PORSCHE_DATABASES__default__DB
+      PORSCHE_DATABASES__default__USER: $PORSCHE_DATABASES__default__USER
+      PORSCHE_DATABASES__default__PASSWORD: $PORSCHE_DATABASES__default__PASSWORD
+      PORSCHE_DATABASES__default__HOST: $PORSCHE_DATABASES__default__HOST
+      PORSCHE_DATABASES__default__PORT: $PORSCHE_DATABASES__default__PORT
+    networks:
+      - default
+    depends_on:
+      - postgres
+
 networks:
   default:
     name: nhm-django-infra-network

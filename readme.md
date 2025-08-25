@@ -85,7 +85,7 @@ PORSCHE_DATABASES__default__PORT=5432
     - 使用下文 Docker 启动一个本地 Postgres。
 4. 执行迁移并启动服务：
     - `uv run python src/manage.py migrate`
-    - `uv run python src/manage.py runserver 0.0.0.0:8000`
+    - `uv run python src/manage.py runserver 0.0.0.0:8000` or `PYTHONPATH=src uv run gunicorn -c deployment/gunicorn.py`
 
 方式 B：使用 pip
 
@@ -115,11 +115,10 @@ POSTGRES_PASSWORD=postgres
 POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=en_US.utf8
 ```
 
-2. 切换到 deployment 目录并启动：
+2. 启动：
 
 ```
-cd deployment
-docker compose up -d
+docker compose --env-file .env -f deployment/docker-compose.yaml up -d --build
 ```
 
 3. 数据库将映射到本机 5432 端口，数据与配置通过卷挂载到当前 deployment/postgres 目录。

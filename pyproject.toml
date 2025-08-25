@@ -1,9 +1,9 @@
 [project]
 name = "nhm-django-infra"
-version = "0.1.0"
+version = "1.0.0"
 description = ""
 authors = [
-    {name = "xuheng.zong", email = "zongxuheng@163.com"}
+    { name = "xuheng.zong", email = "79689669+nohairman@users.noreply.github.com" }
 ]
 readme = "README.md"
 requires-python = ">=3.13"

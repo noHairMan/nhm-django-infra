@@ -10,7 +10,7 @@ RUN set -eux; \
         sed -i "s|deb.debian.org|mirrors.aliyun.com|g; s|security.debian.org|mirrors.aliyun.com/debian-security|g" /etc/apt/sources.list; \
     fi; \
     apt update && \
-    apt-get install -y curl vim && \
+    apt-get install -y curl vim tini && \
     apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
 # Install uv
@@ -30,12 +30,17 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     uv sync --frozen --no-install-project --no-dev
 
+# Copy application source code
+COPY src /app
+COPY deployment/gunicorn.py /app/
+
+# Update PATH to include the virtual environment
+ENV PATH="/app/.venv/bin:$PATH"
+
 # Healthcheck
 HEALTHCHECK --interval=60s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/api/v1/health || exit 1
 
-COPY src /app
-COPY gunicorn.py /app/
 EXPOSE 8000
 
 ENTRYPOINT ["/usr/bin/tini", "--"]
