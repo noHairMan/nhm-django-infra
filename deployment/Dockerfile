@@ -33,6 +33,8 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 # Copy application source code
 COPY src /app
 COPY deployment/gunicorn.py /app/
+COPY deployment/entrypoint.sh /app/
+RUN chmod u+x /app/entrypoint.sh
 
 # Update PATH to include the virtual environment
 ENV PATH="/app/.venv/bin:$PATH"
@@ -43,5 +45,5 @@ HEALTHCHECK --interval=60s --timeout=10s --start-period=5s --retries=3 \
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/bin/tini", "--"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/app/entrypoint.sh"]
 CMD ["gunicorn", "-c", "gunicorn.py"]
