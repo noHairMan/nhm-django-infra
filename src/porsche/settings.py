@@ -144,6 +144,10 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "sqlite3.db",
+    },
+    "postgres": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": APP,
         "DB": None,
