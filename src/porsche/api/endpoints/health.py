@@ -17,7 +17,6 @@ class HealthCheckView(PorscheAPIView):
     def get(self, request: PorscheRequest):
         return PorscheResponse(
             {
-                "status": "ok",
                 "app": settings.APP,
                 "version": settings.VERSION,
             },

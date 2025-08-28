@@ -1,7 +1,7 @@
 [project]
 name = "nhm-django-infra"
 version = "1.0.0"
-description = ""
+description = "A Django-based infrastructure project providing backend services for the Porsche application, featuring REST API support, PostgreSQL database integration, and development workflow automation tools."
 authors = [
     { name = "xuheng.zong", email = "79689669+nohairman@users.noreply.github.com" }
 ]
@@ -14,6 +14,7 @@ dependencies = [
     "django-filter>=24.3",
     "gunicorn>=23.0.0",
     "psycopg[binary,pool]>=3.2.9",
+    "ujson>=5.11.0",
 ]
 
 [dependency-groups]

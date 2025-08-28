@@ -78,7 +78,7 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_CLASSES": [],
     "DEFAULT_CONTENT_NEGOTIATION_CLASS": "rest_framework.negotiation.DefaultContentNegotiation",
     "DEFAULT_METADATA_CLASS": "rest_framework.metadata.SimpleMetadata",
-    "DEFAULT_VERSIONING_CLASS": None,
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.QueryParameterVersioning",
     # Generic view behavior
     "DEFAULT_PAGINATION_CLASS": None,
     "DEFAULT_FILTER_BACKENDS": [],
@@ -96,8 +96,8 @@ REST_FRAMEWORK = {
     "SEARCH_PARAM": "search",
     "ORDERING_PARAM": "ordering",
     # Versioning
-    "DEFAULT_VERSION": None,
-    "ALLOWED_VERSIONS": None,
+    "DEFAULT_VERSION": "1",
+    "ALLOWED_VERSIONS": ["1"],
     "VERSION_PARAM": "version",
     # Authentication
     "UNAUTHENTICATED_USER": "django.contrib.auth.models.AnonymousUser",
