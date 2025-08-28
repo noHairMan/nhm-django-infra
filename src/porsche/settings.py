@@ -57,7 +57,7 @@ ROOT_URLCONF = "porsche.urls"
 
 WSGI_APPLICATION = "porsche.wsgi.application"
 
-# Rest-framework
+# Rest framework
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
         "rest_framework.renderers.JSONRenderer",
@@ -161,6 +161,25 @@ DATABASES = {
                 "num_workers": 2,
             },
         },
+    },
+}
+
+REDIS_URL = "default:3LMUS9cqnKyxqY"
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+    },
+    "redis": {
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "KEY_FUNCTION": "django.core.cache.backends.base.default_key_func",
+        "KEY_PREFIX": APP,
+        "LOCATION": f"redis://{REDIS_URL}/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        },
+        "TIMEOUT": 3600,
+        "VERSION": 1,
     },
 }
 
