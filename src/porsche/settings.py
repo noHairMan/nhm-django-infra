@@ -15,6 +15,8 @@ from pathlib import Path
 
 from rest_framework import ISO_8601
 
+from porsche.models.enums import CacheNamespace, DatabaseNamespace
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -143,11 +145,11 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
+    DatabaseNamespace.DEFAULT: {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": "sqlite3.db",
     },
-    "postgres": {
+    DatabaseNamespace.POSTGRES: {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": APP,
         "DB": None,
@@ -167,14 +169,19 @@ DATABASES = {
         },
     },
 }
+DATABASES["default"] = DATABASES["postgres"]
 
-REDIS_URL = "default:3LMUS9cqnKyxqY"
+PORSCHE_REDIS_HOST = None
+PORSCHE_REDIS_PORT = None
+PORSCHE_REDIS_USER = None
+PORSCHE_REDIS_PASSWORD = None
+REDIS_URL = f"{PORSCHE_REDIS_USER}:{PORSCHE_REDIS_PASSWORD}@{PORSCHE_REDIS_HOST}:{PORSCHE_REDIS_PORT}"
 
 CACHES = {
-    "default": {
+    CacheNamespace.DEFAULT: {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
     },
-    "redis": {
+    CacheNamespace.REDIS: {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "KEY_FUNCTION": "django.core.cache.backends.base.default_key_func",
         "KEY_PREFIX": APP,
