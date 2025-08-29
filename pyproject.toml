@@ -15,6 +15,8 @@ dependencies = [
     "gunicorn>=23.0.0",
     "psycopg[binary,pool]>=3.2.9",
     "ujson>=5.11.0",
+    "redis>=6.4.0",
+    "django-redis>=6.0.0",
 ]
 
 [dependency-groups]

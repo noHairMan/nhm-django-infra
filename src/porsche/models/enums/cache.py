@@ -6,3 +6,4 @@ __all__ = ["CacheNamespace"]
 class CacheNamespace(TextChoices):
     DEFAULT = "default"
     REDIS = "redis"
+    DJANGO_REDIS = "django_redis"

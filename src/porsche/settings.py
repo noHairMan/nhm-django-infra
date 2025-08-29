@@ -169,13 +169,14 @@ DATABASES = {
         },
     },
 }
-DATABASES["default"] = DATABASES["postgres"]
+DATABASES[DatabaseNamespace.DEFAULT] = DATABASES[DatabaseNamespace.POSTGRES]
 
-PORSCHE_REDIS_HOST = None
-PORSCHE_REDIS_PORT = None
-PORSCHE_REDIS_USER = None
-PORSCHE_REDIS_PASSWORD = None
-REDIS_URL = f"{PORSCHE_REDIS_USER}:{PORSCHE_REDIS_PASSWORD}@{PORSCHE_REDIS_HOST}:{PORSCHE_REDIS_PORT}"
+REDIS_HOST = None
+REDIS_PORT = None
+REDIS_USER = None
+REDIS_PASSWORD = None
+REDIS_URL = f"{REDIS_USER}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}"
+REDIS_SAFE_URL = f"{REDIS_USER}@{REDIS_HOST}:{REDIS_PORT}"
 
 CACHES = {
     CacheNamespace.DEFAULT: {
@@ -185,12 +186,32 @@ CACHES = {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "KEY_FUNCTION": "django.core.cache.backends.base.default_key_func",
         "KEY_PREFIX": APP,
-        "LOCATION": f"redis://{REDIS_URL}/1",
-        "OPTIONS": {
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        },
         "TIMEOUT": 3600,
         "VERSION": 1,
+        "LOCATION": f"redis://{REDIS_URL}",
+        "OPTIONS": {
+            "db": 1,
+            "pool_class": "redis.BlockingConnectionPool",
+        },
+    },
+    CacheNamespace.DJANGO_REDIS: {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "KEY_FUNCTION": "django.core.cache.backends.base.default_key_func",
+        "KEY_PREFIX": APP,
+        "TIMEOUT": 3600,
+        "VERSION": 1,
+        "LOCATION": f"redis://{REDIS_SAFE_URL}/2",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "PASSWORD": f"{REDIS_PASSWORD}",
+            "SERIALIZER": "django_redis.serializers.json.JSONSerializer",
+            "COMPRESSOR": "django_redis.compressors.zlib.ZlibCompressor",
+            "IGNORE_EXCEPTIONS": True,
+            "CONNECTION_POOL_KWARGS": {
+                "max_connections": 10,
+                "retry_on_timeout": True,
+            },
+        },
     },
 }
 
