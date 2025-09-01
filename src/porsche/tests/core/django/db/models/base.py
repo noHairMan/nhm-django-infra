@@ -1,6 +1,7 @@
 import datetime
-from uuid import UUID
+from uuid import UUID, uuid4
 
+from porsche.core.django.db.models.base import get_object
 from porsche.core.restframework import PorscheAPITestCase
 from porsche.models import Company
 
@@ -9,23 +10,47 @@ class TestPorscheModel(PorscheAPITestCase):
     def setUp(self):
         self.company = Company.objects.create(name="Test Company")
 
-    def test_model_creation(self):
+    def test_create_model(self):
+        """Test basic model creation and field validation"""
+        self.assertIsInstance(self.company.uid, UUID)
+        self.assertFalse(self.company.deleted)
         self.assertIsInstance(self.company.uid, UUID)
         self.assertIsInstance(self.company.create_time, datetime.datetime)
         self.assertIsInstance(self.company.update_time, datetime.datetime)
-        self.assertFalse(self.company.deleted)
 
     def test_soft_delete(self):
+        """Test soft delete functionality"""
         self.company.delete(soft=True)
-        company = Company.objects.get(uid=self.company.uid)
+        self.assertTrue(self.company.deleted)
+
+        # Object should still exist in database
+        company = Company._objects.get(id=self.company.id)
         self.assertTrue(company.deleted)
+        with self.assertRaises(Company.DoesNotExist):
+            Company.objects.get(id=self.company.id)
 
     def test_hard_delete(self):
+        """Test hard delete functionality"""
         self.company.delete(soft=False)
-        with self.assertRaises(Company.DoesNotExist):
-            Company.objects.get(uid=self.company.uid)
 
-    # def test_related_objects_soft_delete(self):
-    #     self.company.delete(soft=True)
-    #     employee = TestEmployeeModel.objects.get(uid=self.employee.uid)
-    #     self.assertTrue(employee.deleted)
+        # Object should be removed from database
+        with self.assertRaises(Company.DoesNotExist):
+            Company.objects.get(id=self.company.id)
+
+    def test_get_object(self):
+        """Test get_object utility function"""
+        # Test existing object
+        company = get_object(Company, name="Test Company")
+        self.assertEqual(company, self.company)
+        company = get_object(Company, uid=self.company.uid)
+        self.assertEqual(company, self.company)
+        company = get_object(Company, uid=uuid4())
+        self.assertIsNone(company)
+
+        # Test non-existing object
+        company = get_object(Company, name="Non Existing")
+        self.assertIsNone(company)
+
+        # Test raise_exception
+        with self.assertRaises(Company.DoesNotExist):
+            get_object(Company, raise_exception=True, name="Non Existing")

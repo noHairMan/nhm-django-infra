@@ -3,7 +3,7 @@ from typing import Any, Iterable, Optional, override
 from uuid import uuid4
 
 from django.db import transaction
-from django.db.models import Model, fields
+from django.db.models import Manager, Model, fields
 from django.db.models.base import ModelBase
 from django.utils.translation import gettext_lazy
 
@@ -16,6 +16,7 @@ class PorscheModelBase(ModelBase):
 
 class PorscheModel(Model, metaclass=PorscheModelBase):
     objects = PorscheManager()
+    _objects = Manager()
 
     deleted = fields.BooleanField(null=False, blank=False, default=False, verbose_name=gettext_lazy("是否删除"))
 
