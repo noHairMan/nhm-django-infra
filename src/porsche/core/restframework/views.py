@@ -28,11 +28,11 @@ def exception_handler(exc, context):
     override from `rest_framework.views.exception_handler`
     """
     if isinstance(exc, Http404):
-        exc = NotFound(*(exc.args))
+        exc = NotFound(*exc.args)
     elif isinstance(exc, DjangoPermissionDenied):
-        exc = RestFrameworkPermissionDenied(*(exc.args))
+        exc = RestFrameworkPermissionDenied(*exc.args)
     elif isinstance(exc, APIException):
-        exc = PorscheAPIException(*(exc.args))
+        exc = PorscheAPIException(*exc.args)
 
     logger.error(format_exc())
     if isinstance(exc, PorscheAPIException):

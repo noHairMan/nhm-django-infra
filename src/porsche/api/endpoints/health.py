@@ -14,7 +14,8 @@ class HealthCheckView(PorscheGenericAPIView):
     service is running and available.
     """
 
-    def get(self, request: PorscheRequest):
+    @staticmethod
+    def get(request: PorscheRequest):
         return PorscheResponse(
             {
                 "app": settings.APP,

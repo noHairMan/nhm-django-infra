@@ -77,7 +77,12 @@ class PorscheModel(Model, metaclass=PorscheModelBase):
             update_fields = list(update_fields)
             update_fields.append("update_time")
 
-        super().save(force_insert, force_update, using, update_fields)
+        super().save(
+            force_insert=force_insert,
+            force_update=force_update,
+            using=using,
+            update_fields=update_fields,
+        )
 
 
 def get_object[T: PorscheModel | Model](model: type[T], raise_exception: bool = False, **kwargs) -> Optional[T]:
