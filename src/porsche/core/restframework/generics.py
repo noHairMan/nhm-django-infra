@@ -4,6 +4,7 @@ from typing import override
 from rest_framework.generics import GenericAPIView
 
 from porsche.core.restframework.exceptions import PorscheServerException
+from porsche.core.restframework.response import PorscheResponse
 
 
 class PorscheGenericAPIView(GenericAPIView):
@@ -36,3 +37,8 @@ class PorscheGenericAPIView(GenericAPIView):
             raise PorscheServerException("No serializer class found")
 
         return clazz
+
+    def finalize_response(self, request, response, *args, **kwargs):
+        if not isinstance(response, PorscheResponse):
+            response = PorscheResponse(data=response.data)
+        return super().finalize_response(request, response, *args, **kwargs)
