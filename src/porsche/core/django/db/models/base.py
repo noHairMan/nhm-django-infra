@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from typing import Optional
+from typing import Any, Iterable, Optional, override
+from uuid import uuid4
 
 from django.db import transaction
 from django.db.models import Model, fields
 from django.db.models.base import ModelBase
-from django.utils.timezone import override
 
 from porsche.core.django.db.manager import PorscheManager
 
@@ -13,19 +13,15 @@ class PorscheModelBase(ModelBase):
     pass
 
 
-class PorscheModel(Model):
-    """
-    todo: wait for test, fuck!
-    """
+class PorscheModel(Model, metaclass=PorscheModelBase):
+    objects = PorscheManager()
 
-    objects = PorscheManager
-
-    deleted = fields.BooleanField(default=False, null=False, blank=False, name="是否删除")
+    deleted = fields.BooleanField(null=False, blank=False, default=False, name="是否删除")
 
     create_time = fields.DateTimeField(null=False, blank=False, auto_now_add=True, name="创建时间")
     update_time = fields.DateTimeField(null=False, blank=False, auto_now=True, name="更新时间")
 
-    uid = fields.UUIDField(null=False, blank=False, unique=True, db_index=True, name="唯一标识")
+    uid = fields.UUIDField(null=False, blank=False, unique=True, default=uuid4, db_index=True, name="唯一标识")
 
     class Meta:
         abstract = True
@@ -36,7 +32,12 @@ class PorscheModel(Model):
         ]
 
     @override
-    def delete(self, using=None, keep_parents=False, soft: bool = True):
+    def delete(
+        self,
+        using: Any | None = None,
+        keep_parents: bool = False,
+        soft: bool = True,
+    ) -> tuple[int, dict[str, int]]:
         with transaction.atomic(using=using, savepoint=False):
             if soft:
                 self.deleted = True
@@ -47,11 +48,17 @@ class PorscheModel(Model):
                     for obj in related_objects:
                         if hasattr(obj, "deleted"):
                             obj.delete(using=using, soft=True)
-                return self
+                return 0, {}  # todo: check this
             return super().delete(using, keep_parents)
 
     @override
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+    def save(
+        self,
+        force_insert: bool | tuple[ModelBase, ...] = False,
+        force_update: bool = False,
+        using: str | None = None,
+        update_fields: Iterable[str] | None = None,
+    ) -> None:
         if update_fields is not None:
             update_fields = list(update_fields)
             update_fields.append("update_time")

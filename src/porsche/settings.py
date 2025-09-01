@@ -15,7 +15,7 @@ from pathlib import Path
 
 from rest_framework import ISO_8601
 
-from porsche.models.enums import CacheNamespace, DatabaseNamespace
+from porsche.core.django.constants import CacheNamespace, DatabaseNamespace
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -166,6 +166,10 @@ DATABASES = {
                 "max_idle": 600,
                 "num_workers": 2,
             },
+        },
+        "TEST": {
+            "NAME": "test",
+            "MIGRATE": True,
         },
     },
 }
