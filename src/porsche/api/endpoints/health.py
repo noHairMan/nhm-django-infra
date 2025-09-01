@@ -1,11 +1,11 @@
 from django.conf import settings
 
+from porsche.core.restframework import PorscheGenericAPIView
 from porsche.core.restframework.request import PorscheRequest
 from porsche.core.restframework.response import PorscheResponse
-from porsche.core.restframework.views import PorscheAPIView
 
 
-class HealthCheckView(PorscheAPIView):
+class HealthCheckView(PorscheGenericAPIView):
     """
     Handles the health check functionality for the application.
 

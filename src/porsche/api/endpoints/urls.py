@@ -7,4 +7,7 @@ from porsche.core.restframework import PorscheRouter
 router = PorscheRouter()
 router.register("company", CompanyViewSet)
 
-urlpatterns = [path("health/", HealthCheckView.as_view(), name="health-check"), path("", include(router.urls))]
+urlpatterns = [
+    path("health/", HealthCheckView.as_view(), name="health-check"),
+    path("", include(router.urls)),
+]

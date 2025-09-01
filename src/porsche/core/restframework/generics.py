@@ -1,16 +1,24 @@
 # -*- coding: utf-8 -*-
-from typing import override
+from typing import Literal, Optional, override
 
 from rest_framework.generics import GenericAPIView
 
 from porsche.core.restframework.exceptions import PorscheServerException
 from porsche.core.restframework.response import PorscheResponse
+from porsche.core.restframework.views import PorscheAPIView
+
+__all__ = [
+    "PorscheGenericAPIView",
+]
 
 
-class PorscheGenericAPIView(GenericAPIView):
+class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
     lookup_field = "uid"
     lookup_url_kwarg = "uid"
+    action: Optional[Literal["create", "retrieve", "list", "update"]] = None
     serializer_class = None
+
+    # Custom
     create_serializer_class = None
     update_serializer_class = None
     list_serializer_class = None
