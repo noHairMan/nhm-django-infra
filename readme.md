@@ -2,8 +2,9 @@
 
 一个基于 Django 5 与 Django REST framework 的后端基础设施模板，内置：
 
-- 健康检查接口（/api/v1/health）
-- PostgreSQL（使用 psycopg 连接池）
+- 健康检查接口（/api/health）
+- 统一响应包装（code/data/message）与异常处理（全局异常处理器）
+- PostgreSQL 配置（含 psycopg 连接池参数位）、可选 Redis 缓存示例
 - Dynaconf 环境变量管理（支持 .env、本地覆盖）
 - gunicorn 运行配置与 Docker 部署示例
 - 使用 uv 进行依赖管理，已配置国内镜像
@@ -22,18 +23,18 @@
     - manage.py
     - porsche/
         - settings.py：Django 配置，Dynaconf 扩展启用（envvar_prefix=APP="porsche"，load_dotenv=True）
-        - urls.py：API 路由聚合（前缀 /api/v1/）
+        - urls.py：API 路由聚合（前缀 /api/）
         - api/endpoints/
             - urls.py：注册 "health/" 路径
-            - health.py：健康检查 API（返回 {"status": "ok"}）
-        - core/restframework：对 DRF 的基本封装（mixins、generics、viewsets 等）
+            - health.py：健康检查 API（返回 APP 与 VERSION）
+        - core/restframework：对 DRF 的封装（Request/Response 包装、异常处理、mixins、generics、viewsets 等）
 
 ## 运行要求
 
 - Python 3.13+
 - PostgreSQL 17（或兼容版本）
 - uv（推荐）或 pip
-- 可选：Docker 与 Docker Compose（仅用于本地数据库或容器化部署）
+- 可选：Docker 与 Docker Compose（用于本地数据库或容器化部署）
 
 ## 环境变量与配置
 
@@ -55,22 +56,40 @@ POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=en_US.utf8
 # 注意：settings.py 默认 SECRET_KEY 为示例值，生产环境请务必覆盖！
 PORSCHE_SECRET_KEY=your-secret-key
 PORSCHE_DEBUG=true
-# 数据库连接（psycopg，PostgreSQL）
-PORSCHE_DATABASES__default__ENGINE=django.db.backends.postgresql
-PORSCHE_DATABASES__default__NAME=porsche
-PORSCHE_DATABASES__default__USER=postgres
-PORSCHE_DATABASES__default__PASSWORD=postgres
-PORSCHE_DATABASES__default__HOST=127.0.0.1
-PORSCHE_DATABASES__default__PORT=5432
+
+# 数据库连接（PostgreSQL，已将 postgres 配置映射为 default）
+# 你可以覆盖 postgres 或 default 命名空间中的键，以下二选一：
+# 方式1：覆盖 postgres 命名空间（推荐）
+PORSCHE_DATABASES__postgres__ENGINE=django.db.backends.postgresql
+PORSCHE_DATABASES__postgres__NAME=porsche
+PORSCHE_DATABASES__postgres__USER=postgres
+PORSCHE_DATABASES__postgres__PASSWORD=postgres
+PORSCHE_DATABASES__postgres__HOST=127.0.0.1
+PORSCHE_DATABASES__postgres__PORT=5432
+# 方式2：覆盖 default 命名空间（同样生效）
+# PORSCHE_DATABASES__default__ENGINE=django.db.backends.postgresql
+# PORSCHE_DATABASES__default__NAME=porsche
+# PORSCHE_DATABASES__default__USER=postgres
+# PORSCHE_DATABASES__default__PASSWORD=postgres
+# PORSCHE_DATABASES__default__HOST=127.0.0.1
+# PORSCHE_DATABASES__default__PORT=5432
+
 # 连接池设置（可选，与 settings.py 中 OPTIONS.pool 对应）
-# PORSCHE_DATABASES__default__OPTIONS__pool__min_size=4
-# PORSCHE_DATABASES__default__OPTIONS__pool__max_size=20
+# PORSCHE_DATABASES__postgres__OPTIONS__pool__min_size=4
+# PORSCHE_DATABASES__postgres__OPTIONS__pool__max_size=20
+
+# Redis（可选，用于 CACHES[redis] / CACHES[django_redis]）
+# PORSCHE_REDIS_HOST=127.0.0.1
+# PORSCHE_REDIS_PORT=6379
+# PORSCHE_REDIS_USER=default
+# PORSCHE_REDIS_PASSWORD=your-password
 ```
 
 说明：
 
 - settings.py 中默认 DEBUG=False、ALLOWED_HOSTS=["*"], SECRET_KEY 为示例值，强烈建议通过环境变量在生产环境覆盖。
-- Dynaconf 的嵌套键使用双下划线 "__" 分隔：PORSCHE_DATABASES__default__HOST。
+- Dynaconf 的嵌套键使用双下划线 "__" 分隔，如：PORSCHE_DATABASES__postgres__HOST。
+- REST_FRAMEWORK 使用 QueryParameterVersioning（默认 version=1），但当前 URL 前缀不包含版本号。
 
 ## 本地开发
 
@@ -85,7 +104,7 @@ PORSCHE_DATABASES__default__PORT=5432
     - 使用下文 Docker 启动一个本地 Postgres。
 4. 执行迁移并启动服务：
     - `uv run python src/manage.py migrate`
-    - `uv run python src/manage.py runserver 0.0.0.0:8000` or `PYTHONPATH=src uv run gunicorn -c deployment/gunicorn.py`
+    - `uv run python src/manage.py runserver 0.0.0.0:8000` 或 `PYTHONPATH=src uv run gunicorn -c deployment/gunicorn.py`
 
 方式 B：使用 pip
 
@@ -102,11 +121,9 @@ uv run python src/manage.py createsuperuser
 
 ## 使用 Docker（本地 Postgres）
 
-在 deployment 目录下提供了 docker-compose.yaml，仅包含 Postgres 服务，用于本地数据库：
+deployment 目录下提供了 docker-compose.yaml（仅包含 Postgres 服务），用于本地数据库：
 
-操作步骤：
-
-1. 准备 .env（位于项目根目录），至少包含：
+1. 在项目根目录准备 .env（至少包含）：
 
 ```
 POSTGRES_DB=porsche
@@ -121,13 +138,13 @@ POSTGRES_INITDB_ARGS=--encoding=UTF8 --locale=en_US.utf8
 docker compose --env-file .env -f deployment/docker-compose.yaml up -d --build
 ```
 
-3. 数据库将映射到本机 5432 端口，数据与配置通过卷挂载到当前 deployment/postgres 目录。
+3. 数据库映射到本机 5432 端口，数据与配置通过卷挂载到 deployment/postgres 目录。
 
-注意：应用（Django）并未在 compose 中启动。你可以在本机通过 uv/pip 启动 Django，或自行扩展 compose 加入应用服务。
+注意：应用（Django）未在 compose 中启动。可本机通过 uv/pip 启动 Django，或扩展 compose 加入应用服务。
 
 ## 构建应用镜像与运行（可选）
 
-deployment/Dockerfile 提供了应用镜像构建示例：
+deployment/Dockerfile 提供应用镜像构建示例：
 
 ```
 # 在项目根目录执行（需要 Docker 24+）
@@ -142,33 +159,44 @@ docker run --rm -p 8000:8000 \
 说明：
 
 - 镜像在构建阶段通过 uv.lock 与 pyproject.toml 同步依赖。
-- 容器入口为 gunicorn，健康检查路径为 http://localhost:8000/api/v1/health（见 Dockerfile HEALTHCHECK）。
+- 容器入口为 gunicorn。
+- Dockerfile 的 HEALTHCHECK 当前指向 http://localhost:8000/api/v1/health，如保持现有 URL 配置（/api/health），建议同步更新
+  Dockerfile 的健康检查路径，或在 porsche/urls.py 中按需引入版本前缀。
 - 若需要连接 compose 中的 Postgres，请保证容器网络可达并提供正确的 PORSCHE_DATABASES__... 环境变量。
 
 ## API 示例
 
 - 健康检查：
-    - 路径：`GET /api/v1/health/`
-    - 返回：`{"status": "ok"}`
+    - 路径：`GET /api/health/`
+    - 返回（统一响应包装）：
+      ```json
+      {
+        "code": 0,
+        "data": {"app": "porsche", "version": "1.0.0"},
+        "message": "SUCCESS"
+      }
+      ```
     - 示例：
       ```bash
-      curl -s http://127.0.0.1:8000/api/v1/health/
+      curl -s http://127.0.0.1:8000/api/health/
+      # 指定版本（QueryParameterVersioning）：
+      curl -s "http://127.0.0.1:8000/api/health/?version=1"
       ```
 
-后续可在 src/porsche/api/endpoints/ 下新增路由与视图，并在 src/porsche/urls.py 进行聚合。
+后续可在 src/porsche/api/endpoints/ 下新增路由与视图，并在 src/porsche/urls.py 聚合。
 
-## 日志
+## 日志与异常
 
-- 统一使用标准输出（console handler），格式见 settings.LOGGING。
-- 通过环境变量可调整 LOG_LEVEL（若在 Dynaconf 中暴露）。
+- 日志：输出至标准输出（console handler），格式见 settings.LOGGING。
+- 异常：统一使用 porsche.core.restframework.views.exception_handler 处理，返回统一响应结构（code/data/message）。
 
 ## 常见问题（FAQ）
 
 1) 连接数据库失败？
 
-- 确认 Postgres 已启动且账号密码正确（compose 版本在 deployment/.env 或项目根 .env）
-- 检查 PORSCHE_DATABASES__default__HOST/PORT/USER/PASSWORD 是否设置
-- 在容器中运行时，需要确保网络联通（同一 docker network 或正确的主机地址）
+- 确认 Postgres 已启动且账号密码正确（compose 版本使用项目根 .env）
+- 检查 PORSCHE_DATABASES__postgres__HOST/PORT/USER/PASSWORD 是否设置
+- 在容器中运行时，确保网络联通（同一 docker network 或正确的主机地址）
 
 2) SECRET_KEY 与 DEBUG 如何设置？
 
@@ -176,7 +204,7 @@ docker run --rm -p 8000:8000 \
 
 3) 时区与语言设置？
 
-- 默认 LANGUAGE_CODE=en-us，TIME_ZONE=UTC，可按需通过 Dynaconf 覆盖（如 PORSCHE_LANGUAGE_CODE/PORSCHE_TIME_ZONE）
+- 默认 LANGUAGE_CODE=en-us，TIME_ZONE=UTC，可按需通过 Dynaconf 覆盖（如 PORSCHE_LANGUAGE_CODE / PORSCHE_TIME_ZONE）
 
 ## 许可
 
