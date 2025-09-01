@@ -190,6 +190,24 @@ docker run --rm -p 8000:8000 \
 - 日志：输出至标准输出（console handler），格式见 settings.LOGGING。
 - 异常：统一使用 porsche.core.restframework.views.exception_handler 处理，返回统一响应结构（code/data/message）。
 
+## 测试运行示例
+
+本项目内置了部分单元测试（位于 src/porsche/tests/）。当前未引入 pytest 等三方测试依赖，可直接使用 Django 自带测试运行器。
+
+- 前置：确保依赖已安装且已激活虚拟环境（推荐使用 uv）
+    - `uv sync && source .venv/bin/activate`
+    - 如需数据库，请先确保本机 Postgres 可用，或通过下面的 docker-compose 启动 Postgres。
+
+- 运行全部测试（使用 Django TestCase/DRF APITestCase）：
+    - 使用 uv：`uv run python src/manage.py test porsche`
+    - 或使用已激活的虚拟环境：`python src/manage.py test porsche`
+
+- 指定测试包/模块/用例：
+    - 仅运行某个包：`uv run python src/manage.py test porsche.tests.core`
+    - 仅运行某个模块：`uv run python src/manage.py test porsche.tests.core.django.db.models.base`
+    - 仅运行某个用例/方法：
+      `uv run python src/manage.py test porsche.tests.core.django.db.models.base.TestPorscheModel.test_create_model`
+
 ## 常见问题（FAQ）
 
 1) 连接数据库失败？
