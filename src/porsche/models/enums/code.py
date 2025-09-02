@@ -1,9 +1,11 @@
-from django.db.models import IntegerChoices
+from porsche.core.django.db.models import PorscheIntegerChoices
 
-__all__ = ["BusinessCode"]
+__all__ = [
+    "BusinessCode",
+]
 
 
-class BusinessCode(IntegerChoices):
+class BusinessCode(PorscheIntegerChoices):
     SUCCESS = 0
     BAD_REQUEST = 1
     SERVER_ERROR = 2

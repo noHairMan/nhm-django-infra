@@ -7,8 +7,8 @@ from django.db.models import Manager, Model, fields
 from django.db.models.base import ModelBase
 from django.utils.translation import gettext_lazy
 
-from porsche.core.constants import UID
 from porsche.core.django.db.manager import PorscheManager
+from porsche.models.constants import UID
 
 
 class PorscheModelBase(ModelBase):
@@ -19,24 +19,12 @@ class PorscheModel(Model, metaclass=PorscheModelBase):
     objects = PorscheManager()
     _objects = Manager()
 
-    deleted = fields.BooleanField(null=False, blank=False, default=False, verbose_name=gettext_lazy("是否删除"))
+    deleted = fields.BooleanField(default=False, verbose_name=gettext_lazy("是否删除"))
 
-    create_time = fields.DateTimeField(
-        null=False,
-        blank=False,
-        auto_now_add=True,
-        verbose_name=gettext_lazy("创建时间"),
-    )
-    update_time = fields.DateTimeField(null=False, blank=False, auto_now=True, verbose_name=gettext_lazy("更新时间"))
+    create_time = fields.DateTimeField(auto_now_add=True, verbose_name=gettext_lazy("创建时间"))
+    update_time = fields.DateTimeField(auto_now=True, verbose_name=gettext_lazy("更新时间"))
 
-    uid = fields.UUIDField(
-        null=False,
-        blank=False,
-        unique=True,
-        default=uuid4,
-        db_index=True,
-        verbose_name=gettext_lazy("唯一标识"),
-    )
+    uid = fields.UUIDField(unique=True, default=uuid4, db_index=True, verbose_name=gettext_lazy("唯一标识"))
 
     class Meta:
         abstract = True

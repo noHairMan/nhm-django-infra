@@ -27,12 +27,14 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
     @override
     def get_serializer_class(self):
         match self.action:
-            case "create":
-                clazz = self.create_serializer_class
-            case "retrieve":
-                clazz = self.retrieve_serializer_class
+            case "metadata":
+                clazz = self.list_serializer_class
             case "list":
                 clazz = self.list_serializer_class
+            case "retrieve":
+                clazz = self.retrieve_serializer_class
+            case "create":
+                clazz = self.create_serializer_class
             case "update":
                 clazz = self.update_serializer_class
             case _:

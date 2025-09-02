@@ -15,8 +15,6 @@ from pathlib import Path
 
 from rest_framework import ISO_8601
 
-from porsche.core.constants import CacheNamespace, DatabaseNamespace
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -145,11 +143,11 @@ REST_FRAMEWORK = {
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    DatabaseNamespace.DEFAULT: {
+    "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": "sqlite3.db",
     },
-    DatabaseNamespace.POSTGRES: {
+    "postgres": {
         "ENGINE": "django.db.backends.postgresql",
         "NAME": APP,
         "DB": None,
@@ -173,7 +171,7 @@ DATABASES = {
         },
     },
 }
-DATABASES[DatabaseNamespace.DEFAULT] = DATABASES[DatabaseNamespace.POSTGRES]
+DATABASES["default"] = DATABASES["postgres"]
 
 REDIS_HOST = None
 REDIS_PORT = None
@@ -183,10 +181,10 @@ REDIS_URL = f"{REDIS_USER}:{REDIS_PASSWORD}@{REDIS_HOST}:{REDIS_PORT}"
 REDIS_SAFE_URL = f"{REDIS_USER}@{REDIS_HOST}:{REDIS_PORT}"
 
 CACHES = {
-    CacheNamespace.DEFAULT: {
+    "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
     },
-    CacheNamespace.REDIS: {
+    "redis": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
         "KEY_FUNCTION": "django.core.cache.backends.base.default_key_func",
         "KEY_PREFIX": APP,
@@ -198,7 +196,7 @@ CACHES = {
             "pool_class": "redis.BlockingConnectionPool",
         },
     },
-    CacheNamespace.DJANGO_REDIS: {
+    "django_redis": {
         "BACKEND": "django_redis.cache.RedisCache",
         "KEY_FUNCTION": "django.core.cache.backends.base.default_key_func",
         "KEY_PREFIX": APP,
@@ -297,6 +295,8 @@ LOGGING = {
         },
     },
 }
+
+APPEND_SLASH = True
 
 # HERE STARTS DYNACONF EXTENSION LOAD
 import dynaconf
