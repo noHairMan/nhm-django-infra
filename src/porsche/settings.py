@@ -15,7 +15,7 @@ from pathlib import Path
 
 from rest_framework import ISO_8601
 
-from porsche.core.django.constants import CacheNamespace, DatabaseNamespace
+from porsche.core.constants import CacheNamespace, DatabaseNamespace
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

@@ -1,8 +1,11 @@
+from uuid import UUID
+
 from django.db.models import TextChoices
 
 __all__ = [
     "CacheNamespace",
     "DatabaseNamespace",
+    "UID",
 ]
 
 
@@ -15,3 +18,6 @@ class CacheNamespace(TextChoices):
 class DatabaseNamespace(TextChoices):
     DEFAULT = "default"
     POSTGRES = "postgres"
+
+
+UID = UUID | str

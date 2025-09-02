@@ -7,6 +7,7 @@ from django.db.models import Manager, Model, fields
 from django.db.models.base import ModelBase
 from django.utils.translation import gettext_lazy
 
+from porsche.core.constants import UID
 from porsche.core.django.db.manager import PorscheManager
 
 
@@ -85,10 +86,18 @@ class PorscheModel(Model, metaclass=PorscheModelBase):
         )
 
 
-def get_object[T: PorscheModel | Model](model: type[T], raise_exception: bool = False, **kwargs) -> Optional[T]:
+def get_object[T: PorscheModel | Model](
+    model: type[T],
+    uid: Optional[UID] = None,
+    raise_exception: bool = False,
+    **kwargs,
+) -> Optional[T]:
+    if uid:
+        kwargs.setdefault("uid", uid)
     try:
-        return model.objects.get(**kwargs)
+        instance = model.objects.get(**kwargs)
     except model.DoesNotExist:
         if raise_exception:
             raise
-        return None
+        instance = None
+    return instance
