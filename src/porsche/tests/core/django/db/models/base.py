@@ -18,6 +18,15 @@ class TestPorscheModel(PorscheAPITestCase):
         self.assertIsInstance(self.company.create_time, datetime.datetime)
         self.assertIsInstance(self.company.update_time, datetime.datetime)
 
+    def test_update_model(self):
+        """Test basic model update"""
+        create_time, update_time = self.company.create_time, self.company.update_time
+        self.company.name = "New Name"
+        self.company.save()
+        self.assertEqual(self.company.name, "New Name")
+        self.assertEqual(self.company.create_time, create_time)
+        self.assertNotEqual(self.company.update_time, update_time)
+
     def test_soft_delete(self):
         """Test soft delete functionality"""
         self.company.delete(soft=True)
@@ -35,7 +44,7 @@ class TestPorscheModel(PorscheAPITestCase):
 
         # Object should be removed from database
         with self.assertRaises(Company.DoesNotExist):
-            Company.objects.get(id=self.company.id)
+            Company._objects.get(id=self.company.id)
 
     def test_get_object(self):
         """Test get_object utility function"""

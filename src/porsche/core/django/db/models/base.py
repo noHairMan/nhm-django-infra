@@ -62,7 +62,7 @@ class PorscheModel(Model, metaclass=PorscheModelBase):
         using: str | None = None,
         update_fields: Iterable[str] | None = None,
     ) -> None:
-        if update_fields is not None:
+        if update_fields is not None and "update_time" not in update_fields:
             update_fields = list(update_fields)
             update_fields.append("update_time")
 
@@ -77,6 +77,7 @@ class PorscheModel(Model, metaclass=PorscheModelBase):
 def get_object[T: PorscheModel | Model](
     model: type[T],
     uid: Optional[UID] = None,
+    *,
     raise_exception: bool = False,
     **kwargs,
 ) -> Optional[T]:
