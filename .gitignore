@@ -163,3 +163,4 @@ cython_debug/
 .idea/
 .run/
 sqlite3.db
+coverage/

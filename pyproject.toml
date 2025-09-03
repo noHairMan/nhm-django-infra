@@ -22,6 +22,7 @@ dependencies = [
 [dependency-groups]
 dev = [
     "black>=25.1.0",
+    "coverage>=7.10.6",
     "pre-commit>=4.2.0",
 ]
 
@@ -43,3 +44,29 @@ sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
 known_first_party = ["porsche"]
 multi_line_output = 3
 line_length = 120
+
+
+[tool.coverage.run]
+branch = true
+concurrency = [
+    "thread",
+]
+core = "ctrace"
+data_file = ".coverage"
+disable_warnings = []
+source = [
+    "src/porsche",
+]
+
+[tool.coverage.report]
+exclude_also = []
+format = "text"
+sort = "Name"
+ignore_errors = true
+
+[tool.coverage.html]
+directory = "coverage"
+
+[tool.coverage.json]
+output = ".coverage.json"
+pretty_print = true
