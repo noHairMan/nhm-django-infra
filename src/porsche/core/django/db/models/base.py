@@ -9,10 +9,23 @@ from django.utils.translation import gettext_lazy
 
 from porsche.core.django.db.manager import PorscheManager
 from porsche.models.constants import UID
+from porsche.utils.text import camel_case_to_snake_case
 
 
 class PorscheModelBase(ModelBase):
-    pass
+    def __new__(cls, name, bases, namespace, **kwargs):
+        if "Meta" in namespace:
+            Meta = namespace["Meta"]
+        else:
+
+            class Meta:
+                pass
+
+        if not getattr(Meta, "default_related_name", None):
+            Meta.default_related_name = camel_case_to_snake_case(name)
+
+        namespace["Meta"] = Meta
+        return super().__new__(cls, name, bases, namespace, **kwargs)
 
 
 class PorscheModel(Model, metaclass=PorscheModelBase):
@@ -30,9 +43,10 @@ class PorscheModel(Model, metaclass=PorscheModelBase):
         abstract = True
 
     def get_related_objects(self):
-        return [
+        related_objects = [
             f for f in self._meta.get_fields() if (f.one_to_many or f.one_to_one) and f.auto_created and not f.concrete
         ]
+        return related_objects
 
     @override
     def delete(

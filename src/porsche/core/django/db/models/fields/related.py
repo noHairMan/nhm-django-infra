@@ -21,8 +21,6 @@ class PorscheForeignKey(ForeignKey):
         db_constraint=False,
         **kwargs,
     ):
-        if not related_name:
-            related_name = f"{to._meta.model_name}"
         super().__init__(
             to,
             on_delete,
