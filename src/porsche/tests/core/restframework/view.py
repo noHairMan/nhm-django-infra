@@ -1,16 +1,15 @@
+from pyexpat.errors import messages
+
+from django.core.exceptions import PermissionDenied as DjangoPermissionDenied
 from django.http import Http404
 from rest_framework.exceptions import APIException
 
-from porsche.core.restframework.exceptions import PorscheServerException
+from porsche.core.restframework.exceptions import PorscheAPIException
 from porsche.core.restframework.request import PorscheRequest
 from porsche.core.restframework.response import PorscheResponse
 from porsche.core.restframework.test import PorscheAPITestCase
 from porsche.core.restframework.views import PorscheAPIView, exception_handler
 from porsche.models.enums import BusinessCode
-
-
-class DjangoPermissionDenied:
-    pass
 
 
 class TestView(PorscheAPITestCase):
@@ -36,5 +35,14 @@ class TestView(PorscheAPITestCase):
         self.assertEqual(response.headers["Retry-After"], str(exc.wait))
 
         response = exception_handler(DjangoPermissionDenied(), {})
+        self.assertIsInstance(response, PorscheResponse)
+        self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
+
+        message = {"foo": "bar", "code": 123, "message": "test error"}
+        response = exception_handler(PorscheAPIException(message), {})
+        self.assertIsInstance(response, PorscheResponse)
+        self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
+
+        response = exception_handler(Exception(), {})
         self.assertIsInstance(response, PorscheResponse)
         self.assertEqual(response.business_code, BusinessCode.SERVER_ERROR)

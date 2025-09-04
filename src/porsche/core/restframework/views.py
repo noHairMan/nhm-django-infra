@@ -1,4 +1,3 @@
-from os import wait3
 from traceback import format_exc
 from typing import Any, override
 
@@ -9,7 +8,6 @@ from django.http import Http404, HttpRequest
 from rest_framework.exceptions import APIException, NotFound
 from rest_framework.exceptions import PermissionDenied as RestFrameworkPermissionDenied
 from rest_framework.views import APIView, set_rollback
-from sqlparse.utils import offset
 
 from porsche.core.restframework.exceptions import PorscheAPIException
 from porsche.core.restframework.request import PorscheRequest
@@ -44,7 +42,7 @@ def exception_handler(exc: Any, context) -> PorscheResponse:
     logger.error(format_exc())
     if isinstance(exc, NotFound):
         return PorscheResponse(code=BusinessCode.BAD_REQUEST, message="Not found")
-    elif isinstance(exc, DjangoPermissionDenied):
+    elif isinstance(exc, RestFrameworkPermissionDenied):
         return PorscheResponse(code=BusinessCode.BAD_REQUEST, message="Permission denied")
     elif isinstance(exc, PorscheAPIException):
         headers = {}
