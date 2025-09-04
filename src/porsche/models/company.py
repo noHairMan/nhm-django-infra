@@ -9,6 +9,9 @@ from porsche.models.tag import Tag
 class Company(PorscheModel):
     name = models.CharField(max_length=100, verbose_name=gettext_lazy("公司名称"))
 
+    class Meta:
+        default_related_name = "company"  # just for coverage
+
 
 class CompanyTag(PorscheModel):
     company = PorscheForeignKey(

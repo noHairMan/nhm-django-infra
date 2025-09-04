@@ -1,4 +1,5 @@
 from django.db.models import IntegerChoices, TextChoices
+from django.db.models.enums import ChoicesType
 
 __all__ = [
     "PorscheTextChoices",
@@ -6,9 +7,20 @@ __all__ = [
 ]
 
 
-class PorscheTextChoices(TextChoices):
+class PorscheChoicesType(ChoicesType):
     pass
 
 
-class PorscheIntegerChoices(IntegerChoices):
+class PorscheGenericChoices(metaclass=PorscheChoicesType):
+    choices: list[tuple[str | int, str]]
+    values: list[str | int]
+    labels: list[str]
+    names: list[str]
+
+
+class PorscheTextChoices(TextChoices, PorscheGenericChoices, metaclass=PorscheChoicesType):
+    pass
+
+
+class PorscheIntegerChoices(IntegerChoices, PorscheGenericChoices, metaclass=PorscheChoicesType):
     pass

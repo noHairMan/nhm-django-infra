@@ -172,7 +172,7 @@ DATABASES = {
         },
     },
 }
-DATABASES["default"] = DATABASES["postgres"]
+DATABASES["default"] = DATABASES["sqlite"]
 
 REDIS_HOST = None
 REDIS_PORT = None

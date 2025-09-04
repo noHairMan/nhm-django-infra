@@ -2,6 +2,7 @@
 from typing import Any, Iterable, Optional, override
 from uuid import uuid4
 
+from django.conf import settings
 from django.db import transaction
 from django.db.models import Manager, Model, fields
 from django.db.models.base import ModelBase
@@ -57,15 +58,19 @@ class PorscheModel(Model, metaclass=PorscheModelBase):
     ) -> tuple[int, dict[str, int]]:
         with transaction.atomic(using=using, savepoint=False):
             if soft:
-                self.deleted = True
-                self.save(update_fields=["deleted"], using=using)
-
+                soft_count = 1
+                soft_delete_objects = {}
                 for relation in self.get_related_objects():
                     related_objects = getattr(self, relation.get_accessor_name()).all()
                     for obj in related_objects:
-                        if hasattr(obj, "deleted"):
-                            obj.delete(using=using, soft=True)
-                return 0, {}  # todo: check this
+                        count, related_dict = obj.delete(using=using, soft=True)
+                        soft_delete_objects |= related_dict
+                        soft_count += count
+
+                self.deleted = True
+                self.save(update_fields=["deleted"], using=using)
+
+                return soft_count, (soft_delete_objects | {f"{settings.APP}.{self.__class__.__name__}": 1})
             return super().delete(using, keep_parents)
 
     @override

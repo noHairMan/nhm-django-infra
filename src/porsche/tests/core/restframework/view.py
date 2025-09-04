@@ -1,0 +1,40 @@
+from django.http import Http404
+from rest_framework.exceptions import APIException
+
+from porsche.core.restframework.exceptions import PorscheServerException
+from porsche.core.restframework.request import PorscheRequest
+from porsche.core.restframework.response import PorscheResponse
+from porsche.core.restframework.test import PorscheAPITestCase
+from porsche.core.restframework.views import PorscheAPIView, exception_handler
+from porsche.models.enums import BusinessCode
+
+
+class DjangoPermissionDenied:
+    pass
+
+
+class TestView(PorscheAPITestCase):
+    def setUp(self):
+        self.view = PorscheAPIView()
+
+    def test_initialize_request(self):
+        request = self.request_factory.get("/api/health/")
+        self.assertIsInstance(self.view.initialize_request(request), PorscheRequest)
+
+    def test_exception_handler(self):
+        response = exception_handler(Http404(), {})
+        self.assertIsInstance(response, PorscheResponse)
+        self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
+
+        exc = APIException("Test Error")
+        exc.auth_header = "Bearer"
+        exc.wait = 10000
+        response = exception_handler(exc, {})
+        self.assertIsInstance(response, PorscheResponse)
+        self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
+        self.assertEqual(response.headers["WWW-Authenticate"], exc.auth_header)
+        self.assertEqual(response.headers["Retry-After"], str(exc.wait))
+
+        response = exception_handler(DjangoPermissionDenied(), {})
+        self.assertIsInstance(response, PorscheResponse)
+        self.assertEqual(response.business_code, BusinessCode.SERVER_ERROR)

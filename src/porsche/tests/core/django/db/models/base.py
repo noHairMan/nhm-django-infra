@@ -10,7 +10,6 @@ class TestPorscheModel(PorscheAPITestCase):
     def setUp(self):
         self.company = Company.objects.create(name="Test Company")
         self.tag = Tag.objects.create(name="Test Tag")
-        self.company_tag = CompanyTag.objects.create(company=self.company, tag=self.tag)
 
     def test_create(self):
         self.assertIsInstance(self.company.uid, UUID)
@@ -28,23 +27,27 @@ class TestPorscheModel(PorscheAPITestCase):
         self.assertNotEqual(self.company.update_time, update_time)
 
     def test_soft_delete(self):
-        print("soft delete", self.company.delete(soft=True))
+        numbers = 10
+        for _ in range(numbers):
+            CompanyTag.objects.create(company=self.company, tag=self.tag)
+        count, objs = self.company.delete(soft=True)
+        self.assertEqual(count, numbers + 1)
         self.assertTrue(self.company.deleted)
-
         company = Company._objects.get(id=self.company.id)
         self.assertTrue(company.deleted)
         with self.assertRaises(Company.DoesNotExist):
             Company.objects.get(id=self.company.id)
 
     def test_hard_delete(self):
-        print("hard delete", self.company.delete(soft=False))
+        self.company.delete(soft=False)
         with self.assertRaises(Company.DoesNotExist):
             Company._objects.get(id=self.company.id)
 
     def test_get_related_objects(self):
+        company_tag = CompanyTag.objects.create(company=self.company, tag=self.tag)
         self.assertIn("company_tag", [obj.name for obj in self.company.get_related_objects()])
         self.assertIn("company_tag", [obj.name for obj in self.tag.get_related_objects()])
-        self.assertListEqual(self.company_tag.get_related_objects(), [])
+        self.assertListEqual(company_tag.get_related_objects(), [])
 
 
 class TestGetObject(PorscheAPITestCase):

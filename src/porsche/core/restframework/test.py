@@ -1,3 +1,5 @@
+from functools import lru_cache
+
 from rest_framework.test import (
     APIClient,
     APILiveServerTestCase,
@@ -33,20 +35,30 @@ class PorscheAPIClient(APIClient):
     pass
 
 
-class PorscheAPITransactionTestCase(APITransactionTestCase):
+class PorscheGenericTestCase:
     client_class = PorscheAPIClient
+    request_factory_class = PorscheAPIRequestFactory
+
+    @property
+    @lru_cache
+    def request_factory(self):
+        return self.request_factory_class()
 
 
-class PorscheAPITestCase(APITestCase):
-    client_class = PorscheAPIClient
+class PorscheAPITransactionTestCase(APITransactionTestCase, PorscheGenericTestCase):
+    pass
 
 
-class PorscheAPISimpleTestCase(APISimpleTestCase):
-    client_class = PorscheAPIClient
+class PorscheAPITestCase(APITestCase, PorscheGenericTestCase):
+    pass
 
 
-class PorscheAPILiveServerTestCase(APILiveServerTestCase):
-    client_class = PorscheAPIClient
+class PorscheAPISimpleTestCase(APISimpleTestCase, PorscheGenericTestCase):
+    pass
+
+
+class PorscheAPILiveServerTestCase(APILiveServerTestCase, PorscheGenericTestCase):
+    pass
 
 
 class PorscheURLPatternsTestCase(URLPatternsTestCase):

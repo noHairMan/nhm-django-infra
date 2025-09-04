@@ -18,10 +18,9 @@ class PorscheResponse(Response):
         code: BusinessCode | int = BusinessCode.SUCCESS,
         message: Optional[AnyStr] = None,
     ):
-        if isinstance(code, int):
-            code = BusinessCode(code)
+        self.business_code = code if isinstance(code, BusinessCode) else BusinessCode(code)
         data = {
-            "code": code.value,
+            "code": self.business_code,
             "data": data,
             "message": code.label if message is None else message,
         }
