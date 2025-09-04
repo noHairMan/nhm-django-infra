@@ -24,6 +24,7 @@ dependencies = [
 dev = [
     "black>=25.1.0",
     "coverage>=7.10.6",
+    "genbadge[coverage]>=1.1.2",
     "pre-commit>=4.2.0",
 ]
 
@@ -71,3 +72,6 @@ directory = "coverage"
 [tool.coverage.json]
 output = ".coverage.json"
 pretty_print = true
+
+[tool.coverage.xml]
+output = ".coverage.xml"
