@@ -224,9 +224,9 @@ docker run --rm -p 8000:8000 \
 
 - 默认 LANGUAGE_CODE=en-us，TIME_ZONE=UTC，可按需通过 Dynaconf 覆盖（如 PORSCHE_LANGUAGE_CODE / PORSCHE_TIME_ZONE）
 
-## 许可
+## 许可证
 
-当前仓库未声明许可证。如需开源发布，请补充 LICENSE 文件并在此处注明。
+本项目采用 MIT 许可证 - 详见 [LICENSE](LICENSE) 文件
 
 ## 参考
 

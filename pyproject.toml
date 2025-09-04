@@ -6,6 +6,7 @@ authors = [
     { name = "xuheng.zong", email = "79689669+nohairman@users.noreply.github.com" }
 ]
 readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.13"
 dependencies = [
     "django>=5.2.0",
