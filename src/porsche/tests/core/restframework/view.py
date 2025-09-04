@@ -1,8 +1,9 @@
 from pyexpat.errors import messages
 
+import ujson
 from django.core.exceptions import PermissionDenied as DjangoPermissionDenied
 from django.http import Http404
-from rest_framework.exceptions import APIException
+from rest_framework.exceptions import APIException, _get_error_details
 
 from porsche.core.restframework.exceptions import PorscheAPIException
 from porsche.core.restframework.request import PorscheRequest
@@ -42,6 +43,10 @@ class TestView(PorscheAPITestCase):
         response = exception_handler(PorscheAPIException(message), {})
         self.assertIsInstance(response, PorscheResponse)
         self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
+        self.assertEqual(
+            response.data["message"],
+            ujson.dumps(_get_error_details(message), ensure_ascii=False, escape_forward_slashes=False),
+        )
 
         response = exception_handler(Exception(), {})
         self.assertIsInstance(response, PorscheResponse)
