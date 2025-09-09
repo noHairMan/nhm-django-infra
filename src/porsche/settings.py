@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "django.contrib.auth",
+    # "django.contrib.auth",
     "django.contrib.contenttypes",
     # "django.contrib.sessions",
     # "django.contrib.messages",
@@ -46,10 +46,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
+    # "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
+    # "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
@@ -69,8 +69,8 @@ REST_FRAMEWORK = {
         "rest_framework.parsers.MultiPartParser",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.BasicAuthentication",
+        # "rest_framework.authentication.SessionAuthentication",
+        # "rest_framework.authentication.BasicAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.AllowAny",
@@ -99,8 +99,8 @@ REST_FRAMEWORK = {
     "DEFAULT_VERSION": "1",
     "ALLOWED_VERSIONS": ["1"],
     "VERSION_PARAM": "version",
-    # Authentication
-    "UNAUTHENTICATED_USER": "django.contrib.auth.models.AnonymousUser",
+    # Authentication\
+    "UNAUTHENTICATED_USER": None,
     "UNAUTHENTICATED_TOKEN": None,
     # View configuration
     "VIEW_NAME_FUNCTION": "rest_framework.views.get_view_name",
@@ -221,20 +221,20 @@ CACHES = {
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
+# AUTH_PASSWORD_VALIDATORS = [
+#     {
+#         "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
+#     },
+#     {
+#         "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+#     },
+#     {
+#         "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+#     },
+#     {
+#         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+#     },
+# ]
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
