@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from rest_framework.viewsets import ViewSetMixin
 
 from porsche.core.restframework import generics, mixins

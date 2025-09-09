@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from typing import Optional, override
 
 from rest_framework.generics import GenericAPIView
