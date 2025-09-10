@@ -13,7 +13,7 @@ name: "CodeQL Advanced"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "xuheng.zong/*" ]
   pull_request:
     branches: [ "main" ]
   schedule:
