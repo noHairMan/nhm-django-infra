@@ -34,7 +34,8 @@ jobs:
           uv sync --dev
 
       - name: "Coverage Run"
-        run: make test # This is the part where you put your own test command
+        run: |
+          uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
 
       - name: Coverage comment
         id: coverage_comment
