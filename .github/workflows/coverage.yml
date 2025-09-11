@@ -1,4 +1,4 @@
-name: coverage.yml
+name: "Run Coverage And Generate Badge"
 on:
   push:
     branches: [
@@ -34,13 +34,13 @@ jobs:
         run: |
           set -eux
           if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
-              sed -i "s|deb.debian.org|mirrors.aliyun.com|g; s|security.debian.org|mirrors.aliyun.com/debian-security|g" /etc/apt/sources.list.d/debian.sources; \
+              sudo sed -i "s|deb.debian.org|mirrors.aliyun.com|g; s|security.debian.org|mirrors.aliyun.com/debian-security|g" /etc/apt/sources.list.d/debian.sources; \
           else \
-              sed -i "s|deb.debian.org|mirrors.aliyun.com|g; s|security.debian.org|mirrors.aliyun.com/debian-security|g" /etc/apt/sources.list; \
+              sudo sed -i "s|deb.debian.org|mirrors.aliyun.com|g; s|security.debian.org|mirrors.aliyun.com/debian-security|g" /etc/apt/sources.list; \
           fi;
-          apt update
-          apt-get install -y curl
-          apt-get clean -y && rm -rf /var/lib/apt/lists/*
+          sudo apt update
+          sudo apt-get install -y curl
+          sudo apt-get clean -y && sudo rm -rf /var/lib/apt/lists/*
       - name: "install uv"
         env:
           ENV LANG: C.UTF-8
