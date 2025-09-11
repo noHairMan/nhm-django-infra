@@ -1,0 +1,47 @@
+name: coverage.yml
+on:
+  push:
+    branches: [
+      "main",
+      # todo: just for test, remove later
+      "test/*",
+      "!test/*-alpha",
+    ]
+    paths:
+      - "src/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "src/**"
+    types:
+      - "opened"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: true
+
+jobs:
+  coverage-run-and-genbadge:
+    name: "coverage run, coverage xml and genbadge"
+    runs-on: [
+      "ubuntu-latest"
+    ]
+    steps:
+      - name: "checkout"
+        uses: "actions/checkout@v5.0.0"
+      - name: "install uv"
+        env:
+          ENV LANG: C.UTF-8
+          UV_INSTALLER_GHE_BASE_URL: "https://files.m.daocloud.io/github.com"
+          UV_PYTHON_INSTALL_MIRROR: "https://files.m.daocloud.io/github.com/astral-sh/python-build-standalone/releases/download"
+          UV_COMPILE_BYTECODE: 1
+          UV_LINK_MODE: copy
+          PATH: "/root/.local/bin:$PATH"
+        run: |
+          curl -LsSf -o uv_install.sh https://files.m.daocloud.io/astral.sh/uv/install.sh
+          sh uv_install.sh
+          rm uv_install.sh
+          echo "uv --version"
+      - name: "uv sync"
+        run: |
