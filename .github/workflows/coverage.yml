@@ -9,10 +9,12 @@ on:
     ]
     paths:
       - "src/**"
+      - ".github/workflows/coverage.yml"
   pull_request:
     branches: [ "main" ]
     paths:
       - "src/**"
+      - ".github/workflows/coverage.yml"
     types:
       - "opened"
   workflow_dispatch:
@@ -42,11 +44,6 @@ jobs:
           UV_LINK_MODE: copy
           PATH: "/root/.local/bin:$PATH"
         run: |
-          if [ -f /etc/apt/sources.list.d/debian.sources ]; then \
-              sudo sed -i "s|deb.debian.org|mirrors.aliyun.com|g; s|security.debian.org|mirrors.aliyun.com/debian-security|g" /etc/apt/sources.list.d/debian.sources; \
-          else \
-              sudo sed -i "s|deb.debian.org|mirrors.aliyun.com|g; s|security.debian.org|mirrors.aliyun.com/debian-security|g" /etc/apt/sources.list; \
-          fi;
           sudo apt update
           sudo apt-get install -y curl
           sudo apt-get clean -y && sudo rm -rf /var/lib/apt/lists/*
@@ -54,7 +51,7 @@ jobs:
           curl -LsSf -o uv_install.sh https://files.m.daocloud.io/astral.sh/uv/install.sh
           sh uv_install.sh
           rm uv_install.sh
-          echo "uv --version"
+          uv --version
       - name: "uv sync"
         run: |
           echo "uv sync"
