@@ -59,6 +59,7 @@ disable_warnings = []
 source = [
     "src/porsche",
 ]
+relative_files = true
 
 [tool.coverage.report]
 exclude_also = []
