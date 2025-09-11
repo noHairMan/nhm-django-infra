@@ -32,9 +32,6 @@ jobs:
     steps:
       - name: "checkout"
         uses: "actions/checkout@v5.0.0"
-      - name: "install tools"
-        run: |
-
       - name: "install uv"
         env:
           ENV LANG: C.UTF-8
@@ -44,9 +41,9 @@ jobs:
           UV_LINK_MODE: copy
           PATH: "/root/.local/bin:$PATH"
         run: |
-          sudo apt update
-          sudo apt-get install -y curl
-          sudo apt-get clean -y && sudo rm -rf /var/lib/apt/lists/*
+          apt update
+          apt-get install -y curl
+          apt-get clean -y && rm -rf /var/lib/apt/lists/*
 
           curl -LsSf -o uv_install.sh https://files.m.daocloud.io/astral.sh/uv/install.sh
           sh uv_install.sh
