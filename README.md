@@ -1,5 +1,7 @@
 # nhm-django-infra
 
+[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)
+
 A lightweight Django 5 + Django REST framework boilerplate for backend services. It includes:
 
 - Health check endpoint: GET /api/health/
