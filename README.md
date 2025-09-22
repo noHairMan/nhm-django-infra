@@ -66,7 +66,7 @@
 | src/porsche/tests/core/restframework/exceptions.py       |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/restframework/fields.py           |       27 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/restframework/response.py         |        6 |        0 |        0 |        0 |     100% |           |
-| src/porsche/tests/core/restframework/view.py             |       40 |        0 |        0 |        0 |     100% |           |
+| src/porsche/tests/core/restframework/view.py             |       46 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/restframework/viewsets.py         |      107 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/wsgi.py                                |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/urls.py                                      |        2 |        0 |        0 |        0 |     100% |           |
@@ -74,7 +74,7 @@
 | src/porsche/utils/log.py                                 |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/text.py                                |        3 |        0 |        0 |        0 |     100% |           |
 | src/porsche/wsgi.py                                      |        4 |        0 |        0 |        0 |     100% |           |
-|                                                **TOTAL** |  **795** |    **0** |   **58** |    **0** | **100%** |           |
+|                                                **TOTAL** |  **801** |    **0** |   **58** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
