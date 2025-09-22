@@ -14,7 +14,7 @@
 | src/porsche/api/filters/\_\_init\_\_.py                  |        0 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/serializers/\_\_init\_\_.py              |        0 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/serializers/company.py                   |       22 |        0 |        0 |        0 |     100% |           |
-| src/porsche/api/serializers/tag.py                       |       22 |        0 |        0 |        0 |     100% |           |
+| src/porsche/api/serializers/tag.py                       |       24 |        0 |        0 |        0 |     100% |           |
 | src/porsche/apps.py                                      |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/asgi.py                                      |        4 |        0 |        0 |        0 |     100% |           |
 | src/porsche/bussiness/\_\_init\_\_.py                    |        0 |        0 |        0 |        0 |     100% |           |
@@ -24,12 +24,13 @@
 | src/porsche/core/django/db/manager.py                    |        5 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/db/models/\_\_init\_\_.py        |        3 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/db/models/base.py                |       64 |        0 |       16 |        0 |     100% |           |
-| src/porsche/core/django/db/models/enums.py               |       14 |        0 |        0 |        0 |     100% |           |
+| src/porsche/core/django/db/models/enums.py               |       17 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/db/models/fields/\_\_init\_\_.py |        1 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/db/models/fields/related.py      |        7 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/exceptions.py                           |        9 |        0 |        2 |        0 |     100% |           |
 | src/porsche/core/restframework/\_\_init\_\_.py           |        5 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/exceptions.py             |        9 |        0 |        0 |        0 |     100% |           |
+| src/porsche/core/restframework/fields.py                 |       25 |        0 |        2 |        0 |     100% |           |
 | src/porsche/core/restframework/generics.py               |       40 |        0 |       14 |        0 |     100% |           |
 | src/porsche/core/restframework/mixins.py                 |       22 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/request.py                |        5 |        0 |        0 |        0 |     100% |           |
@@ -61,8 +62,9 @@
 | src/porsche/tests/core/django/db/\_\_init\_\_.py         |        1 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/django/db/models/\_\_init\_\_.py  |        1 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/django/db/models/base.py          |       56 |        0 |        2 |        0 |     100% |           |
-| src/porsche/tests/core/restframework/\_\_init\_\_.py     |        4 |        0 |        0 |        0 |     100% |           |
+| src/porsche/tests/core/restframework/\_\_init\_\_.py     |        5 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/restframework/exceptions.py       |        9 |        0 |        0 |        0 |     100% |           |
+| src/porsche/tests/core/restframework/fields.py           |       27 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/restframework/response.py         |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/restframework/view.py             |       40 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/core/restframework/viewsets.py         |      107 |        0 |        0 |        0 |     100% |           |
@@ -72,7 +74,7 @@
 | src/porsche/utils/log.py                                 |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/text.py                                |        3 |        0 |        0 |        0 |     100% |           |
 | src/porsche/wsgi.py                                      |        4 |        0 |        0 |        0 |     100% |           |
-|                                                **TOTAL** |  **737** |    **0** |   **56** |    **0** | **100%** |           |
+|                                                **TOTAL** |  **795** |    **0** |   **58** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
