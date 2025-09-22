@@ -4,6 +4,7 @@ from django.db.models.enums import ChoicesType
 __all__ = [
     "PorscheTextChoices",
     "PorscheIntegerChoices",
+    "PorscheGenericChoices",
 ]
 
 
