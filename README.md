@@ -235,6 +235,3 @@ MIT License — see [LICENSE](LICENSE)
 - uv: https://docs.astral.sh/uv/
 
 ## Todo
-
-- Check model choices. If not check in the database server, just in the django app. It will be best to set choices in
-  the model, not in serializer.

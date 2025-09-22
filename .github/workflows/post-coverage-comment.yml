@@ -1,4 +1,4 @@
-name: Post coverage comment
+name: "Post Coverage Comment"
 
 on:
   workflow_run:

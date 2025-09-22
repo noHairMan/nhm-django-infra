@@ -13,9 +13,21 @@ name: "CodeQL Advanced"
 
 on:
   push:
-    branches: [ "main", "xuheng.zong/*" ]
+    branches: [ "main" ]
+    paths:
+      - "src/**"
+      - "pyproject.toml"
+      - "uv.lock"
   pull_request:
     branches: [ "main" ]
+    paths:
+      - "src/**"
+      - "pyproject.toml"
+      - "uv.lock"
+  label:
+    types:
+      - "created"
+      - "edited"
   schedule:
     - cron: '29 13 * * 4'
   workflow_dispatch:  # manual trigger
