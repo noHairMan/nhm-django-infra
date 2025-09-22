@@ -16,6 +16,9 @@ class PorscheGenericChoices(metaclass=PorscheChoicesType):
     values: list[str | int]
     labels: list[str]
     names: list[str]
+    value: str | int
+    label: str
+    name: str
 
 
 class PorscheTextChoices(TextChoices, PorscheGenericChoices, metaclass=PorscheChoicesType):

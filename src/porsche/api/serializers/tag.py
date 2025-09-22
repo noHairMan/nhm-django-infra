@@ -1,6 +1,5 @@
-from rest_framework import serializers
-
 from porsche.core.restframework import PorscheModelSerializer
+from porsche.core.restframework.fields import PorscheChoiceField
 from porsche.core.restframework.validators import PorscheUniqueTogetherValidator
 from porsche.models import Tag
 
@@ -12,7 +11,7 @@ class TagSerializer(PorscheModelSerializer):
 
 
 class TagCreateSerializer(PorscheModelSerializer):
-    category = serializers.ChoiceField(choices=Tag.Category.choices)
+    category = PorscheChoiceField(choices=Tag.Category)
 
     class Meta:
         model = Tag
@@ -26,12 +25,16 @@ class TagCreateSerializer(PorscheModelSerializer):
 
 
 class TagListSerializer(PorscheModelSerializer):
+    category = PorscheChoiceField(choices=Tag.Category)
+
     class Meta:
         model = Tag
         fields = ["uid", "name", "category"]
 
 
 class TagRetrieveSerializer(PorscheModelSerializer):
+    category = PorscheChoiceField(choices=Tag.Category)
+
     class Meta:
         model = Tag
         fields = ["uid", "name", "category"]

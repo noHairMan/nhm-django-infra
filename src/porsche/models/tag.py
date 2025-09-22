@@ -10,7 +10,7 @@ __all__ = [
 
 class Tag(PorscheModel):
     class Category(PorscheTextChoices):
-        COMPANY = "company"
+        COMPANY = "company", gettext_lazy("公司")
 
     name = models.CharField(max_length=20, verbose_name=gettext_lazy("标签名称"))
     category = models.CharField(max_length=20, verbose_name=gettext_lazy("标签类型"))
