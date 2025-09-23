@@ -2,12 +2,19 @@ name: "Coverage Comment"
 
 on:
   pull_request:
+    branches:
+      - "main"
     paths:
       - "src/**"
       - "pyproject.toml"
       - "uv.lock"
+  push:
     branches:
       - "main"
+    paths:
+      - "src/**"
+      - "pyproject.toml"
+      - "uv.lock"
   workflow_dispatch:
 
 jobs:
