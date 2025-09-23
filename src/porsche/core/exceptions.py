@@ -1,6 +1,3 @@
-from rest_framework.exceptions import _get_error_details
-
-
 class PorscheException(Exception):
     default_detail = "An error occurred."
 
@@ -8,7 +5,7 @@ class PorscheException(Exception):
         if detail is None:
             detail = self.default_detail
 
-        self.detail = _get_error_details(detail)
+        self.detail = detail
 
     def __str__(self):
         return str(self.detail)
