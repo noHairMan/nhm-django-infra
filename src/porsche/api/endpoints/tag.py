@@ -3,16 +3,21 @@ from porsche.api.serializers.tag import (
     TagListSerializer,
     TagRetrieveSerializer,
 )
-from porsche.core.restframework import mixins
+from porsche.core.restframework import (
+    PorscheCreateModelMixin,
+    PorscheDestroyModelMixin,
+    PorscheListModelMixin,
+    PorscheRetrieveModelMixin,
+)
 from porsche.core.restframework.viewsets import PorscheGenericViewSet
 from porsche.models import Tag
 
 
 class TagViewSet(
-    mixins.PorscheCreateModelMixin,
-    mixins.PorscheDestroyModelMixin,
-    mixins.PorscheListModelMixin,
-    mixins.PorscheRetrieveModelMixin,
+    PorscheCreateModelMixin,
+    PorscheDestroyModelMixin,
+    PorscheListModelMixin,
+    PorscheRetrieveModelMixin,
     PorscheGenericViewSet,
 ):
     """

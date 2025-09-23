@@ -1,16 +1,15 @@
 from typing import Optional, override
 
+from django.utils.translation import gettext_lazy
+from PIL.ImageCms import isIntentSupported
 from rest_framework.generics import GenericAPIView
+from rest_framework.response import Response
 
 from porsche.core.restframework.exceptions import PorscheServerException
 from porsche.core.restframework.response import PorscheResponse
 from porsche.core.restframework.serializer import PorscheSerializer
 from porsche.core.restframework.views import PorscheAPIView
 from porsche.models.enums import ViewAction
-
-__all__ = [
-    "PorscheGenericAPIView",
-]
 
 
 class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
@@ -49,6 +48,8 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
         return clazz
 
     def finalize_response(self, request, response, *args, **kwargs) -> PorscheResponse:
-        if not isinstance(response, PorscheResponse):
+        if not isinstance(response, PorscheResponse) and isinstance(response, Response):
             response = PorscheResponse(data=response.data)
+        if not isinstance(response, PorscheResponse):
+            raise PorscheServerException(gettext_lazy("Response must be a PorscheResponse instance"))
         return super().finalize_response(request, response, *args, **kwargs)

@@ -1,10 +1,13 @@
 from rest_framework.viewsets import ViewSetMixin
 
-from porsche.core.restframework import generics, mixins
-
-__all__ = [
-    "PorscheModelViewSet",
-]
+from porsche.core.restframework import (
+    PorscheCreateModelMixin,
+    PorscheDestroyModelMixin,
+    PorscheListModelMixin,
+    PorscheRetrieveModelMixin,
+    PorscheUpdateModelMixin,
+    generics,
+)
 
 
 class PorscheGenericViewSet(ViewSetMixin, generics.PorscheGenericAPIView):
@@ -12,11 +15,11 @@ class PorscheGenericViewSet(ViewSetMixin, generics.PorscheGenericAPIView):
 
 
 class PorscheModelViewSet(
-    mixins.PorscheCreateModelMixin,
-    mixins.PorscheUpdateModelMixin,
-    mixins.PorscheDestroyModelMixin,
-    mixins.PorscheListModelMixin,
-    mixins.PorscheRetrieveModelMixin,
+    PorscheCreateModelMixin,
+    PorscheUpdateModelMixin,
+    PorscheDestroyModelMixin,
+    PorscheListModelMixin,
+    PorscheRetrieveModelMixin,
     PorscheGenericViewSet,
 ):
     pass

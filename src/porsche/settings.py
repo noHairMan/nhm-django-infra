@@ -48,7 +48,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     # "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
+    # "django.middleware.csrf.CsrfViewMiddleware",
     # "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -80,7 +80,7 @@ REST_FRAMEWORK = {
     "DEFAULT_METADATA_CLASS": "rest_framework.metadata.SimpleMetadata",
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.QueryParameterVersioning",
     # Generic view behavior
-    "DEFAULT_PAGINATION_CLASS": None,
+    "DEFAULT_PAGINATION_CLASS": "porsche.core.restframework.pagination.PorschePageNumberPagination",
     "DEFAULT_FILTER_BACKENDS": [],
     # Schema
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.openapi.AutoSchema",
@@ -91,7 +91,7 @@ REST_FRAMEWORK = {
     },
     "NUM_PROXIES": None,
     # Pagination
-    "PAGE_SIZE": None,
+    "PAGE_SIZE": 10,
     # Filtering
     "SEARCH_PARAM": "search",
     "ORDERING_PARAM": "ordering",
