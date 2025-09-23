@@ -51,10 +51,7 @@ def exception_handler(exc: Any, context) -> PorscheResponse:
         if wait := getattr(exc, "wait", None):
             headers["Retry-After"] = "%d" % wait
 
-        if isinstance(exc.detail, (list, dict)):
-            message = ujson.dumps(exc.detail, ensure_ascii=False, escape_forward_slashes=False)
-        else:
-            message = exc.detail
+        message = exc.detail
         set_rollback()
         return PorscheResponse(code=exc.business_code, headers=headers, message=message or exc.message)
     # any other exception, raise server error.
