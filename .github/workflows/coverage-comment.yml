@@ -6,13 +6,9 @@ on:
       - "src/**"
       - "pyproject.toml"
       - "uv.lock"
-  push:
     branches:
       - "main"
-    paths:
-      - "src/**"
-      - "pyproject.toml"
-      - "uv.lock"
+  workflow_dispatch:
 
 jobs:
   test:
