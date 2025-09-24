@@ -80,9 +80,9 @@ class PorscheModel(Model, metaclass=PorscheModelBase):
         using: str | None = None,
         update_fields: Iterable[str] | None = None,
     ) -> None:
-        if update_fields is not None and "update_time" not in update_fields:
-            update_fields = list(update_fields)
-            update_fields.append("update_time")
+        if update_fields and "update_time" not in update_fields:
+            update_fields = set(update_fields)
+            update_fields.add("update_time")
 
         super().save(
             force_insert=force_insert,

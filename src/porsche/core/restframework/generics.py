@@ -38,6 +38,8 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
                 clazz = self.create_serializer_class
             case ViewAction.UPDATE:
                 clazz = self.update_serializer_class
+            case ViewAction.PARTIAL_UPDATE:
+                clazz = self.update_serializer_class
             case _:
                 # same as ViewAction.METADATA
                 clazz = super().get_serializer_class()

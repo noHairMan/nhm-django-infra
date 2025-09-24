@@ -18,5 +18,5 @@ Including another URLconf
 from django.urls import include, path
 
 urlpatterns = [
-    path("api/", include("porsche.api.endpoints.urls")),
+    path("api/", include("porsche.api.urls")),
 ]

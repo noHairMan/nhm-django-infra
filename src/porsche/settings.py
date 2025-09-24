@@ -35,11 +35,11 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    # "django.contrib.auth",
+    "django.contrib.auth",
     "django.contrib.contenttypes",
     # "django.contrib.sessions",
     # "django.contrib.messages",
-    # "django.contrib.staticfiles",
+    "django.contrib.staticfiles",
     "rest_framework",
     APP,
 ]
@@ -57,6 +57,29 @@ ROOT_URLCONF = "porsche.urls"
 
 WSGI_APPLICATION = "porsche.wsgi.application"
 
+AUTH_USER_MODEL = "porsche.User"
+
+# 静态文件配置
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+# 添加模板配置
+TEMPLATES = [
+    {
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
+            ],
+        },
+    },
+]
+
 # Rest framework
 REST_FRAMEWORK = {
     "DEFAULT_RENDERER_CLASSES": [
@@ -65,8 +88,8 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
-        "rest_framework.parsers.FormParser",
-        "rest_framework.parsers.MultiPartParser",
+        # "rest_framework.parsers.FormParser",
+        # "rest_framework.parsers.MultiPartParser",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         # "rest_framework.authentication.SessionAuthentication",
