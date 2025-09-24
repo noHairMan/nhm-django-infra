@@ -1,8 +1,10 @@
 from typing import TypedDict
 
-from rest_framework.fields import ChoiceField, MultipleChoiceField
+from django.utils.translation import gettext_lazy
+from rest_framework.fields import CharField, ChoiceField, MultipleChoiceField
 
 from porsche.core.django.db.models.enums import PorscheGenericChoices
+from porsche.core.django.validators import PasswordValidator, PhoneValidator
 
 
 class PorscheChoiceReturn(TypedDict):
@@ -12,7 +14,9 @@ class PorscheChoiceReturn(TypedDict):
 
 class PorscheChoiceField(ChoiceField):
     def __init__(self, choices: type[PorscheGenericChoices], **kwargs):
-        super().__init__(choices=choices.choices, **kwargs)
+        if isinstance(choices, PorscheGenericChoices):
+            choices = choices.choices
+        super().__init__(choices=choices, **kwargs)
         self.choices_clazz = choices
 
     def to_representation(self, value) -> PorscheChoiceReturn:
@@ -42,3 +46,21 @@ class PorscheMultipleChoiceField(MultipleChoiceField):
                 },
             )
         return results
+
+
+class PorschePhoneField(CharField):
+    default_error_messages = {"invalid": gettext_lazy("Enter a valid mobile phone number.")}
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        validator = PhoneValidator(message=self.error_messages["invalid"])
+        self.validators.append(validator)
+
+
+class PorschePasswordField(CharField):
+    default_error_messages = {"invalid": gettext_lazy("Enter a valid password.")}
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        validator = PasswordValidator(message=self.error_messages["invalid"], min_length=8, require_lowercase=True)
+        self.validators.append(validator)

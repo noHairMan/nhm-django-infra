@@ -8,6 +8,7 @@ __all__ = [
 class ViewAction(PorscheTextChoices):
     CREATE = "create"
     UPDATE = "update"
+    PARTIAL_UPDATE = "partial_update"
     LIST = "list"
     RETRIEVE = "retrieve"
     METADATA = "metadata"
