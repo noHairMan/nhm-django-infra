@@ -2,10 +2,6 @@ from typing import override
 
 from django.db.models import ForeignKey
 
-__all__ = [
-    "PorscheForeignKey",
-]
-
 
 class PorscheForeignKey(ForeignKey):
     @override
