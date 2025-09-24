@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy
 
 from porsche.core.django.db.manager import PorscheManager
-from porsche.core.django.db.models import PorscheForeignKey, PorscheModel, PorscheTextChoices, get_object
+from porsche.core.django.db.models import PorscheForeignKey, PorscheModel, PorscheTextChoices
 
 
 class Role(PorscheModel):
@@ -19,10 +19,6 @@ class Role(PorscheModel):
     name = models.CharField(max_length=20, verbose_name=gettext_lazy("角色名"))
     category = models.CharField(max_length=20, verbose_name=gettext_lazy("角色类型"))
     description = models.TextField(blank=True, verbose_name=gettext_lazy("描述"))
-
-    @classmethod
-    def get_admin_uid(cls):
-        return get_object(cls, name=cls.BuiltInName.ADMIN).uid
 
 
 class UserManager(PorscheManager, _UserManager):
