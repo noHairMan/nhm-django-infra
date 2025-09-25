@@ -14,10 +14,9 @@ class PorscheChoiceReturn(TypedDict):
 
 class PorscheChoiceField(ChoiceField):
     def __init__(self, choices: type[PorscheGenericChoices], **kwargs):
-        if isinstance(choices, PorscheGenericChoices):
-            choices = choices.choices
-        super().__init__(choices=choices, **kwargs)
         self.choices_clazz = choices
+        choices = choices.choices
+        super().__init__(choices=choices, **kwargs)
 
     def to_representation(self, value) -> PorscheChoiceReturn:
         value = super().to_representation(value)

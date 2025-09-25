@@ -15,19 +15,11 @@ class PorscheModelSerializer(serializers.ModelSerializer):
     @override
     def update(self, instance, validated_data):
         raise_errors_on_nested_writes("update", self, validated_data)
-        info = model_meta.get_field_info(instance)
 
-        m2m_fields = []
         update_fields = []
         for attr, value in validated_data.items():
-            if attr in info.relations and info.relations[attr].to_many:
-                m2m_fields.append((attr, value))
-            else:
-                setattr(instance, attr, value)
-                update_fields.append(attr)
+            setattr(instance, attr, value)
+            update_fields.append(attr)
         instance.save(update_fields=update_fields)
 
-        for attr, value in m2m_fields:
-            field = getattr(instance, attr)
-            field.set(value)
         return instance

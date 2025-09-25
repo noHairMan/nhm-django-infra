@@ -42,6 +42,10 @@ class TestGeneric(PorscheAPITestCase):
             UpdateSerializer,
         )
         self.assertEqual(
+            TestViewSet(request=request, format_kwarg={}, action=ViewAction.PARTIAL_UPDATE).get_serializer_class(),
+            UpdateSerializer,
+        )
+        self.assertEqual(
             TestViewSet(request=request, format_kwarg={}, action=ViewAction.RETRIEVE).get_serializer_class(),
             RetrieveSerializer,
         )
