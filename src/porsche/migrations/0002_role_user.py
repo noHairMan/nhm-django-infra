@@ -21,11 +21,6 @@ def add_builtin_roles(apps, schema_editor):
     )
 
 
-def reverse_add_builtin_roles(apps, schema_editor):
-    Role = apps.get_model("porsche", "Role")
-    Role.objects.filter(category="builtin").delete()
-
-
 class Migration(migrations.Migration):
     dependencies = [
         ("auth", "0012_alter_user_first_name_max_length"),
@@ -143,6 +138,6 @@ class Migration(migrations.Migration):
         ),
         migrations.RunPython(
             code=add_builtin_roles,
-            reverse_code=reverse_add_builtin_roles,
+            reverse_code=migrations.RunPython.noop,
         ),
     ]
