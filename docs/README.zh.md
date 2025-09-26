@@ -1,6 +1,6 @@
 # nhm-django-infra
 
-[简体中文] | [English](README.en.md) | [日本語](README.ja.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md)
+[简体中文] | [English](docs/README.en.md) | [日本語](docs/README.ja.md) | [Français](docs/README.fr.md) | [Español](docs/README.es.md) | [Deutsch](docs/README.de.md)
 
 [![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)
 ![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
