@@ -9,43 +9,49 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 允许推送到仓库
+      contents: write
     steps:
-      - uses: actions/checkout@v4  # 更新到较新版本
+      - uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4  # 更新到较新版本
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.x  # 更新 Node.js 版本
+          node-version: 18.x
 
       - name: Adding README - Chinese Traditional
-        uses: dephraiim/translate-readme@main
+        uses: noHairMan/translate-readme@main
         with:
           LANG: zh-TW
+          OUTPUT_DIR: docs
 
       - name: Adding README - English
-        uses: dephraiim/translate-readme@main
+        uses: noHairMan/translate-readme@main
         with:
           LANG: en
+          OUTPUT_DIR: docs
 
       - name: Adding README - Japanese
-        uses: dephraiim/translate-readme@main
+        uses: noHairMan/translate-readme@main
         with:
           LANG: ja
+          OUTPUT_DIR: docs
 
       - name: Adding README - Hindi
-        uses: dephraiim/translate-readme@main
+        uses: noHairMan/translate-readme@main
         with:
           LANG: hi
+          OUTPUT_DIR: docs
 
       - name: Adding README - Arabic
-        uses: dephraiim/translate-readme@main
+        uses: noHairMan/translate-readme@main
         with:
           LANG: ar
+          OUTPUT_DIR: docs
 
       - name: Adding README - French
-        uses: dephraiim/translate-readme@main
+        uses: noHairMan/translate-readme@main
         with:
           LANG: fr
+          OUTPUT_DIR: docs
