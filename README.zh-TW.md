@@ -222,7 +222,7 @@ MIT License — 見[執照](../LICENSE)
 
 -   Django：<https://docs.djangoproject.com/>
 -   Django休息框架：<https://www.django-rest-framework.org/>
--   Dynaconf：<https://www.dynaconf.com/>
+-   Dynaconf: <https://www.dynaconf.com/>
 -   psycopg：<https://www.psycopg.org/>
 -   紫外線：<https://docs.astral.sh/uv/>
 
