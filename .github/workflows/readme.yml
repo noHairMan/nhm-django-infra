@@ -8,32 +8,43 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 允许推送到仓库
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v4  # 更新到较新版本
         with:
-          node-version: 12.x
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4  # 更新到较新版本
+        with:
+          node-version: 18.x  # 更新 Node.js 版本
+
       - name: Adding README - Chinese Traditional
         uses: dephraiim/translate-readme@main
         with:
           LANG: zh-TW
+
       - name: Adding README - English
         uses: dephraiim/translate-readme@main
         with:
           LANG: en
+
       - name: Adding README - Japanese
         uses: dephraiim/translate-readme@main
         with:
           LANG: ja
+
       - name: Adding README - Hindi
         uses: dephraiim/translate-readme@main
         with:
           LANG: hi
+
       - name: Adding README - Arabic
         uses: dephraiim/translate-readme@main
         with:
           LANG: ar
+
       - name: Adding README - French
         uses: dephraiim/translate-readme@main
         with:
