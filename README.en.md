@@ -220,7 +220,7 @@ MIT License — See[LICENSE](../LICENSE)
 
 ## reference
 
--   Django:<https://docs.djangoproject.com/>
+-   Django: <https://docs.djangoproject.com/>
 -   Django REST framework:<https://www.django-rest-framework.org/>
 -   Dynaconf:<https://www.dynaconf.com/>
 -   psycopg:<https://www.psycopg.org/>
