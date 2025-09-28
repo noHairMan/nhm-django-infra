@@ -75,7 +75,7 @@
 
 -   デフォルト：debug = false、aotad_hosts =["*"]、例Secret_key  - 生産環境をカバーする必要があります。
 -   Dynaconfのネストされたキーは二重のアンダースコアを使用します」**「、例えばポルシェ\_DATABASES**postgres\_\_host。
--   REST_FRAMEWORK 使用 QueryParameterVersioning（默认版本=1）；默认 URL 前缀不包含版本。
+-   REST_FRAMEWORKの使用queryparameterversioning（デフォルトバージョン= 1）;デフォルトのURLプレフィックスにはバージョンが含まれていません。
 
 ## クイックスタートローカル
 
@@ -108,7 +108,7 @@ PIPの使用：
 
 ## Docker（ローカルポストグレス）
 
-仓库提供了一个最小化的 docker-compose.yaml（仅包含 Postgres）：
+リポジトリは、最小化されたdocker-compose.yaml（postgresのみを含む）を提供します。
 
 1）Project Root Directoryで.ENVを準備します（少なくとも）：
 
