@@ -27,34 +27,23 @@ jobs:
         uses: noHairMan/translate-readme@main
         with:
           LANG: zh-TW
-          OUTPUT_DIR: docs
+          OUTPUT_DIR: "docs"
 
       - name: Adding README - English
         uses: noHairMan/translate-readme@main
         with:
           LANG: en
-          OUTPUT_DIR: docs
+          OUTPUT_DIR: "docs"
 
       - name: Adding README - Japanese
         uses: noHairMan/translate-readme@main
         with:
           LANG: ja
-          OUTPUT_DIR: docs
+          OUTPUT_DIR: "docs"
 
-      - name: Adding README - Hindi
+      - name: Adding README - test
         uses: noHairMan/translate-readme@main
         with:
-          LANG: hi
-          OUTPUT_DIR: docs
-
-      - name: Adding README - Arabic
-        uses: noHairMan/translate-readme@main
-        with:
-          LANG: ar
-          OUTPUT_DIR: docs
-
-      - name: Adding README - French
-        uses: noHairMan/translate-readme@main
-        with:
-          LANG: fr
-          OUTPUT_DIR: docs
+          LANG: ja
+          OUTPUT_DIR: "docs"
+          OUTPUT_FILE: "readme.${lang}.md"
