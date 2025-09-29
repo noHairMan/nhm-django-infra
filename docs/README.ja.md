@@ -138,9 +138,9 @@ PIPの使用：
 説明：
 
 -   ビルドタイムの​​依存関係は、pyproject.tomlを使用したUV.Lockからのものです。
--   入り口はガニコーンです。
--   DockerfileのHealthCheckは、http：// localhost：8000/api/v1/healthを指します。アプリケーションが /API /ヘルスを使用している場合は、パスを更新するか、
-    Pornche/urls.pyにバージョンされたプレフィックスを追加します。
+-   入口为 gunicorn。
+-   Dockerfile 的 HEALTHCHECK 指向 http&#x3A;//localhost:8000/api/v1/health。若你的应用使用 /api/health，请更新路径或
+    在 porsche/urls.py 中添加带版本的前缀。
 -   ComposeのPostgresに接続するには、ネットワークにアクセスできることを確認し、Porsche_Database \_\_...環境変数が正しく設定されていることを確認してください。
 
 ## APIの例
@@ -173,7 +173,7 @@ SRC/Porsche/API/Endpoints/およびSrc/Porsche/urls.pyの集合体の下にさ�
 
 ## ログと例外
 
--   ログ：stdout（コンソールハンドラー）への出力、詳細についてはsettings.loggingを参照してください
+-   日志：输出到 stdout（console handler），详见 settings.LOGGING
 -   例外：pornsche.core.restframework.views.exception_handlerによって均一に処理され、構造化された応答（コード/データ/メッセージ）を返します
 
 ## テストとカバレッジ
