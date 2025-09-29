@@ -137,7 +137,7 @@ Note: This compose will not start the Django application; you can start it local
 
 illustrate:
 
--   构建时依赖来自 uv.lock 与 pyproject.toml。
+-   Build-time dependencies come from uv.lock with pyproject.toml.
 -   The entrance is gunicorn.
 -   The HEALTHCHECK of the Dockerfile points to http&#x3A;//localhost:8000/api/v1/health. If your application uses /api/health, please update the path or
     Add a versioned prefix in pornche/urls.py.
