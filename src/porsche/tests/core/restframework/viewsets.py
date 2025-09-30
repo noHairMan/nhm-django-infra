@@ -2,15 +2,15 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from rest_framework.response import Response
 
+from porsche.api.endpoints import HealthCheckView
 from porsche.core.restframework import (
-    PorscheGenericAPIView,
     PorscheModelSerializer,
     PorscheModelViewSet,
     PorscheSerializer,
 )
 from porsche.core.restframework.exceptions import PorscheServerException
 from porsche.core.restframework.response import PorscheResponse
-from porsche.core.restframework.test import PorscheAPIRequestFactory, PorscheAPITestCase
+from porsche.core.restframework.test import PorscheAPITestCase
 from porsche.core.restframework.validators import PorscheUniqueTogetherValidator
 from porsche.models import Tag
 from porsche.models.enums import BusinessCode, ViewAction
@@ -138,8 +138,7 @@ class TestPorscheModelViewSet(PorscheAPITestCase):
 
     def test_finalize_response(self):
         request = self.request_factory.get("/api/health/")
-        view = PorscheGenericAPIView()
-        view.permission_classes = []
+        view = HealthCheckView()
         porsche_request = view.initialize_request(request)
         view.initial(porsche_request)
 
