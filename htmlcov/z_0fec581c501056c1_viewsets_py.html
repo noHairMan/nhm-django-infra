@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_236d99788d7743b1_wsgi_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.10.6">coverage.py v7.10.6</a>,
-            created at 2025-09-30 02:25 +0000
+            created at 2025-09-30 07:43 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -221,9 +221,9 @@
     <p class="run"><span class="n"><a id="t137" href="#t137">137</a></span><span class="t">            <span class="nam">self</span><span class="op">.</span><span class="nam">view</span><span class="op">.</span><span class="nam">get_serializer_class</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t138" href="#t138">138</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t139" href="#t139">139</a></span><span class="t">    <span class="key">def</span> <span class="nam">test_finalize_response</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t140" href="#t140">140</a></span><span class="t">        <span class="nam">request_factory</span> <span class="op">=</span> <span class="nam">PorscheAPIRequestFactory</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t141" href="#t141">141</a></span><span class="t">        <span class="nam">request</span> <span class="op">=</span> <span class="nam">request_factory</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">"/api/health/"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t142" href="#t142">142</a></span><span class="t">        <span class="nam">view</span> <span class="op">=</span> <span class="nam">PorscheGenericAPIView</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t140" href="#t140">140</a></span><span class="t">        <span class="nam">request</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">request_factory</span><span class="op">.</span><span class="nam">get</span><span class="op">(</span><span class="str">"/api/health/"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t141" href="#t141">141</a></span><span class="t">        <span class="nam">view</span> <span class="op">=</span> <span class="nam">PorscheGenericAPIView</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t142" href="#t142">142</a></span><span class="t">        <span class="nam">view</span><span class="op">.</span><span class="nam">permission_classes</span> <span class="op">=</span> <span class="op">[</span><span class="op">]</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t143" href="#t143">143</a></span><span class="t">        <span class="nam">porsche_request</span> <span class="op">=</span> <span class="nam">view</span><span class="op">.</span><span class="nam">initialize_request</span><span class="op">(</span><span class="nam">request</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t144" href="#t144">144</a></span><span class="t">        <span class="nam">view</span><span class="op">.</span><span class="nam">initial</span><span class="op">(</span><span class="nam">porsche_request</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t145" href="#t145">145</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -244,7 +244,7 @@
             <a class="nav" href="z_236d99788d7743b1_wsgi_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.10.6">coverage.py v7.10.6</a>,
-            created at 2025-09-30 02:25 +0000
+            created at 2025-09-30 07:43 +0000
         </p>
     </div>
 </footer>

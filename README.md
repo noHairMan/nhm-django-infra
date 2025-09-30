@@ -8,7 +8,7 @@
 | src/porsche/api/\_\_init\_\_.py                          |        0 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/endpoints/\_\_init\_\_.py                |        4 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/endpoints/company.py                     |       11 |        0 |        0 |        0 |     100% |           |
-| src/porsche/api/endpoints/health.py                      |        8 |        0 |        0 |        0 |     100% |           |
+| src/porsche/api/endpoints/health.py                      |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/endpoints/tag.py                         |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/endpoints/user.py                        |       12 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/filters/\_\_init\_\_.py                  |        0 |        0 |        0 |        0 |     100% |           |
@@ -41,7 +41,7 @@
 | src/porsche/core/restframework/response.py               |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/router.py                 |        3 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/serializer.py             |       16 |        0 |        2 |        0 |     100% |           |
-| src/porsche/core/restframework/test.py                   |       25 |        0 |        0 |        0 |     100% |           |
+| src/porsche/core/restframework/test.py                   |       36 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/validators.py             |        5 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/views.py                  |       46 |        0 |       20 |        0 |     100% |           |
 | src/porsche/core/restframework/viewsets.py               |        6 |        0 |        0 |        0 |     100% |           |
@@ -62,7 +62,7 @@
 | src/porsche/tests/api/\_\_init\_\_.py                    |        2 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/api/endpoints/\_\_init\_\_.py          |        2 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/api/endpoints/company.py               |       32 |        0 |        2 |        0 |     100% |           |
-| src/porsche/tests/api/endpoints/health.py                |       14 |        0 |        0 |        0 |     100% |           |
+| src/porsche/tests/api/endpoints/health.py                |       13 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/api/serializers/\_\_init\_\_.py        |        1 |        0 |        0 |        0 |     100% |           |
 | src/porsche/tests/api/serializers/user.py                |       18 |        0 |        2 |        0 |     100% |           |
 | src/porsche/tests/asgi.py                                |        6 |        0 |        0 |        0 |     100% |           |
@@ -87,7 +87,7 @@
 | src/porsche/utils/log.py                                 |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/text.py                                |        3 |        0 |        0 |        0 |     100% |           |
 | src/porsche/wsgi.py                                      |        4 |        0 |        0 |        0 |     100% |           |
-|                                                **TOTAL** | **1219** |    **0** |  **100** |    **0** | **100%** |           |
+|                                                **TOTAL** | **1230** |    **0** |  **100** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
