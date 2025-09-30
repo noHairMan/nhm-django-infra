@@ -137,9 +137,9 @@ class TestPorscheModelViewSet(PorscheAPITestCase):
             self.view.get_serializer_class()
 
     def test_finalize_response(self):
-        request_factory = PorscheAPIRequestFactory()
-        request = request_factory.get("/api/health/")
+        request = self.request_factory.get("/api/health/")
         view = PorscheGenericAPIView()
+        view.permission_classes = []
         porsche_request = view.initialize_request(request)
         view.initial(porsche_request)
 

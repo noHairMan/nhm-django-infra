@@ -1,14 +1,12 @@
 from django.conf import settings
 
-from porsche.core.restframework.test import PorscheAPIClient, PorscheAPITestCase
+from porsche.core.restframework.test import PorscheAPITestCase
 from porsche.models.enums import BusinessCode
 
 
 class TestHealthCheckView(PorscheAPITestCase):
-    def setUp(self):
-        self.client = PorscheAPIClient()
-
     def test_get(self):
+        self.client.logout()
         response = self.client.get("/api/health/")
         self.assertEqual(response.status_code, 200)
         result = response.json()

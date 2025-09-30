@@ -93,10 +93,10 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
         # "rest_framework.authentication.SessionAuthentication",
-        # "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
     ],
     "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.AllowAny",
+        "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_THROTTLE_CLASSES": [],
     "DEFAULT_CONTENT_NEGOTIATION_CLASS": "rest_framework.negotiation.DefaultContentNegotiation",
@@ -126,7 +126,7 @@ REST_FRAMEWORK = {
     "ALLOWED_VERSIONS": ["1"],
     "VERSION_PARAM": "version",
     # Authentication\
-    "UNAUTHENTICATED_USER": None,
+    "UNAUTHENTICATED_USER": "django.contrib.auth.models.AnonymousUser",
     "UNAUTHENTICATED_TOKEN": None,
     # View configuration
     "VIEW_NAME_FUNCTION": "rest_framework.views.get_view_name",

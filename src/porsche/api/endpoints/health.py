@@ -6,13 +6,7 @@ from porsche.core.restframework.response import PorscheResponse
 
 
 class HealthCheckView(PorscheGenericAPIView):
-    """
-    Handles the health check functionality for the application.
-
-    This class provides API endpoints to check the health and operational
-    status of the service. Clients can query this endpoint to ensure the
-    service is running and available.
-    """
+    permission_classes = ()
 
     @staticmethod
     def get(request: PorscheRequest):

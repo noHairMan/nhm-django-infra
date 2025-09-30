@@ -20,7 +20,7 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
     serializer_class = PorscheSerializer
 
     search_fields: Optional[Iterable[str]] = None
-    ordering: Optional[str] = None
+    ordering: Optional[Iterable[str]] = None
 
     # Custom
     create_serializer_class = None
