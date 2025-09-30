@@ -4,5 +4,6 @@ from .generic import *
 from .pagination import *
 from .response import *
 from .serializer import *
+from .test import *
 from .view import *
 from .viewsets import *

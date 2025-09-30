@@ -2,13 +2,10 @@ from functools import lru_cache
 
 from rest_framework.test import (
     APIClient,
-    APILiveServerTestCase,
     APIRequestFactory,
-    APISimpleTestCase,
     APITestCase,
-    APITransactionTestCase,
     ForceAuthClientHandler,
-    URLPatternsTestCase,
+    RequestsClient,
 )
 
 from porsche.core.django.db.models import get_object
@@ -43,31 +40,22 @@ class PorscheAPIClient(APIClient):
 
 
 class PorscheGenericTestCase:
+    request_client_class = RequestsClient
     client_class = PorscheAPIClient
-    client: PorscheAPIClient
     request_factory_class = PorscheAPIRequestFactory
+
+    client: PorscheAPIClient
 
     @property
     @lru_cache
     def request_factory(self) -> PorscheAPIRequestFactory:
         return self.request_factory_class()
 
-
-class PorscheAPITransactionTestCase(APITransactionTestCase, PorscheGenericTestCase):
-    pass
+    @property
+    @lru_cache
+    def request_client(self) -> RequestsClient:
+        return self.request_client_class()
 
 
 class PorscheAPITestCase(PorscheGenericTestCase, APITestCase):
-    pass
-
-
-class PorscheAPISimpleTestCase(APISimpleTestCase, PorscheGenericTestCase):
-    pass
-
-
-class PorscheAPILiveServerTestCase(APILiveServerTestCase, PorscheGenericTestCase):
-    pass
-
-
-class PorscheURLPatternsTestCase(URLPatternsTestCase):
     pass
