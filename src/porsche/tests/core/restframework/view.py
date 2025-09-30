@@ -1,4 +1,6 @@
-import ujson
+import logging
+
+from django.conf import settings
 from django.core.exceptions import PermissionDenied as DjangoPermissionDenied
 from django.http import Http404
 from rest_framework.exceptions import APIException
@@ -27,25 +29,29 @@ class TestView(PorscheAPITestCase):
             return exception_handler(error, context)
 
     def test_exception_handler(self):
-        response = self.exception_handler(Http404(), {})
+        with self.assertLogs(settings.APP.lower(), level=logging.ERROR):
+            response = self.exception_handler(Http404(), {})
         self.assertIsInstance(response, PorscheResponse)
         self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
 
         exc = APIException("Test Error")
         exc.auth_header = "Bearer"
         exc.wait = 10000
-        response = self.exception_handler(exc, {})
+        with self.assertLogs(settings.APP.lower(), level=logging.ERROR):
+            response = self.exception_handler(exc, {})
         self.assertIsInstance(response, PorscheResponse)
         self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
         self.assertEqual(response.headers["WWW-Authenticate"], exc.auth_header)
         self.assertEqual(response.headers["Retry-After"], str(exc.wait))
 
-        response = self.exception_handler(DjangoPermissionDenied(), {})
+        with self.assertLogs(settings.APP.lower(), level=logging.ERROR):
+            response = self.exception_handler(DjangoPermissionDenied(), {})
         self.assertIsInstance(response, PorscheResponse)
         self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
 
         message = {"foo": "bar", "code": 123, "message": "test error"}
-        response = self.exception_handler(PorscheAPIException(message), {})
+        with self.assertLogs(settings.APP.lower(), level=logging.ERROR):
+            response = self.exception_handler(PorscheAPIException(message), {})
         self.assertIsInstance(response, PorscheResponse)
         self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
         self.assertEqual(
@@ -54,7 +60,8 @@ class TestView(PorscheAPITestCase):
         )
 
         message = [{"foo": "bar", "code": 123, "message": "test error"}]
-        response = self.exception_handler(PorscheAPIException(message), {})
+        with self.assertLogs(settings.APP.lower(), level=logging.ERROR):
+            response = self.exception_handler(PorscheAPIException(message), {})
         self.assertIsInstance(response, PorscheResponse)
         self.assertEqual(response.business_code, BusinessCode.BAD_REQUEST)
         self.assertEqual(
@@ -62,6 +69,7 @@ class TestView(PorscheAPITestCase):
             get_error_details(message),
         )
 
-        response = self.exception_handler(Exception("测试异常handler"), {})
+        with self.assertLogs(settings.APP.lower(), level=logging.ERROR):
+            response = self.exception_handler(Exception("测试异常handler"), {})
         self.assertIsInstance(response, PorscheResponse)
         self.assertEqual(response.business_code, BusinessCode.SERVER_ERROR)

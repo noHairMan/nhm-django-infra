@@ -104,7 +104,10 @@ REST_FRAMEWORK = {
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.QueryParameterVersioning",
     # Generic view behavior
     "DEFAULT_PAGINATION_CLASS": "porsche.core.restframework.pagination.PorschePageNumberPagination",
-    "DEFAULT_FILTER_BACKENDS": [],
+    "DEFAULT_FILTER_BACKENDS": [
+        "rest_framework.filters.SearchFilter",
+        "rest_framework.filters.OrderingFilter",
+    ],
     # Schema
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.openapi.AutoSchema",
     # Throttling

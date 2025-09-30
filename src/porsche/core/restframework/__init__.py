@@ -37,4 +37,5 @@ __all__ = [
     "PorscheServerException",
     "PorschePhoneField",
     "PorscheUniqueTogetherValidator",
+    "PorscheGenericViewSet",
 ]

@@ -28,3 +28,6 @@ class CompanyViewSet(PorscheModelViewSet):
     retrieve_serializer_class = CompanyRetrieveSerializer
     create_serializer_class = CompanyCreateSerializer
     update_serializer_class = CompanyUpdateSerializer
+
+    search_fields = ("name",)
+    ordering = ("name",)

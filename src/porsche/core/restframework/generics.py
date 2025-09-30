@@ -1,4 +1,4 @@
-from typing import Optional, override
+from typing import Iterable, Optional, override
 
 from django.utils.translation import gettext_lazy
 from PIL.ImageCms import isIntentSupported
@@ -18,6 +18,9 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
     lookup_url_kwarg = "uid"
     action: Optional[ViewAction | str] = None
     serializer_class = PorscheSerializer
+
+    search_fields: Optional[Iterable[str]] = None
+    ordering: Optional[str] = None
 
     # Custom
     create_serializer_class = None
