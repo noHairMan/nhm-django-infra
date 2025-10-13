@@ -44,8 +44,13 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
             case ViewAction.PARTIAL_UPDATE:
                 clazz = self.update_serializer_class
             case _:
-                # same as ViewAction.METADATA
+                clazz = None
+
+        if not clazz:
+            try:
                 clazz = super().get_serializer_class()
+            except AssertionError:
+                clazz = None
 
         if not clazz:
             raise PorscheServerException("No serializer class found")
