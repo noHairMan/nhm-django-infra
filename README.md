@@ -10,13 +10,13 @@
 | src/porsche/api/endpoints/company.py                     |       11 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/endpoints/health.py                      |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/endpoints/tag.py                         |        9 |        0 |        0 |        0 |     100% |           |
+| src/porsche/api/endpoints/urls.py                        |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/endpoints/user.py                        |       12 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/filters/\_\_init\_\_.py                  |        0 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/serializers/\_\_init\_\_.py              |        0 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/serializers/company.py                   |       22 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/serializers/tag.py                       |       24 |        0 |        0 |        0 |     100% |           |
 | src/porsche/api/serializers/user.py                      |       41 |        0 |        0 |        0 |     100% |           |
-| src/porsche/api/urls.py                                  |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/apps.py                                      |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/asgi.py                                      |        4 |        0 |        0 |        0 |     100% |           |
 | src/porsche/bussiness/\_\_init\_\_.py                    |        0 |        0 |        0 |        0 |     100% |           |
