@@ -7,9 +7,9 @@ from porsche.core.restframework.response import PorscheResponse
 
 class HealthCheckView(PorscheGenericAPIView):
     permission_classes = ()
+    action = "retrieve"
 
-    @staticmethod
-    def get(request: PorscheRequest):
+    def get(self, request: PorscheRequest):
         return PorscheResponse(
             {
                 "app": settings.APP,
