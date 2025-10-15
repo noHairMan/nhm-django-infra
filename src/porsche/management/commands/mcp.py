@@ -9,7 +9,7 @@ from fastmcp import FastMCP
 
 
 class Command(BaseCommand):
-    # can user `npx @modelcontextprotocol/inspector uv run` for test
+    # can use `npx @modelcontextprotocol/inspector uv run` for test
     help = "Run MCP server"
 
     def add_arguments(self, parser):
