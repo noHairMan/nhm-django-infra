@@ -19,6 +19,8 @@ dependencies = [
     "redis>=6.4.0",
     "django-redis>=6.0.0",
     "drf-yasg>=1.21.11",
+    "fastmcp>=2.12.4",
+    "httpx>=0.28.1",
 ]
 
 [dependency-groups]
