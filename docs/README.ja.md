@@ -1,6 +1,6 @@
 # ご協力に感謝いたします
 
-[簡体字中国語](docs/README.zh.md)\|[英語](docs/README.en.md)\|[日本語](docs/README.ja.md)\|[繁体中文](docs/README.zh-TW.md)
+[簡体字中国語](/docs/README.zh.md)\|[英語](/docs/README.en.md)\|[日本語](/docs/README.ja.md)\|[繁体中文](/docs/README.zh-TW.md)
 
 [![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
 
