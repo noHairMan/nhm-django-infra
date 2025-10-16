@@ -139,8 +139,6 @@
 
 -   構建時依賴來自 uv.lock 與 pyproject.toml。
 -   入口為 gunicorn。
--   Dockerfile 的 HEALTHCHECK 指向 http&#x3A;//localhost:8000/api/v1/health。若你的應用使用 /api/health，請更新路徑或
-    在 porsche/urls.py 中添加帶版本的前綴。
 -   若要連接 compose 中的 Postgres，請確保網絡可達並正確設置 PORSCHE_DATABASES\_\_... 環境變量。
 
 ## API 示例
