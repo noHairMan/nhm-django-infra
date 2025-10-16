@@ -139,8 +139,6 @@ UV を使用します (推奨):
 
 -   ビルド時の依存関係は、uv.lock と pyproject.toml から取得されます。
 -   入口はガニコーンです。
--   Dockerfile の HEALTHCHECK は http&#x3A;//localhost:8000/api/v1/health を指します。アプリケーションが /api/health を使用している場合は、パスを更新するか、
-    バージョンのプレフィックスを porsche/urls.py に追加します。
 -   Compose で Postgres に接続するには、ネットワークに到達可能であり、PORSCHE_DATABASES\_\_... 環境変数が正しく設定されていることを確認してください。
 
 ## APIの例
