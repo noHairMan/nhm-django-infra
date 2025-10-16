@@ -1,6 +1,6 @@
-# nazidjnjfra
+# nhm-django-infra
 
-[簡體中文]\|[英語](docs/README.en.md)\|[日本人](docs/README.ja.md)\|[繁體中文](docs/README.zh-TW.md)
+[簡體中文](docs/README.zh.md)\|[英語](docs/README.en.md)\|[日本人](docs/README.ja.md)\|[繁體中文](docs/README.zh-TW.md)
 
 [![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
 
@@ -18,9 +18,9 @@
 -   部署/
     -   Dockerfile（基於 python:3.13-slim，內置 uv + gunicorn）
     -   docker-compose.yaml（PostgreSQL 服務）
-    -   gunicorn.py（wsgi_app = porsche.wsgi：應用程序）
+    -   Gunicorn.py（wsgi_app=porsche.wsgi:application）
     -   postgres/（初始化腳本與 postgres.conf）
--   src/
+-   原始碼/
     -   manage.py
     -   保時捷/
         -   settings.py（已啟用 Dynaconf：APP 名稱 "porsche"）
@@ -74,7 +74,7 @@
 說明：
 
 -   默認：DEBUG=false，ALLOWED_HOSTS=["*"]，示例 SECRET_KEY —— 生產環境務必覆蓋。
--   Dynaconf 的嵌套鍵使用雙下劃線 "**"，例如 PORSCHE_DATABASES**postgres\_\_ -host。
+-   Dynaconf 的嵌套鍵使用雙下劃線 "**"，例如 PORSCHE_DATABASES**postgres\_\_HOST。
 -   REST_FRAMEWORK 使用 QueryParameterVersioning（默認版本=1）；默認 URL 前綴不包含版本。
 
 ## 本地快速開始
@@ -203,7 +203,7 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 1) 數據庫連接問題？
 
 -   確認 Postgres 正在運行，且憑據匹配（compose 使用 .env）
--   檢查 PORSCHE_DATABASES**Postgres**主機/端口/用戶/密碼
+-   檢查 PORSCHE_DATABASES**postgres**主機/端口/用戶/密碼
 -   在容器環境中運行時，確保網絡連通
 
 2) SECRET_KEY 與 DEBUG？
@@ -220,10 +220,10 @@ MIT License — 見[執照](../LICENSE)
 
 ## 參考
 
--   Django：<https://docs.djangoproject.com/>
--   Django休息框架：<https://www.django-rest-framework.org/>
--   Dynaconf：<https://www.dynaconf.com/>
--   psycopg：<https://www.psycopg.org/>
+-   姜戈：<https://docs.djangoproject.com/>
+-   Django REST 框架：<https://www.django-rest-framework.org/>
+-   動態會議：<https://www.dynaconf.com/>
+-   心理諮詢：<https://www.psycopg.org/>
 -   紫外線：<https://docs.astral.sh/uv/>
 
 ## 待辦
