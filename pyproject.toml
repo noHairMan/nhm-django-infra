@@ -62,6 +62,9 @@ disable_warnings = []
 source = [
     "src/porsche",
 ]
+omit = [
+    "src/porsche/tests/*",
+]
 relative_files = true
 
 [tool.coverage.report]
