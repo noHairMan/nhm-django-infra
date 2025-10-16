@@ -147,8 +147,6 @@ docker run --rm -p 8000:8000 \
 
 - 构建时依赖来自 uv.lock 与 pyproject.toml。
 - 入口为 gunicorn。
-- Dockerfile 的 HEALTHCHECK 指向 http://localhost:8000/api/v1/health。若你的应用使用 /api/health，请更新路径或
-  在 porsche/urls.py 中添加带版本的前缀。
 - 若要连接 compose 中的 Postgres，请确保网络可达并正确设置 PORSCHE_DATABASES__... 环境变量。
 
 ## API 示例
