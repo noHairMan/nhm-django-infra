@@ -1,6 +1,6 @@
-# Nazidjnjfra
+# We thank you for your help
 
-[Simplified Chinese]\|[English](docs/README.en.md)\|[Japanese](docs/README.ja.md)\|[Traditional Chinese](docs/README.zh-TW.md)
+[Simplified Chinese](docs/README.zh.md)\|[English](docs/README.en.md)\|[Japanese](docs/README.ja.md)\|[Traditional Chinese](docs/README.zh-TW.md)
 
 [![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
 
@@ -8,37 +8,37 @@ A lightweight Django 5 + Django REST framework scaffolding for backend services,
 
 -   Health check interface: GET /api/health/
 -   Unified API response structure (code/data/message) and global exception handling
--   SQLite is used by default; optional PostgreSQL configuration (reserve psycopg connection pool example) and Redis example
+-   SQLite is used by default; optional PostgreSQL configuration (reserved for psycopg connection pool example) and Redis example
 -   Dynaconf-based environment variable configuration (supports .env)
 -   Provide Gunicorn configuration and Docker examples
 -   It is recommended to use uv for dependency management
 
-## Project Structure (Brief)
+## Project structure (brief)
 
 -   deployment/
     -   Dockerfile (based on python:3.13-slim, built-in uv + gunicorn)
     -   docker-compose.yaml (PostgreSQL service)
     -   gunicorn.py（wsgi_app=porsche.wsgi:application）
-    -   postgres/ (initialize script with postgres.conf)
+    -   postgres/ (initialization script and postgres.conf)
 -   src/
     -   manage.py
     -   porsche/
-        -   settings.py (Dynaconf: APP name "porsche" enabled)
+        -   settings.py (Dynaconf enabled: APP name "porsche")
         -   urls.py (API path prefix /api/)
-        -   api/endpoints/ (Health Check Example)
-        -   core/restframework (DRF packaging: Request/Response, exception, mixins, etc.)
+        -   api/endpoints/ (health check example)
+        -   core/restframework (DRF packaging: Request/Response, exceptions, mixins, etc.)
 
-## Environmental Requirements
+## Environmental requirements
 
 -   Python 3.13+
--   SQLite（默认；开箱即用）
+-   SQLite (default; works out of the box)
 -   Optional: PostgreSQL 17+, Redis, Docker and Docker Compose
 -   uv or pip
 
 ## Configuration (Dynaconf)
 
 -   Environment variable prefix: PORSCHE\_
--   Supports placement of .env files in the project root directory
+-   Support placing .env files in the project root directory
 
 Example .env:
 
@@ -73,11 +73,11 @@ Example .env:
 
 illustrate:
 
--   Default: DEBUG=false, ALLOWED_HOSTS=["*"], example SECRET_KEY — The production environment must be covered.
--   Dynaconf's nested keys use double underscores "**", e.g. PORSCHE_DATABASES**postgres\_\_HOST。
--   REST_FRAMEWORK Use QueryParameterVersioning (default version=1); the default URL prefix does not contain the version.
+-   Default: DEBUG=false, ALLOWED_HOSTS=["*"], example SECRET_KEY - the production environment must be covered.
+-   Dynaconf's nested keys use double underscores "**", for example PORSCHE_DATABASES**postgres\_\_HOST。
+-   REST_FRAMEWORK uses QueryParameterVersioning (default version=1); the default URL prefix does not include version.
 
-## Quick start local
+## local quick start
 
 Use uv (recommended):
 
@@ -97,20 +97,20 @@ Use uv (recommended):
     - `uv run python src/manage.py runserver 0.0.0.0:8000`
     - 或 `PYTHONPATH=src uv run gunicorn -c deployment/gunicorn.py`
 
-使用 pip：
+Use pip:
 
-1)`python -m venv .venv && source .venv/bin/activate`2)`pip install -U pip`Post-install dependencies (UV is more recommended)
+1)`python -m venv .venv && source .venv/bin/activate`2)`pip install -U pip`Install dependencies later (it is more recommended to use uv)
 3) Migration and startup are the same as above
 
-Optional: Create a super user
+Optional: Create a superuser
 
     uv run python src/manage.py createsuperuser
 
-## Docker (local Postgres)
+## Docker (native Postgres)
 
-The repository provides a minimized docker-compose.yaml (including Postgres only):
+The repository provides a minimal docker-compose.yaml (containing only Postgres):
 
-1) Prepare .env in the project root directory (at least):
+1) Prepare .env in the project root directory (containing at least):
 
     POSTGRES_DB=porsche
     POSTGRES_USER=postgres
@@ -121,11 +121,11 @@ The repository provides a minimized docker-compose.yaml (including Postgres only
 
     docker compose --env-file .env -f deployment/docker-compose.yaml up -d --build
 
-3) Postgres is mapped to host port 5432; data/configuration is mounted under deployment/postgres.
+3) Postgres is mapped to port 5432 of the host; data/configuration is mounted under deployment/postgres.
 
-Note: This compose will not start the Django application; you can start it locally with uv/pip, or expand the compose to increase the application service by yourself.
+Note: This compose will not start the Django application; you can start it locally with uv/pip, or extend compose by yourself to add application services.
 
-## Build an application image (optional)
+## Build application image (optional)
 
     # 在项目根目录（Docker 24+）执行
     docker build -f deployment/Dockerfile -t nhm-django-infra:latest deployment
@@ -137,18 +137,18 @@ Note: This compose will not start the Django application; you can start it local
 
 illustrate:
 
--   Build-time dependencies come from uv.lock with pyproject.toml.
+-   Build-time dependencies come from uv.lock and pyproject.toml.
 -   The entrance is gunicorn.
--   The HEALTHCHECK of the Dockerfile points to http&#x3A;//localhost:8000/api/v1/health. If your application uses /api/health, please update the path or
-    Add a versioned prefix in pornche/urls.py.
--   To connect to Postgres in compose, make sure the network is accessible and the PORSCHE_DATABASES\_\_... environment variable is set correctly.
+-   The Dockerfile's HEALTHCHECK points to http&#x3A;//localhost:8000/api/v1/health. If your application uses /api/health, please update the path or
+    Add version prefix to porsche/urls.py.
+-   To connect to Postgres in compose, make sure the network is reachable and the PORSCHE_DATABASES\_\_... environment variable is set correctly.
 
-## API Example
+## API example
 
-Health Check:
+Health check:
 
 -   path:`GET /api/health/`
--   响应（统一结构）：
+-   Response (unified structure):
 
 ```json
 {
@@ -169,20 +169,20 @@ curl -s http://127.0.0.1:8000/api/health/
 curl -s "http://127.0.0.1:8000/api/health/?version=1"
 ```
 
-Add more interfaces under src/porsche/api/endpoints/ and aggregate in src/porsche/urls.py.
+Add more interfaces under src/porsche/api/endpoints/ and aggregate them in src/porsche/urls.py.
 
 ## Logs and exceptions
 
 -   Log: Output to stdout (console handler), see settings.LOGGING for details
--   Exception: uniformly handled by pornsche.core.restframework.views.exception_handler and returns a structured response (code/data/message)
+-   Exceptions: handled uniformly by porsche.core.restframework.views.exception_handler and return structured response (code/data/message)
 
-## Testing and coverage
+## Testing and Coverage
 
-The basic test is located in src/porsche/tests/. Use Django's own test runner (no pytest required).
+Basic tests are located in src/porsche/tests/. Use Django's built-in test runner (no pytest required).
 
--   Prerequisite: Install dependencies and activate the virtual environment (recommended uv)
+-   Pre-requisite: Install dependencies and activate virtual environment (uv recommended)
     -   `uv sync && source .venv/bin/activate`
-    -   If the test requires DB, make sure Postgres is available, or start with compose as follows
+    -   If the test requires DB, make sure Postgres is available, or start it through compose as follows
 
 -   Run all tests:
     -   `uv run python src/manage.py test porsche`
@@ -198,25 +198,25 @@ The basic test is located in src/porsche/tests/. Use Django's own test runner (n
     -   `uv run coverage report`
     -   `uv run coverage html`(Output to htmlcov/)
 
-## FAQ
+## Frequently Asked Questions (FAQ)
 
-1) 数据库连接问题？
+1) Database connection problem?
 
 -   Confirm that Postgres is running and the credentials match (compose uses .env)
 -   Check PORSCHE_DATABASES**postgres**HOST/PORT/USER/PASSWORD
--   Ensure network connectivity while running in container environment
+-   Ensure network connectivity when running in a container environment
 
 2) SECRET_KEY and DEBUG?
 
--   Please set strong random PORSCHE_SECRET_KEY in the production environment and set PORSCHE_DEBUG=false
+-   In the production environment, please set strong random PORSCHE_SECRET_KEY and set PORSCHE_DEBUG=false
 
 3) Language/time zone?
 
--   Default: LANGUAGE_CODE=en-us, TIME_ZONE=UTC; can be overwritten by Dynaconf (such as PORSCHE_LANGUAGE_CODE / PORSCHE_TIME_ZONE)
+-   Default: LANGUAGE_CODE=en-us, TIME_ZONE=UTC; can be overridden through Dynaconf (such as PORSCHE_LANGUAGE_CODE / PORSCHE_TIME_ZONE)
 
 ## license
 
-MIT License — See[LICENSE](../LICENSE)
+MIT License — see[LICENSE](../LICENSE)
 
 ## reference
 
@@ -226,4 +226,4 @@ MIT License — See[LICENSE](../LICENSE)
 -   psycopg:<https://www.psycopg.org/>
 -   uv:<https://docs.astral.sh/uv/>
 
-## To be done
+## To-do
