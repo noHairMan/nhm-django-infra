@@ -1,6 +1,6 @@
 # We thank you for your help
 
-[Simplified Chinese](docs/README.zh.md)\|[English](docs/README.en.md)\|[Japanese](docs/README.ja.md)\|[Traditional Chinese](docs/README.zh-TW.md)
+[Simplified Chinese](/docs/README.zh.md)\|[English](/docs/README.en.md)\|[Japanese](/docs/README.ja.md)\|[Traditional Chinese](/docs/README.zh-TW.md)
 
 [![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
 
@@ -26,7 +26,7 @@ A lightweight Django 5 + Django REST framework scaffolding for backend services,
         -   settings.py (Dynaconf enabled: APP name "porsche")
         -   urls.py (API path prefix /api/)
         -   api/endpoints/ (health check example)
-        -   core/restframework (DRF packaging: Request/Response, exceptions, mixins, etc.)
+        -   core/restframework（DRF 包装：Request/Response、异常、mixins 等）
 
 ## Environmental requirements
 
@@ -138,7 +138,7 @@ Note: This compose will not start the Django application; you can start it local
 illustrate:
 
 -   Build-time dependencies come from uv.lock and pyproject.toml.
--   The entrance is gunicorn.
+-   入口为 gunicorn。
 -   The Dockerfile's HEALTHCHECK points to http&#x3A;//localhost:8000/api/v1/health. If your application uses /api/health, please update the path or
     Add version prefix to porsche/urls.py.
 -   To connect to Postgres in compose, make sure the network is reachable and the PORSCHE_DATABASES\_\_... environment variable is set correctly.
