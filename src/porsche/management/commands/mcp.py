@@ -20,6 +20,13 @@ class Command(BaseCommand):
             type=str,
             help="backend server url",
         )
+        parser.add_argument(
+            "--port",
+            dest="port",
+            default=3002,
+            type=int,
+            help="mcp server port",
+        )
 
     def handle(self, *args, **options):
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -28,4 +35,4 @@ class Command(BaseCommand):
             openapi_spec = ujson.load(open(schema_file))
         client = httpx.AsyncClient(base_url=options["base_url"])
         mcp = FastMCP.from_openapi(openapi_spec=openapi_spec, client=client, name="MCP Server")
-        mcp.run(transport="streamable-http", host="0.0.0.0", port=3002)
+        mcp.run(transport="streamable-http", host="0.0.0.0", port=options["port"])
