@@ -27,14 +27,14 @@
 | src/porsche/core/django/db/manager.py                    |        5 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/db/models/\_\_init\_\_.py        |        4 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/db/models/base.py                |       64 |        0 |       16 |        0 |     100% |           |
-| src/porsche/core/django/db/models/enums.py               |       16 |        0 |        0 |        0 |     100% |           |
+| src/porsche/core/django/db/models/enums.py               |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/db/models/fields/\_\_init\_\_.py |        1 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/db/models/fields/related.py      |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/django/validators.py                    |       67 |        0 |       30 |        0 |     100% |           |
 | src/porsche/core/exceptions.py                           |        8 |        0 |        2 |        0 |     100% |           |
 | src/porsche/core/restframework/\_\_init\_\_.py           |       14 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/exceptions.py             |       24 |        0 |        4 |        0 |     100% |           |
-| src/porsche/core/restframework/fields.py                 |       40 |        0 |        2 |        0 |     100% |           |
+| src/porsche/core/restframework/fields.py                 |       38 |        0 |        2 |        0 |     100% |           |
 | src/porsche/core/restframework/generics.py               |       53 |        0 |       20 |        0 |     100% |           |
 | src/porsche/core/restframework/mixins.py                 |       18 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/pagination.py             |       21 |        0 |        0 |        0 |     100% |           |
@@ -43,7 +43,7 @@
 | src/porsche/core/restframework/router.py                 |        3 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/schemas.py                |        8 |        0 |        2 |        0 |     100% |           |
 | src/porsche/core/restframework/serializer.py             |       16 |        0 |        2 |        0 |     100% |           |
-| src/porsche/core/restframework/test.py                   |       33 |        0 |        0 |        0 |     100% |           |
+| src/porsche/core/restframework/test.py                   |       32 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/validators.py             |        5 |        0 |        0 |        0 |     100% |           |
 | src/porsche/core/restframework/views.py                  |       46 |        0 |       20 |        0 |     100% |           |
 | src/porsche/core/restframework/viewsets.py               |        6 |        0 |        0 |        0 |     100% |           |
@@ -61,14 +61,14 @@
 | src/porsche/models/enums/action.py                       |       10 |        0 |        0 |        0 |     100% |           |
 | src/porsche/models/enums/code.py                         |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/models/tag.py                                |        9 |        0 |        0 |        0 |     100% |           |
-| src/porsche/models/user.py                               |       27 |        0 |        0 |        0 |     100% |           |
+| src/porsche/models/user.py                               |       31 |        0 |        2 |        0 |     100% |           |
 | src/porsche/settings.py                                  |       37 |        0 |        0 |        0 |     100% |           |
 | src/porsche/urls.py                                      |        7 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/\_\_init\_\_.py                        |        0 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/log.py                                 |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/text.py                                |        3 |        0 |        0 |        0 |     100% |           |
 | src/porsche/wsgi.py                                      |        4 |        0 |        0 |        0 |     100% |           |
-|                                                **TOTAL** |  **804** |    **0** |   **98** |    **0** | **100%** |           |
+|                                                **TOTAL** |  **798** |    **0** |  **100** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
