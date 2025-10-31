@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy
 
 from porsche.core.django.db.manager import PorscheManager
-from porsche.core.django.db.models import PorscheForeignKey, PorscheModel, PorscheTextChoices
+from porsche.core.django.db.models import PorscheForeignKey, PorscheModel, PorscheTextChoices, get_object
 
 
 class Role(PorscheModel):
@@ -22,7 +22,12 @@ class Role(PorscheModel):
 
 
 class UserManager(PorscheManager, _UserManager):
-    pass
+    def create_superuser(self, username, email=..., password=..., **extra_fields):
+        role_id = extra_fields.pop("role", None)
+        if role_id:
+            extra_fields["role"] = get_object(Role, role_id)
+
+        return super().create_superuser(username, email, password, **extra_fields)
 
 
 class User(PorscheModel, AbstractUser):
