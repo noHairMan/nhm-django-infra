@@ -1,7 +1,6 @@
 from typing import Iterable, Optional, override
 
 from django.utils.translation import gettext_lazy
-from PIL.ImageCms import isIntentSupported
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 

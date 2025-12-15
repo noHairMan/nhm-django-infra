@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     APP,
-    "drf_yasg",
+    "drf_spectacular",
 ]
 
 MIDDLEWARE = [
@@ -110,7 +110,7 @@ REST_FRAMEWORK = {
         "rest_framework.filters.OrderingFilter",
     ],
     # Schema
-    "DEFAULT_SCHEMA_CLASS": "porsche.core.restframework.schemas.PorscheAutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # Throttling
     "DEFAULT_THROTTLE_RATES": {
         "user": None,
@@ -325,6 +325,14 @@ LOGGING = {
 }
 
 APPEND_SLASH = True
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": APP,
+    "DESCRIPTION": "",
+    "VERSION": VERSION,
+    "SERVE_INCLUDE_SCHEMA": False,
+    "OAS_VERSION": "3.1.0",
+}
 
 # HERE STARTS DYNACONF EXTENSION LOAD
 import dynaconf
