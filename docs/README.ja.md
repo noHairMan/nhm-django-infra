@@ -2,18 +2,18 @@
 
 [簡体字中国語](/docs/README.zh.md)\|[英語](/docs/README.en.md)\|[日本語](/docs/README.ja.md)\|[繁体中文](/docs/README.zh-TW.md)
 
-[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
+![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FnoHairMan%2Fnhm-django-infra%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.project.requires-python&label=python)[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
 
 バックエンド サービス用の軽量の Django 5 + Django REST フレームワーク スキャフォールディングには、次の機能が含まれます。
 
 -   ヘルスチェックインターフェイス: GET /api/health/
 -   統合された API 応答構造 (コード/データ/メッセージ) とグローバル例外処理
 -   SQLite がデフォルトで使用されます。オプションの PostgreSQL 構成 (psycopg 接続プールの例用に予約) と Redis の例
--   基于 Dynaconf 的环境变量配置（支持 .env）
+-   Dynaconf ベースの環境変数設定 (.env をサポート)
 -   Gunicorn 構成と Docker サンプルを提供する
 -   依存関係の管理には uv を使用することをお勧めします
 -   OpenAPI 3 (カスタマイズされた AutoSchema、統合された PyYAML) をサポートし、インターフェイス仕様の生成とリリースを容易にします。
--   フィルタリングと並べ替えをサポートするための権限の例と組み込みの FilterBackend (検索/順序付け) を提供します
+-   提供权限示例与内置 FilterBackend（search / ordering）以支持筛选与排序
 -   共同デバッグと自動化を容易にするためのシンプルなリクエスト/テスト ツール (request_client) を提供します。
 
 ## プロジェクトの構造（概要）
@@ -148,7 +148,7 @@ UV を使用します (推奨):
 
 ## APIの例
 
-ヘルスチェック:
+健康检查：
 
 -   パス：`GET /api/health/`
 -   応答 (統合構造):
