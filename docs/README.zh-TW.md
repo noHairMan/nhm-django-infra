@@ -1,4 +1,4 @@
-# nhm-django-infra
+# 我們感謝您的幫助
 
 [簡體中文](/docs/README.zh.md)\|[英語](/docs/README.en.md)\|[日本人](/docs/README.ja.md)\|[繁體中文](/docs/README.zh-TW.md)
 
@@ -16,9 +16,9 @@
 -   提供權限示例與內置 FilterBackend（search / ordering）以支持篩選與排序
 -   提供簡潔的請求/測試工具（request_client），便於聯調與自動化
 
-## 項目結構（簡要）
+## 项目结构（简要）
 
--   部署/
+-   deployment/
     -   Dockerfile（基於 python:3.13-slim，內置 uv + gunicorn）
     -   docker-compose.yaml（PostgreSQL 服務）
     -   Gunicorn.py（wsgi_app=porsche.wsgi:application）
@@ -40,7 +40,7 @@
 
 ## 配置（Dynaconf）
 
--   環境變量前綴：PORSCHE\_
+-   环境变量前缀：PORSCHE\_
 -   支持在項目根目錄放置 .env 文件
 
 示例 .env：
@@ -214,7 +214,7 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 
 -   CI 與覆蓋率合併：已在 CI 中進行多 Python 版本測試並合併覆蓋率數據。頁面頂部徽章與鏈接指向合併後的報告，便於統一查看。
 
-示例：在測試中可使用`PorscheAPITestCase`的`request_client`提供的`RequestsClient`進行外部請求模擬：
+示例：在測試中可使用`PorscheAPITestCase` 的 `request_client`提供的`RequestsClient`進行外部請求模擬：
 
 ```python
 from porsche.core.restframework.test import PorscheAPITestCase
