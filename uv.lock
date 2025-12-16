@@ -700,6 +700,7 @@ dependencies = [
     { name = "gunicorn" },
     { name = "httpx" },
     { name = "psycopg", extra = ["binary", "pool"] },
+    { name = "pyyaml" },
     { name = "redis" },
     { name = "ujson" },
 ]
@@ -724,6 +725,7 @@ requires-dist = [
     { name = "gunicorn", specifier = ">=23.0.0" },
     { name = "httpx", specifier = ">=0.28.1" },
     { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.2.9" },
+    { name = "pyyaml", specifier = ">=6.0.2" },
     { name = "redis", specifier = ">=6.4.0" },
     { name = "ujson", specifier = ">=5.11.0" },
 ]

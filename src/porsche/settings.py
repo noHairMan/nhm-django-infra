@@ -110,7 +110,7 @@ REST_FRAMEWORK = {
         "rest_framework.filters.OrderingFilter",
     ],
     # Schema
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "porsche.core.restframework.schemas.PorscheAutoSchema",
     # Throttling
     "DEFAULT_THROTTLE_RATES": {
         "user": None,

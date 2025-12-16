@@ -1,12 +1,24 @@
-from rest_framework.schemas.openapi import AutoSchema
+from typing import Optional
+
+from drf_spectacular.openapi import AutoSchema
+from drf_spectacular.plumbing import ComponentRegistry
+from drf_spectacular.utils import _SchemaType
 
 
 class PorscheAutoSchema(AutoSchema):
-    def get_responses(self, path, method):
-        responses = super().get_responses(path, method)
-        wrapped_responses = {}
-        for status_code, response in responses.items():
-            wrapped_responses[status_code] = {
+    def get_operation(
+        self,
+        path: str,
+        path_regex: str,
+        path_prefix: str,
+        method: str,
+        registry: ComponentRegistry,
+    ) -> Optional[_SchemaType]:
+        operation = super().get_operation(path, path_regex, path_prefix, method, registry)
+        if not operation or "responses" not in operation:
+            return operation
+        for status_code, response in operation["responses"].items():
+            operation["responses"][status_code] = {
                 "content": {
                     "application/json": {
                         "schema": {
@@ -22,4 +34,4 @@ class PorscheAutoSchema(AutoSchema):
                 },
                 "description": response.get("content", {}).get("application/json", {}).get("description", ""),
             }
-        return wrapped_responses
+        return operation
