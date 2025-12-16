@@ -9,7 +9,7 @@
 -   ヘルスチェックインターフェイス: GET /api/health/
 -   統合された API 応答構造 (コード/データ/メッセージ) とグローバル例外処理
 -   SQLite がデフォルトで使用されます。オプションの PostgreSQL 構成 (psycopg 接続プールの例用に予約) と Redis の例
--   Dynaconf ベースの環境変数設定 (.env をサポート)
+-   基于 Dynaconf 的环境变量配置（支持 .env）
 -   Gunicorn 構成と Docker サンプルを提供する
 -   依存関係の管理には uv を使用することをお勧めします
 -   OpenAPI 3 (カスタマイズされた AutoSchema、統合された PyYAML) をサポートし、インターフェイス仕様の生成とリリースを容易にします。
