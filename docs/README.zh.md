@@ -250,7 +250,6 @@ class TestSomething(PorscheAPITestCase):
 
 - 默认：LANGUAGE_CODE=en-us，TIME_ZONE=UTC；可通过 Dynaconf 覆盖（如 PORSCHE_LANGUAGE_CODE / PORSCHE_TIME_ZONE）
 
-
 ## 许可证
 
 MIT License — 见 [LICENSE](../LICENSE)
