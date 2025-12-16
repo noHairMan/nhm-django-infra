@@ -12,6 +12,9 @@ A lightweight Django 5 + Django REST framework scaffolding for backend services,
 -   Dynaconf-based environment variable configuration (supports .env)
 -   Provide Gunicorn configuration and Docker examples
 -   It is recommended to use uv for dependency management
+-   Support OpenAPI 3 (customized AutoSchema, integrated PyYAML) to facilitate the generation and release of interface specifications
+-   Provides permission examples and built-in FilterBackend (search/ordering) to support filtering and sorting
+-   Provide a simple request/test tool (request_client) to facilitate joint debugging and automation
 
 ## Project structure (brief)
 
@@ -75,7 +78,7 @@ illustrate:
 
 -   Default: DEBUG=false, ALLOWED_HOSTS=["*"], example SECRET_KEY - the production environment must be covered.
 -   Dynaconf's nested keys use double underscores "**", for example PORSCHE_DATABASES**postgres\_\_HOST。
--   REST_FRAMEWORK uses QueryParameterVersioning (default version=1); the default URL prefix does not include version.
+-   REST_FRAMEWORK uses QueryParameterVersioning (default version=1); the default URL prefix does not include version; the API version number can be obtained dynamically from settings.
 
 ## local quick start
 
@@ -125,6 +128,8 @@ The repository provides a minimal docker-compose.yaml (containing only Postgres)
 
 Note: This compose will not start the Django application; you can start it locally with uv/pip, or extend compose by yourself to add application services.
 
+-   Health check: The image health check path has been pointed to`/api/health/`, which can be used for liveness/readiness of container orchestration.
+
 ## Build application image (optional)
 
     # 在项目根目录（Docker 24+）执行
@@ -169,6 +174,17 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 
 Add more interfaces under src/porsche/api/endpoints/ and aggregate them in src/porsche/urls.py.
 
+### Filtering, sorting and permissions
+
+-   Filter/Search: Supported`?search=关键字`
+-   Sort: Support`?ordering=字段`or`?ordering=-created_at`
+-   Permissions: DRF permission classes and custom permissions can be configured as needed, examples are at`porsche/core/restframework`
+
+### OpenAPI 3 与 Schema
+
+-   OpenAPI 3 has been adopted, AutoSchema has been customized and PyYAML has been integrated to facilitate exporting and publishing API specifications.
+-   If you need to generate or expose interface specifications, you can extend the corresponding routes/commands in the project, refer to`porsche/core/restframework`
+
 ## Logs and exceptions
 
 -   Log: Output to stdout (console handler), see settings.LOGGING for details
@@ -194,7 +210,21 @@ Basic tests are located in src/porsche/tests/. Use Django's built-in test runner
 -   Coverage:
     -   `uv run coverage run src/manage.py test porsche`
     -   `uv run coverage report`
-    -   `uv run coverage html`（输出到 htmlcov/）
+    -   `uv run coverage html`(Output to htmlcov/)
+
+-   CI and coverage merging: Multi-Python version testing has been done in CI and coverage data has been merged. Badges and links at the top of the page point to the merged report for unified viewing.
+
+Example: can be used in testing`PorscheAPITestCase`of`request_client`provided`RequestsClient`Perform external request simulation:
+
+```python
+from porsche.core.restframework.test import PorscheAPITestCase
+
+
+class TestSomething(PorscheAPITestCase):
+    def test_request(self):
+        resp = self.request_client.get("http://localhost:8000/api/health/")
+        self.assertEqual(resp.status_code, 200)
+```
 
 ## Frequently Asked Questions (FAQ)
 
