@@ -1,4 +1,4 @@
-# 我們感謝您的幫助
+# nhm-django-infra
 
 [簡體中文](/docs/README.zh.md)\|[英語](/docs/README.en.md)\|[日本人](/docs/README.ja.md)\|[繁體中文](/docs/README.zh-TW.md)
 
@@ -12,6 +12,9 @@
 -   基於 Dynaconf 的環境變量配置（支持 .env）
 -   提供 Gunicorn 配置與 Docker 示例
 -   推薦使用 uv 進行依賴管理
+-   支持 OpenAPI 3（自定義 AutoSchema，集成 PyYAML），便於生成與發布接口規範
+-   提供權限示例與內置 FilterBackend（search / ordering）以支持篩選與排序
+-   提供簡潔的請求/測試工具（request_client），便於聯調與自動化
 
 ## 項目結構（簡要）
 
@@ -75,7 +78,7 @@
 
 -   默認：DEBUG=false，ALLOWED_HOSTS=["*"]，示例 SECRET_KEY —— 生產環境務必覆蓋。
 -   Dynaconf 的嵌套鍵使用雙下劃線 "**"，例如 PORSCHE_DATABASES**postgres\_\_HOST。
--   REST_FRAMEWORK 使用 QueryParameterVersioning（默認版本=1）；默認 URL 前綴不包含版本。
+-   REST_FRAMEWORK 使用 QueryParameterVersioning（默認版本=1）；默認 URL 前綴不包含版本；API 版本號可從 settings 動態獲取。
 
 ## 本地快速開始
 
@@ -125,6 +128,8 @@
 
 注意：該 compose 不會啟動 Django 應用；可在本地用 uv/pip 啟動，或自行擴展 compose 增加應用服務。
 
+-   健康檢查：鏡像健康檢查路徑已指向`/api/health/`，可用於容器編排的 liveness/readiness。
+
 ## 構建應用鏡像（可選）
 
     # 在项目根目录（Docker 24+）执行
@@ -169,6 +174,17 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 
 在 src/porsche/api/endpoints/ 下添加更多接口，並在 src/porsche/urls.py 中進行聚合。
 
+### 過濾、排序與權限
+
+-   過濾/搜索：支持`?search=关键字`
+-   排序：支持`?ordering=字段`或`?ordering=-created_at`
+-   權限：可按需配置 DRF 權限類與自定義權限，示例位於`porsche/core/restframework`
+
+### OpenAPI 3 與架構
+
+-   已採用 OpenAPI 3，自定義 AutoSchema 並集成 PyYAML，便於導出與發布 API 規範
+-   如需生成或暴露接口規範，可在項目中擴展對應路由/命令，參考`porsche/core/restframework`
+
 ## 日誌與異常
 
 -   日誌：輸出到 stdout（console handler），詳見 settings.LOGGING
@@ -195,6 +211,20 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
     -   `uv run coverage run src/manage.py test porsche`
     -   `uv run coverage report`
     -   `uv run coverage html`（輸出到 htmlcov/）
+
+-   CI 與覆蓋率合併：已在 CI 中進行多 Python 版本測試並合併覆蓋率數據。頁面頂部徽章與鏈接指向合併後的報告，便於統一查看。
+
+示例：在測試中可使用`PorscheAPITestCase`的`request_client`提供的`RequestsClient`進行外部請求模擬：
+
+```python
+from porsche.core.restframework.test import PorscheAPITestCase
+
+
+class TestSomething(PorscheAPITestCase):
+    def test_request(self):
+        resp = self.request_client.get("http://localhost:8000/api/health/")
+        self.assertEqual(resp.status_code, 200)
+```
 
 ## 常見問題（FAQ）
 
