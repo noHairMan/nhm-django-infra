@@ -30,9 +30,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # This is optional since by default it's to true. The git
-          # operations in python-coverage-comment-action utilize the token
-          # stored by actions/checkout.
           persist-credentials: true
 
       - name: Set up Python
@@ -54,25 +51,14 @@ jobs:
 
       - name: Coverage Run
         run: |
-          uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche &&
-          if [ ! -f .coverage.${{ matrix.python_version }} ]; then echo ".coverage.${{ matrix.python_version }} file not found" && exit 1; fi
+          uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
         env:
           COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
-          # The file name prefix must be ".coverage." for "coverage combine"
-          # enabled by "MERGE_COVERAGE_FILES: true" to work. A "subprocess"
-          # error with the message "No data to combine" will be triggered if
-          # this prefix is not used.
-
       - name: Store coverage file
         uses: actions/upload-artifact@v4
         with:
           name: coverage-${{ matrix.python_version }}
           path: .coverage.${{ matrix.python_version }}
-          # By default hidden files/folders (i.e. starting with .) are ignored.
-          # You may prefer (for security reasons) not setting this and instead
-          # set COVERAGE_FILE above to not start with a `.`, but you cannot
-          # use "MERGE_COVERAGE_FILES: true" later on and need to manually
-          # combine the coverage file using "pipx run coverage combine"
           include-hidden-files: true
 
   coverage:
@@ -80,19 +66,11 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     permissions:
-      # Gives the action the necessary permissions for publishing new
-      # comments in pull requests.
       pull-requests: write
-      # Gives the action the necessary permissions for pushing data to the
-      # python-coverage-comment-action branch, and for editing existing
-      # comments (to avoid publishing multiple comments in the same PR)
       contents: write
     steps:
       - uses: actions/checkout@v4
         with:
-          # This is optional since by default it's to true. The git
-          # operations in python-coverage-comment-action utilize the token
-          # stored by actions/checkout.
           persist-credentials: true
 
       - uses: actions/download-artifact@v4
