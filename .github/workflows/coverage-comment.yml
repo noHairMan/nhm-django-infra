@@ -41,20 +41,21 @@ jobs:
         with:
           python-version: ${{ matrix.python_version }}
 
-      - name: "Install Uv"
+      - name: Install Uv
         uses: "astral-sh/setup-uv@v6"
         with:
           version: "latest"
-          python-version: "3.13"
+          python-version: "${{ matrix.python_version }}"
           working-directory: "."
 
-      - name: "uv sync"
+      - name: uv sync
         run: |
           uv sync --dev
 
-      - name: "Coverage Run"
+      - name: Coverage Run
         run: |
-          uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
+          uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche &&
+          if [ ! -f .coverage.${{ matrix.python_version }} ]; then echo ".coverage.${{ matrix.python_version }} file not found" && exit 1; fi
         env:
           COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
           # The file name prefix must be ".coverage." for "coverage combine"
@@ -74,7 +75,7 @@ jobs:
           # combine the coverage file using "pipx run coverage combine"
           include-hidden-files: true
 
-  test:
+  coverage:
     name: Run tests & display coverage
     runs-on: ubuntu-latest
     permissions:
