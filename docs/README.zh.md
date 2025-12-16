@@ -13,6 +13,9 @@
 - 基于 Dynaconf 的环境变量配置（支持 .env）
 - 提供 Gunicorn 配置与 Docker 示例
 - 推荐使用 uv 进行依赖管理
+- 支持 OpenAPI 3（自定义 AutoSchema，集成 PyYAML），便于生成与发布接口规范
+- 提供权限示例与内置 FilterBackend（search / ordering）以支持筛选与排序
+- 提供简洁的请求/测试工具（request_client），便于联调与自动化
 
 ## 项目结构（简要）
 
@@ -78,7 +81,7 @@ PORSCHE_DATABASES__postgres__PORT=5432
 
 - 默认：DEBUG=false，ALLOWED_HOSTS=["*" ]，示例 SECRET_KEY —— 生产环境务必覆盖。
 - Dynaconf 的嵌套键使用双下划线 "__"，例如 PORSCHE_DATABASES__postgres__HOST。
-- REST_FRAMEWORK 使用 QueryParameterVersioning（默认版本=1）；默认 URL 前缀不包含版本。
+- REST_FRAMEWORK 使用 QueryParameterVersioning（默认版本=1）；默认 URL 前缀不包含版本；API 版本号可从 settings 动态获取。
 
 ## 本地快速开始
 
@@ -131,6 +134,8 @@ docker compose --env-file .env -f deployment/docker-compose.yaml up -d --build
 
 注意：该 compose 不会启动 Django 应用；可在本地用 uv/pip 启动，或自行扩展 compose 增加应用服务。
 
+- 健康检查：镜像健康检查路径已指向 `/api/health/`，可用于容器编排的 liveness/readiness。
+
 ## 构建应用镜像（可选）
 
 ```
@@ -177,6 +182,17 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 
 在 src/porsche/api/endpoints/ 下添加更多接口，并在 src/porsche/urls.py 中进行聚合。
 
+### 过滤、排序与权限
+
+- 过滤/搜索：支持 `?search=关键字`
+- 排序：支持 `?ordering=字段` 或 `?ordering=-created_at`
+- 权限：可按需配置 DRF 权限类与自定义权限，示例位于 `porsche/core/restframework`
+
+### OpenAPI 3 与 Schema
+
+- 已采用 OpenAPI 3，自定义 AutoSchema 并集成 PyYAML，便于导出与发布 API 规范
+- 如需生成或暴露接口规范，可在项目中扩展对应路由/命令，参考 `porsche/core/restframework`
+
 ## 日志与异常
 
 - 日志：输出到 stdout（console handler），详见 settings.LOGGING
@@ -204,6 +220,20 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
     - `uv run coverage report`
     - `uv run coverage html`（输出到 htmlcov/）
 
+- CI 与覆盖率合并：已在 CI 中进行多 Python 版本测试并合并覆盖率数据。页面顶部徽章与链接指向合并后的报告，便于统一查看。
+
+示例：在测试中可使用 `PorscheAPITestCase` 的 `request_client` 提供的 `RequestsClient` 进行外部请求模拟：
+
+```python
+from porsche.core.restframework.test import PorscheAPITestCase
+
+
+class TestSomething(PorscheAPITestCase):
+    def test_request(self):
+        resp = self.request_client.get("http://localhost:8000/api/health/")
+        self.assertEqual(resp.status_code, 200)
+```
+
 ## 常见问题（FAQ）
 
 1) 数据库连接问题？
@@ -219,6 +249,7 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 3) 语言/时区？
 
 - 默认：LANGUAGE_CODE=en-us，TIME_ZONE=UTC；可通过 Dynaconf 覆盖（如 PORSCHE_LANGUAGE_CODE / PORSCHE_TIME_ZONE）
+
 
 ## 许可证
 
