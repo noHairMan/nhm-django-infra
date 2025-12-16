@@ -176,7 +176,7 @@ Add more interfaces under src/porsche/api/endpoints/ and aggregate them in src/p
 
 ### Filtering, sorting and permissions
 
--   Filter/Search: Supported`?search=关键字`
+-   过滤/搜索：支持 `?search=关键字`
 -   Sort: Support`?ordering=字段`or`?ordering=-created_at`
 -   Permissions: DRF permission classes and custom permissions can be configured as needed, examples are at`porsche/core/restframework`
 
@@ -185,7 +185,7 @@ Add more interfaces under src/porsche/api/endpoints/ and aggregate them in src/p
 -   OpenAPI 3 has been adopted, AutoSchema has been customized and PyYAML has been integrated to facilitate exporting and publishing API specifications.
 -   If you need to generate or expose interface specifications, you can extend the corresponding routes/commands in the project, refer to`porsche/core/restframework`
 
-## Logs and exceptions
+## 日志与异常
 
 -   Log: Output to stdout (console handler), see settings.LOGGING for details
 -   Exceptions: handled uniformly by porsche.core.restframework.views.exception_handler and return structured response (code/data/message)
