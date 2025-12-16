@@ -12,6 +12,9 @@
 -   Dynaconf ベースの環境変数設定 (.env をサポート)
 -   Gunicorn 構成と Docker サンプルを提供する
 -   依存関係の管理には uv を使用することをお勧めします
+-   OpenAPI 3 (カスタマイズされた AutoSchema、統合された PyYAML) をサポートし、インターフェイス仕様の生成とリリースを容易にします。
+-   フィルタリングと並べ替えをサポートするための権限の例と組み込みの FilterBackend (検索/順序付け) を提供します
+-   共同デバッグと自動化を容易にするためのシンプルなリクエスト/テスト ツール (request_client) を提供します。
 
 ## プロジェクトの構造（概要）
 
@@ -75,7 +78,7 @@
 
 -   デフォルト: DEBUG=false、ALLOWED_HOSTS=["*"]、SECRET_KEY の例 - 運用環境をカバーする必要があります。
 -   Dynaconf のネストされたキーは二重アンダースコアを使用します。**"、例: PORSCHE_DATABASES**postgres\_\_HOST。
--   REST_FRAMEWORK は QueryParameterVersioning を使用します (デフォルトのバージョン = 1)。デフォルトの URL プレフィックスにはバージョンが含まれません。
+-   REST_FRAMEWORK は QueryParameterVersioning を使用します (デフォルトのバージョン = 1)。デフォルトの URL プレフィックスにはバージョンが含まれません。 API バージョン番号は設定から​​動的に取得できます。
 
 ## ローカルのクイックスタート
 
@@ -125,6 +128,8 @@ UV を使用します (推奨):
 
 注: この作成では Django アプリケーションは起動しません。 uv/pip を使用してローカルで開始することも、Compose を自分で拡張してアプリケーション サービスを追加することもできます。
 
+-   ヘルスチェック: イメージヘルスチェックのパスが指定されています`/api/health/`、コンテナ オーケストレーションの稼働状態/準備状態に使用できます。
+
 ## アプリケーションイメージのビルド (オプション)
 
     # 在项目根目录（Docker 24+）执行
@@ -169,6 +174,17 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 
 src/porsche/api/endpoints/ の下にさらにインターフェイスを追加し、src/porsche/urls.py に集約します。
 
+### フィルタリング、並べ替え、権限
+
+-   フィルタ/検索: サポート`?search=关键字`
+-   並べ替え: サポート`?ordering=字段`または`?ordering=-created_at`
+-   権限: DRF 権限クラスとカスタム権限は必要に応じて構成できます。例は次のとおりです。`porsche/core/restframework`
+
+### OpenAPI 3 とスキーマ
+
+-   API 仕様のエクスポートと公開を容易にするために、OpenAPI 3 が採用され、AutoSchema がカスタマイズされ、PyYAML が統合されました。
+-   インターフェイス仕様を生成または公開する必要がある場合は、プロジェクト内の対応するルート/コマンドを拡張できます。を参照してください。`porsche/core/restframework`
+
 ## ログと例外
 
 -   ログ: 標準出力 (コンソール ハンドラー) に出力します。詳細については、settings.LOGGING を参照してください。
@@ -195,6 +211,20 @@ src/porsche/api/endpoints/ の下にさらにインターフェイスを追加�
     -   `uv run coverage run src/manage.py test porsche`
     -   `uv run coverage report`
     -   `uv run coverage html`(htmlcov/に出力)
+
+-   CI とカバレッジのマージ: 複数の Python バージョンのテストが CI で行われ、カバレッジ データがマージされました。ページ上部のバッジとリンクは、統合されたレポートを指し、統合された表示を可能にします。
+
+例: テストで使用できます`PorscheAPITestCase`の`request_client`提供的`RequestsClient`外部リクエストのシミュレーションを実行します。
+
+```python
+from porsche.core.restframework.test import PorscheAPITestCase
+
+
+class TestSomething(PorscheAPITestCase):
+    def test_request(self):
+        resp = self.request_client.get("http://localhost:8000/api/health/")
+        self.assertEqual(resp.status_code, 200)
+```
 
 ## よくある質問 (FAQ)
 
