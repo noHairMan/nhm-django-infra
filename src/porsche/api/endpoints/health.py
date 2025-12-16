@@ -16,6 +16,7 @@ class HealthCheckView(PorscheGenericAPIView):
             data={
                 "app": settings.APP,
                 "version": settings.VERSION,
+                "debug": settings.DEBUG,
             },
         )
         serializer.is_valid(raise_exception=True)
