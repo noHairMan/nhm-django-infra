@@ -1,3 +1,4 @@
+from porsche.api.filters.company import CompanyFilter
 from porsche.api.serializers.company import (
     CompanyCreateSerializer,
     CompanyListSerializer,
@@ -17,3 +18,5 @@ class CompanyViewSet(PorscheModelViewSet):
 
     search_fields = ("name",)
     ordering = ("name",)
+
+    filterset_class = CompanyFilter

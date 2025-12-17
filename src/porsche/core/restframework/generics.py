@@ -1,6 +1,7 @@
 from typing import Iterable, Optional, override
 
 from django.utils.translation import gettext_lazy
+from django_filters.rest_framework import FilterSet
 from rest_framework.generics import GenericAPIView
 from rest_framework.response import Response
 
@@ -21,7 +22,11 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
     search_fields: Optional[Iterable[str]] = None
     ordering: Optional[Iterable[str]] = None
 
-    # Custom
+    # django-filter typing
+    filterset_class: Optional[FilterSet] = None
+    filterset_fields: Optional[Iterable[str]] = None
+
+    # custom
     create_serializer_class = None
     update_serializer_class = None
     list_serializer_class = None

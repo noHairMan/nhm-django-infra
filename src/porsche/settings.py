@@ -108,6 +108,7 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": [
         "rest_framework.filters.SearchFilter",
         "rest_framework.filters.OrderingFilter",
+        "django_filters.rest_framework.DjangoFilterBackend",
     ],
     # Schema
     "DEFAULT_SCHEMA_CLASS": "porsche.core.restframework.schemas.PorscheAutoSchema",
