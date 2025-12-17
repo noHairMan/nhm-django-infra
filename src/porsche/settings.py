@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 import logging
+import os
 from pathlib import Path
 
 from rest_framework import ISO_8601
@@ -281,7 +282,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOG_LEVEL = logging.getLevelName(logging.INFO)
-
+LOG_ROOT = BASE_DIR / ".." / "logs"
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": True,
@@ -301,6 +302,14 @@ LOGGING = {
             "class": "logging.StreamHandler",
             "formatter": "console",
         },
+        "sql": {
+            "class": "logging.handlers.RotatingFileHandler",
+            "filters": [],
+            "filename": os.path.join(LOG_ROOT, "sql.log"),
+            "formatter": "simple",
+            "maxBytes": 100 * 1024 * 1024,
+            "backupCount": 5,
+        },
     },
     "root": {
         "handlers": ["console"],
@@ -315,6 +324,11 @@ LOGGING = {
         "django": {
             "handlers": ["console"],
             "level": LOG_LEVEL,
+            "propagate": False,
+        },
+        "django.db.backends": {
+            "level": logging.getLevelName(logging.DEBUG),
+            "handlers": ["sql"],
             "propagate": False,
         },
         "restframework": {
