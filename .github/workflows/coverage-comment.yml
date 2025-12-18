@@ -49,6 +49,10 @@ jobs:
         run: |
           uv sync --dev
 
+      - name: Create log directory for uv run
+        run: |
+          mkdir ../logs
+
       - name: Coverage Run
         run: |
           uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
