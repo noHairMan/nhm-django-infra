@@ -52,7 +52,7 @@ jobs:
 
       - name: Create log directory for uv run
         run: |
-          mkdir ../../logs
+          mkdir logs
 
       - name: Coverage Run
         run: |
