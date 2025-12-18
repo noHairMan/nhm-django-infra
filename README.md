@@ -63,13 +63,13 @@
 | src/porsche/models/enums/code.py                         |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/models/tag.py                                |        9 |        0 |        0 |        0 |     100% |           |
 | src/porsche/models/user.py                               |       31 |        0 |        2 |        0 |     100% |           |
-| src/porsche/settings.py                                  |       38 |        0 |        0 |        0 |     100% |           |
+| src/porsche/settings.py                                  |       40 |        0 |        0 |        0 |     100% |           |
 | src/porsche/urls.py                                      |        2 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/\_\_init\_\_.py                        |        0 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/log.py                                 |        6 |        0 |        0 |        0 |     100% |           |
 | src/porsche/utils/text.py                                |        3 |        0 |        0 |        0 |     100% |           |
 | src/porsche/wsgi.py                                      |        4 |        0 |        0 |        0 |     100% |           |
-| **TOTAL**                                                |  **811** |    **0** |  **102** |    **0** | **100%** |           |
+| **TOTAL**                                                |  **813** |    **0** |  **102** |    **0** | **100%** |           |
 
 
 ## Setup coverage badge
