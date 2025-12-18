@@ -1,98 +1,23 @@
-name: "Coverage Comment"
+name: Coverage Comment
 
 on:
-  pull_request:
-    branches:
-      - "main"
-    paths:
-      - "src/**"
-      - "pyproject.toml"
-      - "uv.lock"
-  push:
-    branches:
-      - "main"
-    paths:
-      - "src/**"
-      - "pyproject.toml"
-      - "uv.lock"
+  workflow_run:
+    workflows: ["Build"]
+    types:
+      - completed
 
 jobs:
-  build:
-    strategy:
-      matrix:
-        include:
-          - python_version: "3.13"
-          - python_version: "3.14"
-
-    name: "Python ${{ matrix.python_version }}"
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: true
-
-      - name: Set up Python
-        id: setup-python
-        uses: actions/setup-python@v6
-        with:
-          python-version: ${{ matrix.python_version }}
-
-      - name: Install Uv
-        uses: "astral-sh/setup-uv@v6"
-        with:
-          version: "latest"
-          python-version: "${{ matrix.python_version }}"
-          working-directory: "."
-
-      - name: uv sync
-        run: |
-          uv sync --dev
-
-      - name: Create log directory for uv run
-        run: |
-          mkdir ../logs
-
-      - name: Coverage Run
-        run: |
-          uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
-        env:
-          COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
-      - name: Store coverage file
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-${{ matrix.python_version }}
-          path: .coverage.${{ matrix.python_version }}
-          include-hidden-files: true
-
-  coverage:
+  test:
     name: Run tests & display coverage
-    needs: build
     runs-on: ubuntu-latest
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
     permissions:
       pull-requests: write
       contents: write
+      actions: read
     steps:
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: true
-
-      - uses: actions/download-artifact@v4
-        id: download
-        with:
-          pattern: coverage-*
-          merge-multiple: true
-
-      - name: Coverage comment
-        id: coverage_comment
+      - name: Post comment
         uses: py-cov-action/python-coverage-comment-action@v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MERGE_COVERAGE_FILES: true
-
-      - name: Store Pull Request comment to be posted
-        uses: actions/upload-artifact@v4
-        if: steps.coverage_comment.outputs.COMMENT_FILE_WRITTEN == 'true'
-        with:
-          name: python-coverage-comment-action
-          path: python-coverage-comment-action.txt
+          GITHUB_PR_RUN_ID: ${{ github.event.workflow_run.id }}
