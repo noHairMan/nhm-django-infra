@@ -2,7 +2,7 @@
 
 [Simplified Chinese](/docs/README.zh.md)\|[English](/docs/README.en.md)\|[Japanese](/docs/README.ja.md)\|[Traditional Chinese](/docs/README.zh-TW.md)
 
-![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FnoHairMan%2Fnhm-django-infra%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.project.requires-python&label=python)[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
+![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FnoHairMan%2Fnhm-django-infra%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.project.requires-python&label=python)![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/noHairMan/nhm-django-infra/build.yml)[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
 
 A lightweight Django 5 + Django REST framework scaffolding for backend services, including the following features:
 
@@ -94,7 +94,7 @@ Use uv (recommended):
     - 使用本地 Postgres（创建 porsche 数据库并设置 .env），或
     - 使用 Docker Compose 启动 Postgres（见下文）
 
-4) Migrate and start:
+4) 迁移并启动：
 
     - `uv run python src/manage.py migrate`
     - `uv run python src/manage.py runserver 0.0.0.0:8000`
@@ -146,7 +146,7 @@ illustrate:
 -   The entrance is gunicorn.
 -   To connect to Postgres in compose, make sure the network is reachable and the PORSCHE_DATABASES\_\_... environment variable is set correctly.
 
-## API example
+## API 示例
 
 Health check:
 
@@ -182,7 +182,7 @@ Add more interfaces under src/porsche/api/endpoints/ and aggregate them in src/p
 
 ### OpenAPI 3 与 Schema
 
--   OpenAPI 3 has been adopted, AutoSchema has been customized and PyYAML has been integrated to facilitate exporting and publishing API specifications.
+-   已采用 OpenAPI 3，自定义 AutoSchema 并集成 PyYAML，便于导出与发布 API 规范
 -   If you need to generate or expose interface specifications, you can extend the corresponding routes/commands in the project, refer to`porsche/core/restframework`
 
 ## Logs and exceptions
