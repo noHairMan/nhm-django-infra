@@ -42,8 +42,9 @@ INSTALLED_APPS = [
     # "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
-    APP,
     "drf_spectacular",
+    "cacheops",
+    APP,
 ]
 
 MIDDLEWARE = [
@@ -246,6 +247,21 @@ CACHES = {
         },
     },
 }
+
+CACHEOPS_REDIS = {
+    "host": REDIS_HOST,
+    "port": REDIS_PORT,
+    "password": REDIS_PASSWORD,
+    "db": 3,
+    "socket_timeout": 3,
+}
+CACHEOPS_CLIENT_CLASS = "redis.Redis"
+CACHEOPS_DEFAULTS = {"timeout": 10 * 60}
+CACHEOPS = {
+    "porsche.*": {"ops": {"get", "fetch", "count", "aggregate", "exists"}},
+    "*.*": None,
+}
+CACHEOPS_DEGRADE_ON_FAILURE = True
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
