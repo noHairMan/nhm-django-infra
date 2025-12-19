@@ -20,10 +20,7 @@ class PorscheAPIRequestFactory(APIRequestFactory):
 class PorscheForceAuthClientHandler(ForceAuthClientHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        try:
-            invalidate_all()
-        except Exception:
-            pass  # Redis 未连接时忽略
+        invalidate_all()
 
         self._force_user, _ = User.objects.get_or_create(
             username="sdet",
@@ -67,14 +64,8 @@ class PorscheAPITestCase(PorscheGenericTestCase, APITestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        try:
-            invalidate_all()
-        except Exception:
-            pass
+        invalidate_all()
 
     def setUp(self):
         super().setUp()
-        try:
-            invalidate_all()
-        except Exception:
-            pass
+        invalidate_all()

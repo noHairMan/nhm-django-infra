@@ -59,6 +59,7 @@ jobs:
           uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
         env:
           COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
+          CACHEOPS_ENABLED: "false"
 
       - name: Store coverage file
         uses: actions/upload-artifact@v4
