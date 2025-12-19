@@ -1,5 +1,6 @@
 from functools import lru_cache
 
+from cacheops import invalidate_all
 from rest_framework.test import (
     APIClient,
     APIRequestFactory,
@@ -19,6 +20,11 @@ class PorscheAPIRequestFactory(APIRequestFactory):
 class PorscheForceAuthClientHandler(ForceAuthClientHandler):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        try:
+            invalidate_all()
+        except Exception:
+            pass  # Redis 未连接时忽略
+
         self._force_user, _ = User.objects.get_or_create(
             username="sdet",
             email="sdet@fortest.cn",
@@ -58,4 +64,17 @@ class PorscheGenericTestCase:
 
 
 class PorscheAPITestCase(PorscheGenericTestCase, APITestCase):
-    pass
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        try:
+            invalidate_all()
+        except Exception:
+            pass
+
+    def setUp(self):
+        super().setUp()
+        try:
+            invalidate_all()
+        except Exception:
+            pass
