@@ -78,7 +78,7 @@ illustrate:
 
 -   Default: DEBUG=false, ALLOWED_HOSTS=["*"], example SECRET_KEY - the production environment must be covered.
 -   Dynaconf's nested keys use double underscores "**", for example PORSCHE_DATABASES**postgres\_\_HOST。
--   REST_FRAMEWORK uses QueryParameterVersioning (default version=1); the default URL prefix does not include version; the API version number can be obtained dynamically from settings.
+-   REST_FRAMEWORK uses QueryParameterVersioning (default version=1); the default URL prefix does not include the version; the API version number can be obtained dynamically from settings.
 
 ## local quick start
 
@@ -94,7 +94,7 @@ Use uv (recommended):
     - 使用本地 Postgres（创建 porsche 数据库并设置 .env），或
     - 使用 Docker Compose 启动 Postgres（见下文）
 
-4) 迁移并启动：
+4) Migrate and start:
 
     - `uv run python src/manage.py migrate`
     - `uv run python src/manage.py runserver 0.0.0.0:8000`
@@ -146,7 +146,7 @@ illustrate:
 -   The entrance is gunicorn.
 -   To connect to Postgres in compose, make sure the network is reachable and the PORSCHE_DATABASES\_\_... environment variable is set correctly.
 
-## API 示例
+## API example
 
 Health check:
 
@@ -182,7 +182,7 @@ Add more interfaces under src/porsche/api/endpoints/ and aggregate them in src/p
 
 ### OpenAPI 3 与 Schema
 
--   已采用 OpenAPI 3，自定义 AutoSchema 并集成 PyYAML，便于导出与发布 API 规范
+-   OpenAPI 3 has been adopted, AutoSchema has been customized and PyYAML has been integrated to facilitate exporting and publishing API specifications.
 -   If you need to generate or expose interface specifications, you can extend the corresponding routes/commands in the project, refer to`porsche/core/restframework`
 
 ## Logs and exceptions
@@ -190,7 +190,7 @@ Add more interfaces under src/porsche/api/endpoints/ and aggregate them in src/p
 -   Log: Output to stdout (console handler), see settings.LOGGING for details
 -   Exceptions: handled uniformly by porsche.core.restframework.views.exception_handler and return structured response (code/data/message)
 
-## Testing and Coverage
+## 测试与覆盖率
 
 Basic tests are located in src/porsche/tests/. Use Django's built-in test runner (no pytest required).
 
@@ -201,6 +201,11 @@ Basic tests are located in src/porsche/tests/. Use Django's built-in test runner
 -   Run all tests:
     -   `uv run python src/manage.py test porsche`
     -   or`python src/manage.py test porsche`
+
+-   Use tox for multi-version local testing:
+    -   Prefix:`pip install tox`(Configuration is integrated`tox-uv`)
+    -   Runs all supported versions (py312, py313, py314):`tox`
+    -   Run the specified version:`tox -e py313`
 
 -   Run the specified package/module/use case:
     -   `uv run python src/manage.py test porsche.tests.core`
