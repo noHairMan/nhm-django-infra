@@ -31,7 +31,7 @@
         -   api/endpoints/ (ヘルスチェックの例)
         -   コア/レストフレームワーク (DRF パッケージ化: リクエスト/レスポンス、例外、ミックスインなど)
 
-## 环境要求
+## 環境要件
 
 -   Python 3.13+
 -   SQLite (デフォルト、すぐに使用可能)
@@ -128,7 +128,7 @@ UV を使用します (推奨):
 
 注: この作成では Django アプリケーションは起動しません。 uv/pip を使用してローカルで開始することも、Compose を自分で拡張してアプリケーション サービスを追加することもできます。
 
--   健康检查：镜像健康检查路径已指向 `/api/health/`、コンテナ オーケストレーションの稼働状態/準備状態に使用できます。
+-   ヘルスチェック: イメージヘルスチェックのパスが指定されました`/api/health/`、コンテナ オーケストレーションの稼働状態/準備状態に使用できます。
 
 ## アプリケーションイメージのビルド (オプション)
 
@@ -187,12 +187,12 @@ src/porsche/api/endpoints/ の下にさらにインターフェイスを追加�
 
 ## ログと例外
 
--   日志：输出到 stdout（console handler），详见 settings.LOGGING
+-   ログ: 標準出力 (コンソール ハンドラー) に出力します。詳細については、settings.LOGGING を参照してください。
 -   例外: porsche.core.restframework.views.Exception_handler によって均一に処理され、構造化された応答 (コード/データ/メッセージ) を返します。
 
 ## テストと適用範囲
 
-基础测试位于 src/porsche/tests/。使用 Django 自带测试运行器（无需 pytest）。
+基本的なテストは src/porsche/tests/ にあります。 Django の組み込みテスト ランナーを使用します (pytest は必要ありません)。
 
 -   前提条件: 依存関係をインストールし、仮想環境をアクティブ化します (UV を推奨)
     -   `uv sync && source .venv/bin/activate`
@@ -201,6 +201,11 @@ src/porsche/api/endpoints/ の下にさらにインターフェイスを追加�
 -   すべてのテストを実行します。
     -   `uv run python src/manage.py test porsche`
     -   または`python src/manage.py test porsche`
+
+-   マルチバージョンのローカルテストには tox を使用します。
+    -   プレフィックス:`pip install tox`(構成は統合されています)`tox-uv`)
+    -   サポートされているすべてのバージョン (py312、py313、py314) を実行します。`tox`
+    -   指定されたバージョンを実行します。`tox -e py313`
 
 -   指定されたパッケージ/モジュール/ユースケースを実行します。
     -   `uv run python src/manage.py test porsche.tests.core`
