@@ -22,6 +22,7 @@ jobs:
     strategy:
       matrix:
         include:
+          - python_version: "3.12"
           - python_version: "3.13"
           - python_version: "3.14"
 
