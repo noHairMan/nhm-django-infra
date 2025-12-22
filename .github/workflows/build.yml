@@ -52,11 +52,11 @@ jobs:
 
       - name: Install tox
         run: |
-          pip install tox tox-uv
+          uv pip install tox tox-uv
 
       - name: Run tests with tox
         run: |
-          tox -e ${{ matrix.tox_env }}
+          tox -e ${{ matrix.tox_env }} --discover $(which python)
         env:
           COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
 
