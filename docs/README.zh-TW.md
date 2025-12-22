@@ -21,7 +21,7 @@
 -   部署/
     -   Dockerfile（基於 python:3.13-slim，內置 uv + gunicorn）
     -   docker-compose.yaml（PostgreSQL 服務）
-    -   Gunicorn.py（wsgi_app=porsche.wsgi:application）
+    -   gunicorn.py（wsgi_app=porsche.wsgi:application）
     -   postgres/（初始化腳本與 postgres.conf）
 -   原始碼/
     -   manage.py
@@ -180,7 +180,7 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 -   排序：支持`?ordering=字段`或`?ordering=-created_at`
 -   權限：可按需配置 DRF 權限類與自定義權限，示例位於`porsche/core/restframework`
 
-### OpenAPI 3 與架構
+### OpenAPI 3 与 Schema
 
 -   已採用 OpenAPI 3，自定義 AutoSchema 並集成 PyYAML，便於導出與發布 API 規範
 -   如需生成或暴露接口規範，可在項目中擴展對應路由/命令，參考`porsche/core/restframework`
@@ -201,6 +201,11 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
 -   運行全部測試：
     -   `uv run python src/manage.py test porsche`
     -   或`python src/manage.py test porsche`
+
+-   使用 tox 進行多版本本地測試：
+    -   前置：`pip install tox`(配置已集成`tox-uv`)
+    -   運行所有支持的版本 (py312, py313, py314)：`tox`
+    -   運行指定版本：`tox -e py313`
 
 -   運行指定包/模塊/用例：
     -   `uv run python src/manage.py test porsche.tests.core`
