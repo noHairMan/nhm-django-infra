@@ -213,6 +213,11 @@ curl -s "http://127.0.0.1:8000/api/health/?version=1"
     - `uv run python src/manage.py test porsche`
     - 或 `python src/manage.py test porsche`
 
+- 使用 tox 进行多版本本地测试：
+    - 前置：`pip install tox` (配置已集成 `tox-uv`)
+    - 运行所有支持的版本 (py312, py313, py314)：`tox`
+    - 运行指定版本：`tox -e py313`
+
 - 运行指定包/模块/用例：
     - `uv run python src/manage.py test porsche.tests.core`
     - `uv run python src/manage.py test porsche.tests.core.django.db.models.base`
