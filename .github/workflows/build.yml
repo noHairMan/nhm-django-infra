@@ -23,8 +23,11 @@ jobs:
       matrix:
         include:
           - python_version: "3.12"
+            tox_env: py312
           - python_version: "3.13"
+            tox_env: py313
           - python_version: "3.14"
+            tox_env: py314
 
     name: "Python ${{ matrix.python_version }}"
     runs-on: ubuntu-latest
@@ -47,20 +50,15 @@ jobs:
           python-version: "${{ matrix.python_version }}"
           working-directory: "."
 
-      - name: uv sync
+      - name: Install tox
         run: |
-          uv sync --dev
+          pip install tox tox-uv
 
-      - name: Create log directory for uv run
+      - name: Run tests with tox
         run: |
-          mkdir logs
-
-      - name: Coverage Run
-        run: |
-          uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
+          tox -e ${{ matrix.tox_env }}
         env:
           COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
-          PORSCHE_CACHEOPS_ENABLED: "false"
 
       - name: Store coverage file
         uses: actions/upload-artifact@v4

@@ -31,6 +31,7 @@ dev = [
     "coverage>=7.10.6",
     "genbadge[coverage]>=1.1.2",
     "pre-commit>=4.2.0",
+    "tox>=4.32.0",
 ]
 
 [tool.uv.sources]
@@ -84,3 +85,20 @@ pretty_print = true
 
 [tool.coverage.xml]
 output = ".coverage.xml"
+
+[tool.tox]
+env_list = ["py312", "py313", "py314"]
+requires = ["tox-uv"]
+
+[tool.tox.env_run_base]
+description = "Run tests with coverage"
+pass_env = ["COVERAGE_FILE"]
+set_env = { PORSCHE_CACHEOPS_ENABLED = "false", PYTHONPATH = "{toxinidir}/src" }
+allowlist_externals = ["uv"]
+commands_pre = [
+    ["python", "-c", "import os; os.makedirs('logs', exist_ok=True)"]
+]
+commands = [
+    ["uv", "sync", "--dev"],
+    ["uv", "run", "coverage", "run", "--rcfile={toxinidir}/pyproject.toml", "{toxinidir}/src/manage.py", "test", "porsche"]
+]
