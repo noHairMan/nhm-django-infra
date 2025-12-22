@@ -21,10 +21,7 @@ jobs:
   build:
     strategy:
       matrix:
-        include:
-          - python_version: "3.12"
-          - python_version: "3.13"
-          - python_version: "3.14"
+        python_version: ["3.12", "3.13", "3.14"]
 
     name: "Python ${{ matrix.python_version }}"
     runs-on: ubuntu-latest
@@ -47,20 +44,13 @@ jobs:
           python-version: "${{ matrix.python_version }}"
           working-directory: "."
 
-      - name: uv sync
+      - name: Run tests
         run: |
-          uv sync --dev
-
-      - name: Create log directory for uv run
-        run: |
-          mkdir logs
-
-      - name: Coverage Run
-        run: |
+          mkdir -p logs
           uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
         env:
-          COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
           PORSCHE_CACHEOPS_ENABLED: "false"
+          COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
 
       - name: Store coverage file
         uses: actions/upload-artifact@v4
