@@ -21,13 +21,7 @@ jobs:
   build:
     strategy:
       matrix:
-        include:
-          - python_version: "3.12"
-            tox_env: py312
-          - python_version: "3.13"
-            tox_env: py313
-          - python_version: "3.14"
-            tox_env: py314
+        python_version: ["3.12", "3.13", "3.14"]
 
     name: "Python ${{ matrix.python_version }}"
     runs-on: ubuntu-latest
@@ -50,14 +44,12 @@ jobs:
           python-version: "${{ matrix.python_version }}"
           working-directory: "."
 
-      - name: Install tox
+      - name: Run tests
         run: |
-          uv pip install --system tox tox-uv
-
-      - name: Run tests with tox
-        run: |
-          tox -e ${{ matrix.tox_env }} --discover $(which python)
+          mkdir -p logs
+          uv run coverage run --rcfile=pyproject.toml src/manage.py test porsche
         env:
+          PORSCHE_CACHEOPS_ENABLED: "false"
           COVERAGE_FILE: ".coverage.${{ matrix.python_version }}"
 
       - name: Store coverage file

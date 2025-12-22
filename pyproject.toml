@@ -31,8 +31,6 @@ dev = [
     "coverage>=7.10.6",
     "genbadge[coverage]>=1.1.2",
     "pre-commit>=4.2.0",
-    "tox>=4.32.0",
-    "tox-uv>=1.10.0",
 ]
 
 [tool.uv.sources]
