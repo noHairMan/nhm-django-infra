@@ -31,6 +31,7 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
     update_serializer_class = None
     list_serializer_class = None
     retrieve_serializer_class = None
+    destroy_serializer_class = PorscheSerializer
 
     @override
     def get_serializer_class(self):
@@ -47,6 +48,8 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
                 clazz = self.update_serializer_class
             case ViewAction.PARTIAL_UPDATE:
                 clazz = self.update_serializer_class
+            case ViewAction.DESTROY:
+                clazz = self.destroy_serializer_class
             case _:
                 clazz = None
 

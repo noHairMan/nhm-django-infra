@@ -23,3 +23,5 @@ class UserViewSet(PorscheModelViewSet):
     retrieve_serializer_class = UserRetrieveSerializer
     create_serializer_class = UserCreateSerializer
     update_serializer_class = UserUpdateSerializer
+
+    search_fields = ["username"]

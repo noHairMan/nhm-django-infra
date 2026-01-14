@@ -35,7 +35,7 @@ class User(PorscheModel, AbstractUser):
     _objects = _UserManager()
 
     phone = models.CharField(max_length=15, blank=True, verbose_name=gettext_lazy("手机号码"))
-    avatar = models.FileField(upload_to="avatar", blank=True, verbose_name=gettext_lazy("头像"))
+    avatar = models.FileField(upload_to="avatar", null=True, verbose_name=gettext_lazy("头像"))
     role = PorscheForeignKey(to=Role, on_delete=models.PROTECT, verbose_name=gettext_lazy("角色"))
 
     REQUIRED_FIELDS = ["email", "phone", "role"]
