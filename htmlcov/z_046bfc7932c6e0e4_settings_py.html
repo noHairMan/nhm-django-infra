@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_046bfc7932c6e0e4_urls_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.13.1">coverage.py v7.13.1</a>,
-            created at 2026-01-15 02:50 +0000
+            created at 2026-01-15 08:46 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -197,7 +197,7 @@
     <p class="run run2"><span class="n"><a id="t113" href="#t113">113</a></span><span class="t">        <span class="str">"django_filters.rest_framework.DjangoFilterBackend"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t114" href="#t114">114</a></span><span class="t">    <span class="op">]</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t115" href="#t115">115</a></span><span class="t">    <span class="com"># Schema</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t116" href="#t116">116</a></span><span class="t">    <span class="str">"DEFAULT_SCHEMA_CLASS"</span><span class="op">:</span> <span class="str">"porsche.core.restframework.schemas.PorscheAutoSchema"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t116" href="#t116">116</a></span><span class="t">    <span class="str">"DEFAULT_SCHEMA_CLASS"</span><span class="op">:</span> <span class="str">"porsche.core.drfspectacular.schemas.PorscheAutoSchema"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t117" href="#t117">117</a></span><span class="t">    <span class="com"># Throttling</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t118" href="#t118">118</a></span><span class="t">    <span class="str">"DEFAULT_THROTTLE_RATES"</span><span class="op">:</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t119" href="#t119">119</a></span><span class="t">        <span class="str">"user"</span><span class="op">:</span> <span class="key">None</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
@@ -436,32 +436,36 @@
     <p class="run run2"><span class="n"><a id="t352" href="#t352">352</a></span><span class="t">            <span class="str">"level"</span><span class="op">:</span> <span class="nam">LOG_LEVEL</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t353" href="#t353">353</a></span><span class="t">            <span class="str">"propagate"</span><span class="op">:</span> <span class="key">False</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t354" href="#t354">354</a></span><span class="t">        <span class="op">}</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t355" href="#t355">355</a></span><span class="t">    <span class="op">}</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t356" href="#t356">356</a></span><span class="t"><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t357" href="#t357">357</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t358" href="#t358">358</a></span><span class="t"><span class="nam">APPEND_SLASH</span> <span class="op">=</span> <span class="key">True</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t359" href="#t359">359</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t360" href="#t360">360</a></span><span class="t"><span class="nam">SPECTACULAR_SETTINGS</span> <span class="op">=</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t361" href="#t361">361</a></span><span class="t">    <span class="str">"TITLE"</span><span class="op">:</span> <span class="nam">APP</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t362" href="#t362">362</a></span><span class="t">    <span class="str">"DESCRIPTION"</span><span class="op">:</span> <span class="str">""</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t363" href="#t363">363</a></span><span class="t">    <span class="str">"VERSION"</span><span class="op">:</span> <span class="nam">VERSION</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t364" href="#t364">364</a></span><span class="t">    <span class="str">"SERVE_INCLUDE_SCHEMA"</span><span class="op">:</span> <span class="key">False</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t365" href="#t365">365</a></span><span class="t">    <span class="str">"OAS_VERSION"</span><span class="op">:</span> <span class="str">"3.1.0"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t366" href="#t366">366</a></span><span class="t"><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t367" href="#t367">367</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t368" href="#t368">368</a></span><span class="t"><span class="nam">FASTMCP</span> <span class="op">=</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t369" href="#t369">369</a></span><span class="t">    <span class="str">"ENABLE_NEW_OPENAPI_PARSER"</span><span class="op">:</span> <span class="key">True</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t355" href="#t355">355</a></span><span class="t">        <span class="str">"fastmcp"</span><span class="op">:</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t356" href="#t356">356</a></span><span class="t">            <span class="str">"handlers"</span><span class="op">:</span> <span class="op">[</span><span class="str">"console"</span><span class="op">]</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t357" href="#t357">357</a></span><span class="t">            <span class="str">"level"</span><span class="op">:</span> <span class="nam">LOG_LEVEL</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t358" href="#t358">358</a></span><span class="t">        <span class="op">}</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t359" href="#t359">359</a></span><span class="t">    <span class="op">}</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t360" href="#t360">360</a></span><span class="t"><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t361" href="#t361">361</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t362" href="#t362">362</a></span><span class="t"><span class="nam">APPEND_SLASH</span> <span class="op">=</span> <span class="key">True</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t363" href="#t363">363</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t364" href="#t364">364</a></span><span class="t"><span class="nam">SPECTACULAR_SETTINGS</span> <span class="op">=</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t365" href="#t365">365</a></span><span class="t">    <span class="str">"TITLE"</span><span class="op">:</span> <span class="nam">APP</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t366" href="#t366">366</a></span><span class="t">    <span class="str">"DESCRIPTION"</span><span class="op">:</span> <span class="str">""</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t367" href="#t367">367</a></span><span class="t">    <span class="str">"VERSION"</span><span class="op">:</span> <span class="nam">VERSION</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t368" href="#t368">368</a></span><span class="t">    <span class="str">"SERVE_INCLUDE_SCHEMA"</span><span class="op">:</span> <span class="key">False</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t369" href="#t369">369</a></span><span class="t">    <span class="str">"OAS_VERSION"</span><span class="op">:</span> <span class="str">"3.1.0"</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
     <p class="run run2"><span class="n"><a id="t370" href="#t370">370</a></span><span class="t"><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t371" href="#t371">371</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t372" href="#t372">372</a></span><span class="t"><span class="com"># HERE STARTS DYNACONF EXTENSION LOAD</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t373" href="#t373">373</a></span><span class="t"><span class="key">import</span> <span class="nam">dynaconf</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t374" href="#t374">374</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="run"><span class="n"><a id="t375" href="#t375">375</a></span><span class="t"><span class="nam">settings</span> <span class="op">=</span> <span class="nam">dynaconf</span><span class="op">.</span><span class="nam">DjangoDynaconf</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t376" href="#t376">376</a></span><span class="t">    <span class="nam">__name__</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t377" href="#t377">377</a></span><span class="t">    <span class="nam">envvar_prefix</span><span class="op">=</span><span class="nam">APP</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t378" href="#t378">378</a></span><span class="t">    <span class="nam">load_dotenv</span><span class="op">=</span><span class="key">True</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
-    <p class="run run2"><span class="n"><a id="t379" href="#t379">379</a></span><span class="t"><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="pln"><span class="n"><a id="t380" href="#t380">380</a></span><span class="t"><span class="com"># HERE ENDS DYNACONF EXTENSION LOAD (No more code below this line)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t372" href="#t372">372</a></span><span class="t"><span class="nam">FASTMCP</span> <span class="op">=</span> <span class="op">{</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t373" href="#t373">373</a></span><span class="t">    <span class="str">"ENABLE_NEW_OPENAPI_PARSER"</span><span class="op">:</span> <span class="key">True</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t374" href="#t374">374</a></span><span class="t"><span class="op">}</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t375" href="#t375">375</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t376" href="#t376">376</a></span><span class="t"><span class="com"># HERE STARTS DYNACONF EXTENSION LOAD</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t377" href="#t377">377</a></span><span class="t"><span class="key">import</span> <span class="nam">dynaconf</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t378" href="#t378">378</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t379" href="#t379">379</a></span><span class="t"><span class="nam">settings</span> <span class="op">=</span> <span class="nam">dynaconf</span><span class="op">.</span><span class="nam">DjangoDynaconf</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t380" href="#t380">380</a></span><span class="t">    <span class="nam">__name__</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t381" href="#t381">381</a></span><span class="t">    <span class="nam">envvar_prefix</span><span class="op">=</span><span class="nam">APP</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t382" href="#t382">382</a></span><span class="t">    <span class="nam">load_dotenv</span><span class="op">=</span><span class="key">True</span><span class="op">,</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run run2"><span class="n"><a id="t383" href="#t383">383</a></span><span class="t"><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="pln"><span class="n"><a id="t384" href="#t384">384</a></span><span class="t"><span class="com"># HERE ENDS DYNACONF EXTENSION LOAD (No more code below this line)</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -471,7 +475,7 @@
             <a class="nav" href="z_046bfc7932c6e0e4_urls_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.13.1">coverage.py v7.13.1</a>,
-            created at 2026-01-15 02:50 +0000
+            created at 2026-01-15 08:46 +0000
         </p>
     </div>
 </footer>
