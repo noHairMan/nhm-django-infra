@@ -40,38 +40,60 @@ class PorscheAutoSchema(AutoSchema):
 
     def _wrap_response(self, response, registry):
         """
-        在全局 registry 级别包装响应
+        此模块提供将原始 OpenAPI 响应包装为
+        PorscheResponse 格式的工具函数。
+
+        功能包括：
+        - 检查并过滤非 JSON 类型的响应
+        - 依据原始响应构造统一的业务码、消息和数据字段
+        - 将构造好的 schema 以组件引用形式嵌入
         """
-        if "content" not in response or "application/json" not in response["content"]:
-            return response
 
-        # 获取原始 schema
-        json_content = response["content"]["application/json"]
-        original_schema = json_content.get("schema", {})
-
-        # 构建 PorscheResponse 的外层 schema
-        # 使用 $ref 引用一个组件，而不是内联
-        porsche_schema = {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "description": "业务状态码",
-                    "example": 0,
-                },
-                "message": {
-                    "type": "string",
-                    "description": "响应消息",
-                    "example": "success",
-                },
-                "data": original_schema
-                or {
+        # 提取构建 schema 的通用逻辑
+        def build_porsche_schema(use_original_schema: bool):
+            data_schema = (
+                original_schema
+                if use_original_schema
+                else {
                     "type": "object",
                     "description": "响应数据",
+                }
+            )
+            return {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "description": "业务状态码",
+                        "example": 0,
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "响应消息",
+                        "example": "success",
+                    },
+                    "data": data_schema,
                 },
-            },
-            "required": ["code", "message", "data"],
-        }
+                "required": ["code", "message", "data"],
+            }
+
+        if "content" not in response or "application/json" not in response["content"]:
+            # 没有 content 时使用默认结构
+            original_schema = {}
+            porsche_schema = build_porsche_schema(False)
+            return {
+                "description": response.get("description", "Successful response"),
+                "content": {
+                    "application/json": {
+                        "schema": porsche_schema,
+                    },
+                },
+            }
+
+        # 存在 content 时使用原始 schema
+        json_content = response["content"]["application/json"]
+        original_schema = json_content.get("schema", {})
+        porsche_schema = build_porsche_schema(True)
 
         return {
             "description": response.get("description", "Successful response"),
