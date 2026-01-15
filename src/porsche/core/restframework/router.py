@@ -13,7 +13,7 @@ class PorscheRouter(DefaultRouter):
         ),
         # Create route
         Route(
-            url=r"^{prefix}/_create{trailing_slash}$",
+            url=r"^{prefix}/create{trailing_slash}$",
             mapping={"post": "create"},
             name="{basename}-create",
             detail=False,
@@ -22,7 +22,7 @@ class PorscheRouter(DefaultRouter):
         # Dynamically generated list routes. Generated using
         # @action(detail=False) decorator on methods of the viewset.
         DynamicRoute(
-            url=r"^{prefix}/_action/{url_path}{trailing_slash}$",
+            url=r"^{prefix}/action/{url_path}{trailing_slash}$",
             name="{basename}-{url_name}",
             detail=False,
             initkwargs={},
@@ -37,14 +37,14 @@ class PorscheRouter(DefaultRouter):
         ),
         # Update route
         Route(
-            url=r"^{prefix}/{lookup}/_update{trailing_slash}$",
+            url=r"^{prefix}/{lookup}/update{trailing_slash}$",
             mapping={"post": "update"},
             name="{basename}-update",
             detail=True,
             initkwargs={"suffix": "Update"},
         ),
         Route(
-            url=r"^{prefix}/{lookup}/_partial_update{trailing_slash}$",
+            url=r"^{prefix}/{lookup}/partial_update{trailing_slash}$",
             mapping={"post": "partial_update"},
             name="{basename}-partial_update",
             detail=True,
@@ -52,7 +52,7 @@ class PorscheRouter(DefaultRouter):
         ),
         # Delete route
         Route(
-            url=r"^{prefix}/{lookup}/_destroy{trailing_slash}$",
+            url=r"^{prefix}/{lookup}/destroy{trailing_slash}$",
             mapping={"post": "destroy"},
             name="{basename}-destroy",
             detail=True,
@@ -61,7 +61,7 @@ class PorscheRouter(DefaultRouter):
         # Dynamically generated detail routes. Generated using
         # @action(detail=True) decorator on methods of the viewset.
         DynamicRoute(
-            url=r"^{prefix}/{lookup}/_action/{url_path}{trailing_slash}$",
+            url=r"^{prefix}/{lookup}/action/{url_path}{trailing_slash}$",
             name="{basename}-{url_name}",
             detail=True,
             initkwargs={},

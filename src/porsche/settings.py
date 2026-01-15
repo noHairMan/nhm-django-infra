@@ -113,7 +113,7 @@ REST_FRAMEWORK = {
         "django_filters.rest_framework.DjangoFilterBackend",
     ],
     # Schema
-    "DEFAULT_SCHEMA_CLASS": "porsche.core.restframework.schemas.PorscheAutoSchema",
+    "DEFAULT_SCHEMA_CLASS": "porsche.core.drfspectacular.schemas.PorscheAutoSchema",
     # Throttling
     "DEFAULT_THROTTLE_RATES": {
         "user": None,
@@ -351,6 +351,10 @@ LOGGING = {
             "handlers": ["console"],
             "level": LOG_LEVEL,
             "propagate": False,
+        },
+        "fastmcp": {
+            "handlers": ["console"],
+            "level": LOG_LEVEL,
         },
     },
 }

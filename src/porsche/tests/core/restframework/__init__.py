@@ -3,7 +3,6 @@ from .fields import *
 from .generic import *
 from .pagination import *
 from .response import *
-from .schemas import *
 from .serializer import *
 from .test import *
 from .view import *

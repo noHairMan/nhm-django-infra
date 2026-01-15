@@ -25,12 +25,14 @@ class CompanyRetrieveSerializer(PorscheModelSerializer):
 class CompanyCreateSerializer(PorscheModelSerializer):
     class Meta:
         model = Company
-        fields = ["name"]
+        fields = ["uid", "name"]
+        read_only_fields = ["uid"]
         validators = company_validators
 
 
 class CompanyUpdateSerializer(PorscheModelSerializer):
     class Meta:
         model = Company
-        fields = ["name"]
+        fields = ["uid", "name"]
+        read_only_fields = ["uid"]
         validators = company_validators
