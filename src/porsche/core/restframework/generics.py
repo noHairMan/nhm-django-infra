@@ -69,4 +69,5 @@ class PorscheGenericAPIView(PorscheAPIView, GenericAPIView):
             response = PorscheResponse(data=response.data)
         if not isinstance(response, PorscheResponse):
             raise PorscheServerException(gettext_lazy("Response must be a PorscheResponse instance"))
+        # 忽略类型检查，此处返回返回的response类型取决于入参的response类型
         return super().finalize_response(request, response, *args, **kwargs)
