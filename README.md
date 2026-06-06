@@ -33,7 +33,7 @@
 | src/porsche/core/django/db/models/fields/related.py      |        6 |        0 |        0 |        0 |    100% |           |
 | src/porsche/core/django/validators.py                    |       67 |        0 |       30 |        0 |    100% |           |
 | src/porsche/core/drfspectacular/\_\_init\_\_.py          |        0 |        0 |        0 |        0 |    100% |           |
-| src/porsche/core/drfspectacular/schemas.py               |       41 |        4 |       16 |        5 |     84% |37->41, 122, 125, 128, 132 |
+| src/porsche/core/drfspectacular/schemas.py               |       41 |        4 |       16 |        5 |     84% |37-\>41, 122, 125, 128, 132 |
 | src/porsche/core/exceptions.py                           |        8 |        0 |        2 |        0 |    100% |           |
 | src/porsche/core/restframework/\_\_init\_\_.py           |       14 |        0 |        0 |        0 |    100% |           |
 | src/porsche/core/restframework/exceptions.py             |       24 |        0 |        4 |        0 |    100% |           |
