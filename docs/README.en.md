@@ -2,7 +2,7 @@
 
 [Simplified Chinese](/docs/README.zh.md)\|[English](/docs/README.en.md)\|[Japanese](/docs/README.ja.md)\|[Traditional Chinese](/docs/README.zh-TW.md)
 
-![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FnoHairMan%2Fnhm-django-infra%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.project.requires-python&label=python)![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/noHairMan/nhm-django-infra/build.yml)[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
+[![Python Version](https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14%20%7C%203.15-blue.svg)](https://www.python.org/downloads/)![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/noHairMan/nhm-django-infra/build.yml)[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
 
 A lightweight Django 5 + Django REST framework scaffolding for backend services, including the following features:
 
@@ -33,7 +33,7 @@ A lightweight Django 5 + Django REST framework scaffolding for backend services,
 
 ## Environmental requirements
 
--   Python 3.13+
+-   Python 3.12+
 -   SQLite (default; works out of the box)
 -   Optional: PostgreSQL 17+, Redis, Docker and Docker Compose
 -   uv or pip
@@ -84,7 +84,7 @@ illustrate:
 
 Use uv (recommended):
 
-1) Install uv(<https://docs.astral.sh/uv/）>2) Execute in the project root directory:
+1) 安装 uv（<https://docs.astral.sh/uv/）>2) Execute in the project root directory:
 
     - 同步依赖：`uv sync`
     - 激活虚拟环境：`source .venv/bin/activate`（或直接使用 `uv run`）
@@ -188,13 +188,13 @@ Add more interfaces under src/porsche/api/endpoints/ and aggregate them in src/p
 ## Logs and exceptions
 
 -   Log: Output to stdout (console handler), see settings.LOGGING for details
--   Exceptions: handled uniformly by porsche.core.restframework.views.exception_handler and return structured response (code/data/message)
+-   Exceptions: handled uniformly by porsche.core.restframework.views.exception_handler and returned structured response (code/data/message)
 
-## 测试与覆盖率
+## Testing and Coverage
 
 Basic tests are located in src/porsche/tests/. Use Django's built-in test runner (no pytest required).
 
--   Pre-requisite: Install dependencies and activate virtual environment (uv recommended)
+-   Pre-requisite: install dependencies and activate virtual environment (uv recommended)
     -   `uv sync && source .venv/bin/activate`
     -   If the test requires DB, make sure Postgres is available, or start it through compose as follows
 
