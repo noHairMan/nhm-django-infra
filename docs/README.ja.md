@@ -2,7 +2,7 @@
 
 [簡体字中国語](/docs/README.zh.md)\|[英語](/docs/README.en.md)\|[日本語](/docs/README.ja.md)\|[繁体中文](/docs/README.zh-TW.md)
 
-![Dynamic TOML Badge](https://img.shields.io/badge/dynamic/toml?url=https%3A%2F%2Fraw.githubusercontent.com%2FnoHairMan%2Fnhm-django-infra%2Frefs%2Fheads%2Fmain%2Fpyproject.toml&query=%24.project.requires-python&label=python)![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/noHairMan/nhm-django-infra/build.yml)[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
+[![Python Version](https://img.shields.io/badge/python-3.12%20%7C%203.13%20%7C%203.14%20%7C%203.15-blue.svg)](https://www.python.org/downloads/)![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/noHairMan/nhm-django-infra/build.yml)[![Coverage badge](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/noHairMan/nhm-django-infra/python-coverage-comment-action-data/endpoint.json)](https://htmlpreview.github.io/?https://github.com/noHairMan/nhm-django-infra/blob/python-coverage-comment-action-data/htmlcov/index.html)![GitHub License](https://img.shields.io/github/license/noHairMan/nhm-django-infra)
 
 バックエンド サービス用の軽量の Django 5 + Django REST フレームワーク スキャフォールディングには、次の機能が含まれます。
 
@@ -33,7 +33,7 @@
 
 ## 環境要件
 
--   Python 3.13+
+-   Python 3.12+
 -   SQLite (デフォルト、すぐに使用可能)
 -   オプション: PostgreSQL 17 以降、Redis、Docker、Docker Compose
 -   uvまたはpip
@@ -128,7 +128,7 @@ UV を使用します (推奨):
 
 注: この作成では Django アプリケーションは起動しません。 uv/pip を使用してローカルで開始することも、Compose を自分で拡張してアプリケーション サービスを追加することもできます。
 
--   ヘルスチェック: イメージヘルスチェックのパスが指定されました`/api/health/`、コンテナ オーケストレーションの稼働状態/準備状態に使用できます。
+-   ヘルスチェック: イメージヘルスチェックのパスが指定されています`/api/health/`、コンテナ オーケストレーションの稼働状態/準備状態に使用できます。
 
 ## アプリケーションイメージのビルド (オプション)
 
@@ -188,7 +188,7 @@ src/porsche/api/endpoints/ の下にさらにインターフェイスを追加�
 ## ログと例外
 
 -   ログ: 標準出力 (コンソール ハンドラー) に出力します。詳細については、settings.LOGGING を参照してください。
--   例外: porsche.core.restframework.views.Exception_handler によって均一に処理され、構造化された応答 (コード/データ/メッセージ) を返します。
+-   例外: porsche.core.restframework.views.Exception_handler によって均一に処理され、構造化された応答 (コード/データ/メッセージ) が返されます。
 
 ## テストと適用範囲
 
