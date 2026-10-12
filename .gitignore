@@ -164,3 +164,4 @@ cython_debug/
 .run/
 sqlite3.db
 coverage/
+.junie/
