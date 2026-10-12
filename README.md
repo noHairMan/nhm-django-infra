@@ -51,7 +51,7 @@
 | src/porsche/core/restframework/viewsets.py               |        6 |        0 |        0 |        0 |    100% |           |
 | src/porsche/management/\_\_init\_\_.py                   |        0 |        0 |        0 |        0 |    100% |           |
 | src/porsche/management/commands/\_\_init\_\_.py          |        0 |        0 |        0 |        0 |    100% |           |
-| src/porsche/management/commands/mcp.py                   |       24 |        0 |        0 |        0 |    100% |           |
+| src/porsche/management/commands/mcp.py                   |       24 |        1 |        0 |        0 |     96% |        59 |
 | src/porsche/migrations/0001\_initial.py                  |        8 |        0 |        0 |        0 |    100% |           |
 | src/porsche/migrations/0002\_role\_user.py               |       14 |        0 |        0 |        0 |    100% |           |
 | src/porsche/migrations/0003\_alter\_user\_avatar.py      |        4 |        0 |        0 |        0 |    100% |           |
@@ -71,7 +71,7 @@
 | src/porsche/utils/log.py                                 |        6 |        0 |        0 |        0 |    100% |           |
 | src/porsche/utils/text.py                                |        3 |        0 |        0 |        0 |    100% |           |
 | src/porsche/wsgi.py                                      |        4 |        0 |        0 |        0 |    100% |           |
-| **TOTAL**                                                |  **869** |    **6** |  **116** |    **6** | **99%** |           |
+| **TOTAL**                                                |  **869** |    **7** |  **116** |    **6** | **99%** |           |
 
 
 ## Setup coverage badge
