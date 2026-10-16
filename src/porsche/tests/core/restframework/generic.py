@@ -67,3 +67,11 @@ class TestGeneric(PorscheAPITestCase):
         )
         with self.assertRaises(PorscheServerException):
             TestViewSet(request=request, format_kwarg={}, action=ViewAction.METADATA).finalize_response(request, Any)
+
+    def test_get_serializer_class_raises_when_no_fallback_exists(self):
+        class TestViewSet(PorscheGenericAPIView):
+            serializer_class = None
+
+        request = self.request_factory.get("test")
+        with self.assertRaises(PorscheServerException):
+            TestViewSet(request=request, format_kwarg={}, action="unsupported").get_serializer_class()

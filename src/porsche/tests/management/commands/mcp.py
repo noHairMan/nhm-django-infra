@@ -1,10 +1,12 @@
 import asyncio
 import logging
 import socket
+import sys
 import threading
 import time
 from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
+from unittest.mock import MagicMock, patch
 
 import httpx
 from django.core.management import call_command
@@ -14,6 +16,33 @@ from porsche.management.commands.mcp import Command
 
 
 class TestMcp(PorscheAPITestCase):
+    def test_handle_starts_fastmcp_server(self):
+        fastmcp = MagicMock()
+        generator = MagicMock()
+        generator_instance = MagicMock()
+        generator.return_value = generator_instance
+        generator_instance.get_schema.return_value = {"openapi": "3.1.0"}
+
+        with (
+            patch.dict(sys.modules, {"fastmcp": fastmcp}),
+            patch("porsche.management.commands.mcp.logging.config.dictConfig"),
+            patch("porsche.management.commands.mcp.spectacular_settings.DEFAULT_GENERATOR_CLASS", generator),
+            patch("porsche.management.commands.mcp.spectacular_settings.SERVE_PUBLIC", True),
+            patch("porsche.management.commands.mcp.settings.LOG_LEVEL", "INFO"),
+            patch("porsche.management.commands.mcp.httpx.AsyncClient") as async_client,
+        ):
+            Command().handle(base_url="http://example.test", api_version="v1", port=3002)
+
+        generator.assert_called_once_with(api_version="v1")
+        generator_instance.get_schema.assert_called_once_with(public=True)
+        fastmcp.FastMCP.from_openapi.assert_called_once()
+        fastmcp.FastMCP.from_openapi.return_value.run.assert_called_once_with(
+            transport="streamable-http",
+            host="0.0.0.0",
+            port=3002,
+        )
+        async_client.assert_called_once_with(base_url="http://example.test")
+
     @staticmethod
     def _is_port_available(port):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:

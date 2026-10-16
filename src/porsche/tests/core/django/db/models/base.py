@@ -1,4 +1,5 @@
 import datetime
+from unittest.mock import patch
 from uuid import UUID, uuid4
 
 from porsche.core.django.db.models.base import get_object
@@ -21,10 +22,12 @@ class TestPorscheModel(PorscheAPITestCase):
     def test_update(self):
         create_time, update_time = self.company.create_time, self.company.update_time
         self.company.name = "New Name"
-        self.company.save()
+        updated_time = update_time + datetime.timedelta(seconds=1)
+        with patch("django.utils.timezone.now", return_value=updated_time):
+            self.company.save()
         self.assertEqual(self.company.name, "New Name")
         self.assertEqual(self.company.create_time, create_time)
-        self.assertNotEqual(self.company.update_time, update_time)
+        self.assertEqual(self.company.update_time, updated_time)
 
     def test_soft_delete(self):
         numbers = 10
