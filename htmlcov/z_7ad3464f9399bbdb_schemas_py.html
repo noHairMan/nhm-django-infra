@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Coverage for src/porsche/core/drfspectacular/schemas.py: 84%</title>
+    <title>Coverage for src/porsche/core/drfspectacular/schemas.py: 100%</title>
     <link rel="icon" sizes="32x32" href="favicon_32_cb_c827f16f.png">
     <link rel="stylesheet" href="style_cb_4667309f.css" type="text/css">
     <script src="coverage_html_cb_15cffcd0.js" defer></script>
@@ -12,7 +12,7 @@
     <div class="content">
         <h1>
             <span class="text">Coverage for </span><b>src<span class="sep">/</span>porsche<span class="sep">/</span>core<span class="sep">/</span>drfspectacular<span class="sep">/</span>schemas.py</b>:
-            <span class="pc_cov">84%</span>
+            <span class="pc_cov">100%</span>
         </h1>
         <aside id="help_panel_wrapper">
             <input id="help_panel_state" type="checkbox">
@@ -56,10 +56,10 @@
         </aside>
         <h2>
             <span class="text">41 statements &nbsp;</span>
-            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">37<span class="text"> run</span></button>
-            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">4<span class="text"> missing</span></button>
+            <button type="button" class="run button_toggle_run" value="run" data-shortcut="r" title="Toggle lines run">41<span class="text"> run</span></button>
+            <button type="button" class="mis show_mis button_toggle_mis" value="mis" data-shortcut="m" title="Toggle lines missing">0<span class="text"> missing</span></button>
             <button type="button" class="exc show_exc button_toggle_exc" value="exc" data-shortcut="x" title="Toggle lines excluded">0<span class="text"> excluded</span></button>
-            <button type="button" class="par run show_par button_toggle_par" value="par" data-shortcut="p" title="Toggle lines partially run">5<span class="text"> partial</span></button>
+            <button type="button" class="par run show_par button_toggle_par" value="par" data-shortcut="p" title="Toggle lines partially run">0<span class="text"> partial</span></button>
         </h2>
         <p class="text">
             <a id="prevFileLink" class="nav" href="z_52611562c40117af_validators_py.html">&#xab; prev</a> &nbsp; &nbsp;
@@ -67,7 +67,7 @@
             <a id="nextFileLink" class="nav" href="z_ea3c655bf11ce6af_exceptions_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.16.2">coverage.py v7.16.2</a>,
-            created at 2026-10-12 07:59 +0000
+            created at 2026-10-16 09:15 +0000
         </p>
         <aside class="hidden">
             <button type="button" class="button_next_chunk" data-shortcut="j"></button>
@@ -118,7 +118,7 @@
     <p class="run"><span class="n"><a id="t34" href="#t34">34</a></span><span class="t">            <span class="key">return</span> <span class="nam">operation</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t35" href="#t35">35</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t36" href="#t36">36</a></span><span class="t">        <span class="com"># &#21253;&#35013;&#25152;&#26377;&#21709;&#24212;</span>&nbsp;</span><span class="r"></span></p>
-    <p class="par run show_par"><span class="n"><a id="t37" href="#t37">37</a></span><span class="t">        <span class="key">if</span> <span class="str">&quot;responses&quot;</span> <span class="key">in</span> <span class="nam">operation</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">37&#x202F;&#x219B;&#x202F;41</span><span class="annotate long">line 37 didn't jump to line 41 because the condition on line 37 was always true</span></span></p>
+    <p class="run"><span class="n"><a id="t37" href="#t37">37</a></span><span class="t">        <span class="key">if</span> <span class="str">&quot;responses&quot;</span> <span class="key">in</span> <span class="nam">operation</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t38" href="#t38">38</a></span><span class="t">            <span class="key">for</span> <span class="nam">status_code</span><span class="op">,</span> <span class="nam">response</span> <span class="key">in</span> <span class="nam">operation</span><span class="op">[</span><span class="str">&quot;responses&quot;</span><span class="op">]</span><span class="op">.</span><span class="nam">items</span><span class="op">(</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t39" href="#t39">39</a></span><span class="t">                <span class="nam">operation</span><span class="op">[</span><span class="str">&quot;responses&quot;</span><span class="op">]</span><span class="op">[</span><span class="nam">status_code</span><span class="op">]</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">_wrap_response</span><span class="op">(</span><span class="nam">response</span><span class="op">,</span> <span class="nam">registry</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t40" href="#t40">40</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -202,18 +202,18 @@
     <p class="pln"><span class="n"><a id="t118" href="#t118">118</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t119" href="#t119">119</a></span><span class="t">        <span class="nam">action</span> <span class="op">=</span> <span class="nam">self</span><span class="op">.</span><span class="nam">view</span><span class="op">.</span><span class="nam">action</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t120" href="#t120">120</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="par run show_par"><span class="n"><a id="t121" href="#t121">121</a></span><span class="t">        <span class="key">if</span> <span class="key">not</span> <span class="nam">tokenized_path</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">121&#x202F;&#x219B;&#x202F;122</span><span class="annotate long">line 121 didn't jump to line 122 because the condition on line 121 was never true</span></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t122" href="#t122">122</a></span><span class="t">            <span class="nam">tokenized_path</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">&quot;root&quot;</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t121" href="#t121">121</a></span><span class="t">        <span class="key">if</span> <span class="key">not</span> <span class="nam">tokenized_path</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t122" href="#t122">122</a></span><span class="t">            <span class="nam">tokenized_path</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">&quot;root&quot;</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t123" href="#t123">123</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="par run show_par"><span class="n"><a id="t124" href="#t124">124</a></span><span class="t">        <span class="key">if</span> <span class="nam">re</span><span class="op">.</span><span class="nam">search</span><span class="op">(</span><span class="str">r&quot;&lt;drf_format_suffix\w*:\w+&gt;&quot;</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">path_regex</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">124&#x202F;&#x219B;&#x202F;125</span><span class="annotate long">line 124 didn't jump to line 125 because the condition on line 124 was never true</span></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t125" href="#t125">125</a></span><span class="t">            <span class="nam">tokenized_path</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">&quot;formatted&quot;</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t124" href="#t124">124</a></span><span class="t">        <span class="key">if</span> <span class="nam">re</span><span class="op">.</span><span class="nam">search</span><span class="op">(</span><span class="str">r&quot;&lt;drf_format_suffix\w*:\w+&gt;&quot;</span><span class="op">,</span> <span class="nam">self</span><span class="op">.</span><span class="nam">path_regex</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t125" href="#t125">125</a></span><span class="t">            <span class="nam">tokenized_path</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">&quot;formatted&quot;</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t126" href="#t126">126</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
-    <p class="par run show_par"><span class="n"><a id="t127" href="#t127">127</a></span><span class="t">        <span class="key">if</span> <span class="nam">spectacular_settings</span><span class="op">.</span><span class="nam">OPERATION_ID_METHOD_POSITION</span> <span class="op">==</span> <span class="str">&quot;PRE&quot;</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">127&#x202F;&#x219B;&#x202F;128</span><span class="annotate long">line 127 didn't jump to line 128 because the condition on line 127 was never true</span></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t128" href="#t128">128</a></span><span class="t">            <span class="key">return</span> <span class="str">&quot;_&quot;</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="op">[</span><span class="nam">action</span><span class="op">]</span> <span class="op">+</span> <span class="nam">tokenized_path</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p class="par run show_par"><span class="n"><a id="t129" href="#t129">129</a></span><span class="t">        <span class="key">elif</span> <span class="nam">spectacular_settings</span><span class="op">.</span><span class="nam">OPERATION_ID_METHOD_POSITION</span> <span class="op">==</span> <span class="str">&quot;POST&quot;</span><span class="op">:</span>&nbsp;</span><span class="r"><span class="annotate short">129&#x202F;&#x219B;&#x202F;132</span><span class="annotate long">line 129 didn't jump to line 132 because the condition on line 129 was always true</span></span></p>
+    <p class="run"><span class="n"><a id="t127" href="#t127">127</a></span><span class="t">        <span class="key">if</span> <span class="nam">spectacular_settings</span><span class="op">.</span><span class="nam">OPERATION_ID_METHOD_POSITION</span> <span class="op">==</span> <span class="str">&quot;PRE&quot;</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t128" href="#t128">128</a></span><span class="t">            <span class="key">return</span> <span class="str">&quot;_&quot;</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="op">[</span><span class="nam">action</span><span class="op">]</span> <span class="op">+</span> <span class="nam">tokenized_path</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t129" href="#t129">129</a></span><span class="t">        <span class="key">elif</span> <span class="nam">spectacular_settings</span><span class="op">.</span><span class="nam">OPERATION_ID_METHOD_POSITION</span> <span class="op">==</span> <span class="str">&quot;POST&quot;</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p class="run"><span class="n"><a id="t130" href="#t130">130</a></span><span class="t">            <span class="key">return</span> <span class="str">&quot;_&quot;</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="nam">tokenized_path</span> <span class="op">+</span> <span class="op">[</span><span class="nam">action</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p class="pln"><span class="n"><a id="t131" href="#t131">131</a></span><span class="t">        <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p class="mis show_mis"><span class="n"><a id="t132" href="#t132">132</a></span><span class="t">            <span class="key">assert</span> <span class="key">False</span><span class="op">,</span> <span class="str">&quot;Invalid value for OPERATION_ID_METHOD_POSITION. Allowed: PRE, POST&quot;</span>&nbsp;</span><span class="r"></span></p>
+    <p class="run"><span class="n"><a id="t132" href="#t132">132</a></span><span class="t">            <span class="key">assert</span> <span class="key">False</span><span class="op">,</span> <span class="str">&quot;Invalid value for OPERATION_ID_METHOD_POSITION. Allowed: PRE, POST&quot;</span>&nbsp;</span><span class="r"></span></p>
 </main>
 <footer>
     <div class="content">
@@ -223,7 +223,7 @@
             <a class="nav" href="z_ea3c655bf11ce6af_exceptions_py.html">&#xbb; next</a>
             &nbsp; &nbsp; &nbsp;
             <a class="nav" href="https://coverage.readthedocs.io/en/7.16.2">coverage.py v7.16.2</a>,
-            created at 2026-10-12 07:59 +0000
+            created at 2026-10-16 09:15 +0000
         </p>
     </div>
 </footer>
